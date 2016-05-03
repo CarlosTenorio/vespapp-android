@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout
+    android:id="@+id/layout_guia_tab"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    >
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="AVISPA VELUTINA/ASIATICA"
+        android:textSize="20sp"
+        android:textColor="@color/orange"
+        />
+
+    <ImageView
+        android:id="@+id/btn_toolbar_back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/avispa"
+        android:layout_margin="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:text="Es fácilmente distinguible por su tórax y su abdomen de color negro, exceptuando el cuarto segmento, de color amarillo. Sus patas de color marrón destacan por sus extremos amarillos. Sus alas son de un color oscuro."
+        android:textSize="15sp"
+        android:textColor="@color/orange"
+        />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="NIDO AVIS ASIATICA"
+        android:textSize="20sp"
+        android:textColor="@color/orange"
+        />
+
+    <ImageView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:src="@drawable/vespa_velutina"
+        android:scaleType="fitXY"
+        android:layout_margin="10dp"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:text=" Los nidos son construidos con fibras de madera masticada, y pueden alcanzar un metro de altura y 80 cm de diámetro."
+        android:textSize="15sp"
+        android:textColor="@color/orange"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+
+        android:text="IMPORTANTE: No destruyas el nido por tu cuenta. Nosotros nos encargaremos de enviar a nuestros especialistas para llevar a cabo el delicado proceso de su eliminación."
+        android:textSize="20sp"
+        android:textColor="@color/red"
+        />
+
+
+</LinearLayout>
+</ScrollView>

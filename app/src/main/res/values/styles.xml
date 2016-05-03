@@ -1,0 +1,22 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:windowBackground">@color/colorBackground</item>
+        <item name="android:buttonStyle">@style/ButtonOrangeRipple</item>
+    </style>
+
+    <style name="ButtonOrangeRipple" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/button_orange_ripple_selector</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+</resources>

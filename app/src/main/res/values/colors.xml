@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorTitulo">#ffffff</color>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#FFA51F</color>
+    <color name="colorPrimaryText">#606060</color>
+    <color name="colorAccent">#FFA51F</color>
+    <color name="colorBackground">#FFF0DD</color>
+    <color name="orange">#FF6716</color>
+
+    <color name="statusProcessing">#FFA51F</color>
+    <color name="statusNotSent">#FF6716</color>
+    <color name="statusValidated">#63CA75</color>
+    <color name="statusPending">#B26F0D</color>
+    <color name="red">#9c0608</color>
+
+</resources>
