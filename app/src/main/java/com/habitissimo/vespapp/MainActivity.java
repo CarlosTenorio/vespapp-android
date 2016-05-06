@@ -14,15 +14,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
 
+import com.habitissimo.vespapp.api.VespappApi;
+import com.habitissimo.vespapp.async.TaskCallback;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 import com.habitissimo.vespapp.database.Database;
 import com.habitissimo.vespapp.fotos.ConfirmCaptureActivity;
 import com.habitissimo.vespapp.fotos.ListaFotos;
+import com.habitissimo.vespapp.async.Task;
+import com.habitissimo.vespapp.info.Info;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private ListaFotos lista;
     private File photoFile;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +56,57 @@ public class MainActivity extends AppCompatActivity {
         initTabs();
         initCamBtn();
         initSelFotosBtn();
+        initButtons();
+    }
+
+
+    /*LinearLayout ll = (LinearLayout) findViewById(R.id.layout_guia_tab);
+
+    for (int i = 1; i <= 5; i++) {
+        Button btn = new Button(this);
+        btn.setText("button " + i);
+        ll.addView(btn);
+    }*/
+
+    private void initButtons() {
+        final VespappApi api = Vespapp.get(this).getApi();
+
+        final Callback<List<Info>> callback = new Callback<List<Info>>() {
+            @Override
+            public void onResponse(Call<List<Info>> call, Response<List<Info>> response) {
+                List<Info> infoList = response.body();
+                for (Info info : infoList) {
+                    System.out.println("Title: " + info.getTitle());
+                    System.out.println("Body: " + info.getBody());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Info>> call, Throwable t) {
+                System.out.println("onFailure " + t);
+            }
+        };
+        Task.doInBackground(new TaskCallback<List<Info>>() {
+            @Override
+            public List<Info> executeInBackground() {
+                Call<List<Info>> call = api.getInfo();
+                call.enqueue(callback);
+                return null;
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                System.out.println("onError " + t);
+                callback.onFailure(null, t);
+            }
+
+            @Override
+            public void onCompleted(List<Info> infos) {
+                System.out.println("onCompleted " + infos);
+                callback.onResponse(null, Response.success((List<Info>) null));
+
+            }
+        });
     }
 
     private void initSelFotosBtn() {

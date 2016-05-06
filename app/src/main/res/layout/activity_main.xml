@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <include layout="@layout/guia_tab" />
+                <include layout="@layout/info_tab" />
 
                 <include layout="@layout/main_tab" />
 

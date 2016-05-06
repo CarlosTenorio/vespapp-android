@@ -4,6 +4,7 @@ import com.habitissimo.vespapp.questions.ExpertComment;
 import com.habitissimo.vespapp.questions.Location;
 import com.habitissimo.vespapp.questions.Picture;
 import com.habitissimo.vespapp.questions.Sighting;
+import com.habitissimo.vespapp.info.Info;
 
 import java.io.File;
 import java.util.List;
@@ -22,7 +23,8 @@ import retrofit2.http.Path;
 public interface VespappApi {
     String SIGHTINGS = "sightings/";
 
-    @GET(SIGHTINGS) Call<List<Sighting>> getSightings();
+    @GET(SIGHTINGS)
+    Call<List<Sighting>> getSightings();
 
     @GET(SIGHTINGS + "{sightingId}/")
     void getSightingById(@Path("sightingId") String sightingId, Callback<Sighting> callback);
@@ -64,4 +66,7 @@ public interface VespappApi {
 
     @GET("/locations/")
     void getLocations(Callback<List<Location>> callback);
+
+    @GET("info/")
+    Call<List<Info>> getInfo();
 }

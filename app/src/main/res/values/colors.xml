@@ -5,7 +5,7 @@
     <color name="colorPrimaryDark">#FFA51F</color>
     <color name="colorPrimaryText">#606060</color>
     <color name="colorAccent">#FFA51F</color>
-    <color name="colorBackground">#FFF0DD</color>
+    <color name="colorBackground">#FFFFFF</color>
     <color name="orange">#FF6716</color>
 
     <color name="statusProcessing">#FFA51F</color>

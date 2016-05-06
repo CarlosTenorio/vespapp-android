@@ -67,15 +67,12 @@ public class Vespapp extends Application {
                 .build());
 
         if (Constants.isBaseApiUrlDefined() && !FORCE_MOCK) {
-
             Retrofit retrofit = new Builder()
                     .baseUrl(Constants.API_BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(httpClient)
                     .build();
             api = retrofit.create(VespappApi.class);
-        } else {
-            api = new MockedVespappApi();
         }
     }
 
