@@ -25,6 +25,8 @@ import com.habitissimo.vespapp.fotos.ListaFotos;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.info.Info;
 
+//import com.google.android.gms.maps.MapView;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -158,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
      * Inicializar pestañas
      */
     private void initTabs() {
+
         TabHost tabs = (TabHost) findViewById(R.id.tabs_main);
         tabs.setup();
 
@@ -171,12 +174,12 @@ public class MainActivity extends AppCompatActivity {
         spec.setIndicator("Haz una foto");
         tabs.addTab(spec);
 
-        spec = tabs.newTabSpec("CapTab");
-        spec.setContent(R.id.layout_capturas_tab);
-        spec.setIndicator("Capturas");
+        spec = tabs.newTabSpec("MapTab");
+        spec.setContent(R.id.map);
+        spec.setIndicator("Mapa");
         tabs.addTab(spec);
 
-        tabs.setCurrentTab(1);
+        tabs.setCurrentTab(0);
     }
 
     private void resize(File photo, int width, int height) {
