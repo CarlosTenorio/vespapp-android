@@ -25,6 +25,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.TaskCallback;
@@ -45,6 +47,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -183,9 +186,14 @@ public class MainActivity extends AppCompatActivity {
                 for (Sighting sighting : sightingList) {
                     LatLng myLocation = new LatLng(sighting.getLat(), sighting.getLng());
                     map.addMarker(new MarkerOptions().position(myLocation));
+
                     System.out.println("Lat: " + sighting.getLat());
                     System.out.println("Lng: " + sighting.getLng());
                 }
+                //First Vision pf the map, center on teh Balearic Islands
+                LatLng cameraFocus = new LatLng(39.56,2.62);
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(cameraFocus, 7);
+                map.animateCamera(cameraUpdate);
             }
 
             @Override
