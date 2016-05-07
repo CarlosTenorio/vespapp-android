@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
 
@@ -36,12 +37,14 @@ import com.habitissimo.vespapp.fotos.ConfirmCaptureActivity;
 import com.habitissimo.vespapp.fotos.ListaFotos;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.info.Info;
+import com.habitissimo.vespapp.info.InfoDescription;
 
 //import com.google.android.gms.maps.MapView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -75,24 +78,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    /*LinearLayout ll = (LinearLayout) findViewById(R.id.layout_guia_tab);
-
-    for (int i = 1; i <= 5; i++) {
-        Button btn = new Button(this);
-        btn.setText("button " + i);
-        ll.addView(btn);
-    }*/
-
     private void initButtons() {
         final VespappApi api = Vespapp.get(this).getApi();
 
         final Callback<List<Info>> callback = new Callback<List<Info>>() {
             @Override
             public void onResponse(Call<List<Info>> call, Response<List<Info>> response) {
-                List<Info> infoList = response.body();
-                for (Info info : infoList) {
-                    System.out.println("Title: " + info.getTitle());
-                    System.out.println("Body: " + info.getBody());
+                LinearLayout ll = (LinearLayout) findViewById(R.id.layout_guia_tab);
+                final List<Info> infoList = response.body();
+                for (final Info info : infoList) {
+                    Button btn = new Button(getApplicationContext());
+                    btn.setTextAppearance(getApplicationContext(), R.style.ButtonOrangeRipple);
+                    btn.setText(info.getTitle());
+                    btn.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent i = new Intent(getApplicationContext(), InfoDescription.class);
+                            i.putExtra("infoObject", info);
+                            startActivity(i);
+                        }
+                    });
+                    ll.addView(btn);
                 }
             }
 

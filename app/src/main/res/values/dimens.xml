@@ -6,4 +6,8 @@
     <dimen name="button_orange_radius">3dp</dimen>
     <dimen name="button_orange_stroke_width">1dp</dimen>
     <dimen name="toolbar_title_size">25sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+
+    <dimen name="info_textsize">24sp</dimen>
 </resources>

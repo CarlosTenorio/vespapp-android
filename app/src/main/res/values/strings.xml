@@ -19,6 +19,7 @@
     <string name="listo">¡Listo!</string>
     <string name="s_lo_quedan_unas_preguntas">Sólo quedan unas preguntas</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_info_description">InfoDescription</string>
 
 
 </resources>
