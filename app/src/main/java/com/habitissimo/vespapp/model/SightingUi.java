@@ -3,7 +3,7 @@ package com.habitissimo.vespapp.model;
 import android.content.Context;
 
 import com.habitissimo.vespapp.R;
-import com.habitissimo.vespapp.questions.Sighting;
+import com.habitissimo.vespapp.Sighting.Sighting;
 
 public class    SightingUi {
     public String imageUrl;
@@ -25,10 +25,11 @@ public class    SightingUi {
     }
 
     public enum SightingData {
-        Pending(Sighting.STATUS_PENDING, R.string.status_pending, R.color.statusPending),
-        Processed(Sighting.STATUS_PROCESSED, R.string.status_processed, R.color.statusValidated),
-        NotSent(Sighting.STATUS_UNSENT, R.string.status_unsent, R.color.statusNotSent),
-        Processing(Sighting.STATUS_PROCESSING, R.string.status_processing, R.color.statusProcessing);
+
+        Pending(0, R.string.status_pending, R.color.statusPending),
+        Processed(1, R.string.status_processed, R.color.statusValidated),
+        NotSent(2, R.string.status_unsent, R.color.statusNotSent),
+        Processing(3, R.string.status_processing, R.color.statusProcessing);
 
         private final int textRes;
         private final int colorRes;

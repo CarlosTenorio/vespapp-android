@@ -36,12 +36,14 @@ import com.habitissimo.vespapp.fotos.ConfirmCaptureActivity;
 import com.habitissimo.vespapp.fotos.ListaFotos;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.info.Info;
+import com.habitissimo.vespapp.Sighting.Sighting;
 
 //import com.google.android.gms.maps.MapView;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -71,7 +73,8 @@ public class MainActivity extends AppCompatActivity {
         initCamBtn();
         initSelFotosBtn();
         initButtons();
-        getCurrentPosition();
+        paintSightinghsMap();
+        //getCurrentPosition();
     }
 
 
@@ -164,6 +167,55 @@ public class MainActivity extends AppCompatActivity {
         map.addMarker(new MarkerOptions().position(myLocation));
     }
 
+
+    private void paintSightinghsMap() {
+
+        final GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        map.setMyLocationEnabled(true);
+
+        final VespappApi api = Vespapp.get(this).getApi();
+
+        final Callback<List<Sighting>> callback = new Callback<List<Sighting>>() {
+            @Override
+            public void onResponse(Call<List<Sighting>> call, Response<List<Sighting>> response) {
+                System.out.println("Entra en onResponse");
+                List<Sighting> sightingList = response.body();
+                for (Sighting sighting : sightingList) {
+                    LatLng myLocation = new LatLng(sighting.getLat(), sighting.getLng());
+                    map.addMarker(new MarkerOptions().position(myLocation));
+                    System.out.println("Lat: " + sighting.getLat());
+                    System.out.println("Lng: " + sighting.getLng());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Sighting>> call, Throwable t) {
+                System.out.println("onFailure " + t);
+            }
+        };
+        Task.doInBackground(new TaskCallback<List<Sighting>>() {
+            @Override
+            public List<Sighting> executeInBackground() {
+                Call<List<Sighting>> call = api.getSightings();
+                call.enqueue(callback);
+                return null;
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                System.out.println("onError " + t);
+                callback.onFailure(null, t);
+            }
+
+            @Override
+            public void onCompleted(List<Sighting> sightings) {
+                System.out.println("onCompleted " + sightings);
+                callback.onResponse(null, Response.success((List<Sighting>) null));
+
+            }
+        });
+    }
+
     private void initSelFotosBtn() {
         Button btn = (Button) findViewById(R.id.btn_selFotos);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -232,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
         spec.setIndicator("Mapa");
         tabs.addTab(spec);
 
-        tabs.setCurrentTab(0);
+        tabs.setCurrentTab(1);
     }
 
     private void resize(File photo, int width, int height) {

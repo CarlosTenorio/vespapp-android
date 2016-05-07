@@ -8,7 +8,7 @@ import com.habitissimo.vespapp.api.VespappApiHelper;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.fotos.ListaFotos;
-import com.habitissimo.vespapp.questions.Sighting;
+import com.habitissimo.vespapp.Sighting.Sighting;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,7 +26,7 @@ public class AddPhotosToSighting {
     }
 
     public void execute(final Arguments arguments, final Callback<Void> callback) {
-        final String sightingId = arguments.sighting.id;
+        /*final String sightingId = arguments.sighting.id;
 
         Task.doInBackground(new TaskCallback<Void>() {
             @Override public Void executeInBackground() {
@@ -46,6 +46,7 @@ public class AddPhotosToSighting {
                 callback.onResponse(null, Response.success((Void) null));
             }
         });
+        */
     }
 
     private void uploadPhotos(Arguments arguments, String sightingId) throws java.io.IOException {
