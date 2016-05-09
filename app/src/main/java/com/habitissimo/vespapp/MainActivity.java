@@ -73,18 +73,139 @@ public class MainActivity extends AppCompatActivity {
         initTabs();
         initCamBtn();
         initSelFotosBtn();
-        initButtons();
         getCurrentPosition();
     }
 
+    private void getCurrentPosition() {
+        GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        map.setMyLocationEnabled(true);
 
-    private void initButtons() {
+        // Search my position
+        LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        LocationListener locListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+                Toast.makeText(getApplicationContext(), "Gps enabled.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+                Toast.makeText(getApplicationContext(), "Gps disabled.", Toast.LENGTH_SHORT).show();
+            }
+        };
+        String locationProvider = LocationManager.NETWORK_PROVIDER;
+        locManager.requestLocationUpdates(locationProvider, 0, 0, locListener);
+
+        // Display my position in the map
+        Location currentLocation = locManager.getLastKnownLocation(locationProvider);
+        LatLng myLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
+        CameraPosition camPos = new CameraPosition.Builder().target(myLocation).zoom(14).build();
+        CameraUpdate camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
+
+        map.animateCamera(camUpd3);
+        map.addMarker(new MarkerOptions().position(myLocation));
+    }
+
+    private void initCamBtn() {
+        Button btn = (Button) findViewById(R.id.btn_cam);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    takePhoto();
+                } catch (IOException e) {
+                    Log.e(TAG, "Could not take photo: " + e);
+                }
+            }
+        });
+    }
+
+    private void takePhoto() throws IOException {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        photoFile = createImageFile();
+        Database.get(this).save(Constants.KEY_CAPTURE, photoFile.getAbsolutePath());
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
+        startActivityForResult(intent, TAKE_CAPTURE_REQUEST);
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        return File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+    }
+
+    private void initTabs() {
+        final TabHost tabs = (TabHost) findViewById(R.id.tabs_main);
+        tabs.setup();
+
+        TabHost.TabSpec spec = tabs.newTabSpec("GuiaTab");
+        spec.setContent(R.id.layout_info_tab);
+        spec.setIndicator("Guía");
+        tabs.addTab(spec);
+
+        spec = tabs.newTabSpec("MainTab");
+        spec.setContent(R.id.layout_main_tab);
+        spec.setIndicator("Haz una foto");
+        tabs.addTab(spec);
+
+        spec = tabs.newTabSpec("MapTab");
+        spec.setContent(R.id.map);
+        spec.setIndicator("Mapa");
+        tabs.addTab(spec);
+
+        tabs.setCurrentTab(1);
+
+        tabs.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            public void onTabChanged(String tabId) {
+                int i = tabs.getCurrentTab();
+                if (i == 0) {
+                    getInfo();
+                } else if (i == 1) {
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
+                    ll.removeAllViews();
+                } else if (i == 2) {
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
+                    ll.removeAllViews();
+
+                }
+            }
+        });
+    }
+
+    private void initSelFotosBtn() {
+        Button btn = (Button) findViewById(R.id.btn_selFotos);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, PICK_IMAGE_REQUEST);
+            }
+        });
+    }
+
+    private void getInfo() {
         final VespappApi api = Vespapp.get(this).getApi();
 
         final Callback<List<Info>> callback = new Callback<List<Info>>() {
             @Override
             public void onResponse(Call<List<Info>> call, Response<List<Info>> response) {
-                LinearLayout ll = (LinearLayout) findViewById(R.id.layout_guia_tab);
+                LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                 final List<Info> infoList = response.body();
                 for (final Info info : infoList) {
                     Button btn = new Button(getApplicationContext());
@@ -130,115 +251,37 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getCurrentPosition() {
-        GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-        map.setMyLocationEnabled(true);
 
-        // Search my position
-        LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
 
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            String picturePath = null;
+
+            switch (requestCode) {
+                case TAKE_CAPTURE_REQUEST:
+                    picturePath = Database.get(this).load(Constants.KEY_CAPTURE);
+                    photoFile = new File(picturePath);
+                    resize(photoFile, 640, 480);
+                    break;
+                case PICK_IMAGE_REQUEST:
+                    Uri selectedImage = data.getData();
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+                    cursor.moveToFirst();
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    picturePath = cursor.getString(columnIndex);
+                    cursor.close();
+                    break;
             }
 
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
+            savePictureToDatabase(picturePath);
 
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-                Toast.makeText(getApplicationContext(), "Gps enabled.", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                Toast.makeText(getApplicationContext(), "Gps disabled.", Toast.LENGTH_SHORT).show();
-            }
-        };
-        String locationProvider = LocationManager.NETWORK_PROVIDER;
-        locManager.requestLocationUpdates(locationProvider, 0, 0, locListener);
-
-        // Display my position in the map
-        Location currentLocation = locManager.getLastKnownLocation(locationProvider);
-        LatLng myLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        CameraPosition camPos = new CameraPosition.Builder().target(myLocation).zoom(14).build();
-        CameraUpdate camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
-
-        map.animateCamera(camUpd3);
-        map.addMarker(new MarkerOptions().position(myLocation));
-    }
-
-    private void initSelFotosBtn() {
-        Button btn = (Button) findViewById(R.id.btn_selFotos);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(i, PICK_IMAGE_REQUEST);
-            }
-        });
-    }
-
-    private void initCamBtn() {
-        Button btn = (Button) findViewById(R.id.btn_cam);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    takePhoto();
-                } catch (IOException e) {
-                    Log.e(TAG, "Could not take photo: " + e);
-                }
-            }
-        });
-    }
-
-    private void takePhoto() throws IOException {
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        photoFile = createImageFile();
-        Database.get(this).save(Constants.KEY_CAPTURE, photoFile.getAbsolutePath());
-        intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
-        startActivityForResult(intent, TAKE_CAPTURE_REQUEST);
-    }
-
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
-        return File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
-    }
-
-    /**
-     * Inicializar pestañas
-     */
-    private void initTabs() {
-
-        TabHost tabs = (TabHost) findViewById(R.id.tabs_main);
-        tabs.setup();
-
-        TabHost.TabSpec spec = tabs.newTabSpec("GuiaTab");
-        spec.setContent(R.id.layout_guia_tab);
-        spec.setIndicator("Guía");
-        tabs.addTab(spec);
-
-        spec = tabs.newTabSpec("MainTab");
-        spec.setContent(R.id.layout_main_tab);
-        spec.setIndicator("Haz una foto");
-        tabs.addTab(spec);
-
-        spec = tabs.newTabSpec("MapTab");
-        spec.setContent(R.id.map);
-        spec.setIndicator("Mapa");
-        tabs.addTab(spec);
-
-        tabs.setCurrentTab(0);
+            Intent i = new Intent(this, ConfirmCaptureActivity.class);
+            startActivity(i);
+        }
     }
 
     private void resize(File photo, int width, int height) {
@@ -275,36 +318,6 @@ public class MainActivity extends AppCompatActivity {
             } catch (IOException e) {
                 throw new RuntimeException("Could not save bitmap into file(" + photo.getAbsolutePath() + "): " + e);
             }
-        }
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == RESULT_OK) {
-            String picturePath = null;
-
-            switch (requestCode) {
-                case TAKE_CAPTURE_REQUEST:
-                    picturePath = Database.get(this).load(Constants.KEY_CAPTURE);
-                    photoFile = new File(picturePath);
-                    resize(photoFile, 640, 480);
-                    break;
-                case PICK_IMAGE_REQUEST:
-                    Uri selectedImage = data.getData();
-                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
-                    Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-                    cursor.moveToFirst();
-                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-                    picturePath = cursor.getString(columnIndex);
-                    cursor.close();
-                    break;
-            }
-
-            savePictureToDatabase(picturePath);
-
-            Intent i = new Intent(this, ConfirmCaptureActivity.class);
-            startActivity(i);
         }
     }
 
