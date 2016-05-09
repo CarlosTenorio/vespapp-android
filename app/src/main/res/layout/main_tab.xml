@@ -5,24 +5,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/app_name"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        android:layout_weight="1.00" />
+
     <Space
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="1" />
+        android:layout_weight="0.01" />
 
-    <ImageView
-        android:id="@+id/img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/btn_cam"
-        style="@style/ButtonOrangeRipple"
+    <TextView
+        android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="Camara" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:text="@string/add_Photo" />
+
+    <ImageButton
+        android:id="@+id/btn_cam"
+        android:src="@drawable/camera"
+        style="@style/camera_button"
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"
+        android:padding="50dp"
+         />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="110dp"
+        android:layout_weight="0.00" />
 
     <TextView
         android:id="@+id/textView2"
@@ -31,11 +57,12 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/txt_selFotos" />
+        android:text="@string/txt_selFotos"
+        android:layout_weight="0.00" />
 
     <Button
         android:id="@+id/btn_selFotos"
-        style="@style/ButtonOrangeRipple"
+        style="@style/camera_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

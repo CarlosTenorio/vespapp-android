@@ -2,8 +2,10 @@
     <string name="app_name">Vespapp</string>
     <string name="cabecera">Pregunta %1$s/%2$s</string>
 
+    <string name="add_Photo">¡Haz una foto!</string>
+
     <string name="btn_selFotos">Seleccionar foto</string>
-    <string name="txt_selFotos">Si ya tienes fotos, ¡añadelas!</string>
+    <string name="txt_selFotos">O si ya tienes fotos, ¡añádelas!</string>
     <string name="confirm_cap_titulo">Añade fotos</string>
     <string name="confirm_cap_txt_confirm">La foto es de...</string>
     <string name="nido">Nido</string>
@@ -19,6 +21,8 @@
     <string name="listo">¡Listo!</string>
     <string name="s_lo_quedan_unas_preguntas">Sólo quedan unas preguntas</string>
     <string name="title_activity_maps">Map</string>
+
+    <string name="icon_heart">&#xf0f9;</string>
 
 
 </resources>

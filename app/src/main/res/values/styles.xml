@@ -12,11 +12,10 @@
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="android:windowBackground">@color/colorBackground</item>
-        <item name="android:buttonStyle">@style/ButtonOrangeRipple</item>
+        <item name="android:buttonStyle">@style/camera_button</item>
     </style>
 
-    <style name="ButtonOrangeRipple" parent="Base.Widget.AppCompat.Button">
-        <item name="android:background">@drawable/button_orange_ripple_selector</item>
-        <item name="android:textColor">@color/orange</item>
+    <style name="camera_button" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/camera_button_selector</item>
     </style>
 </resources>
