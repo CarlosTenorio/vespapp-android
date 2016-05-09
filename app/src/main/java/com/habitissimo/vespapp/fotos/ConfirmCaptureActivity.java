@@ -16,12 +16,11 @@ import android.widget.Toast;
 
 import com.habitissimo.vespapp.Constants;
 import com.habitissimo.vespapp.R;
-import com.habitissimo.vespapp.Vespapp;
 import com.habitissimo.vespapp.database.Database;
 import com.habitissimo.vespapp.dialog.LoadingDialog;
 import com.habitissimo.vespapp.dialog.LoadingDialog.Listener;
 import com.habitissimo.vespapp.fotos.interactor.AddPhotosToSighting;
-import com.habitissimo.vespapp.questions.Sighting;
+import com.habitissimo.vespapp.sighting.Sighting;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -79,16 +78,16 @@ public class ConfirmCaptureActivity extends AppCompatActivity implements Locatio
         });
     }
 
-    @OnClick(R.id.btn_nido) void onNidoPressed() {
-        onTypeOfSightPressed(Sighting.TYPE_NEST);
+    @OnClick(R.id.btn_nido) void onNidoPressed() {/*
+        onTypeOfSightPressed(Sighting.TYPE_NEST);*/
     }
 
     @OnClick(R.id.btn_avispa) void onAvispaPressed() {
-        onTypeOfSightPressed(Sighting.TYPE_WASP);
+       /* onTypeOfSightPressed(Sighting.TYPE_WASP);*/
     }
 
     private void onTypeOfSightPressed(int type) {
-        showLoading();
+        /*showLoading();
         Sighting sighting = new Sighting();
         sighting.type = type;
         sighting.lat = location == null ? 1 : (float) location.getLatitude();
@@ -106,7 +105,7 @@ public class ConfirmCaptureActivity extends AppCompatActivity implements Locatio
             @Override public void onFailure(Call<Sighting> call, Throwable t) {
                 onSightingCreationError(t);
             }
-        });
+        });*/
     }
 
     private void showLoading() {
@@ -131,7 +130,7 @@ public class ConfirmCaptureActivity extends AppCompatActivity implements Locatio
     }
 
     private void onPhotosUploaded(Sighting sighting) {
-        Log.i(TAG, "Photos of sighting " + sighting.id + " uploaded");
+      /*  Log.i(TAG, "Photos of sighting " + sighting.id + " uploaded");*/
         Toast.makeText(this, "Fotos subidas", Toast.LENGTH_LONG).show();
         hideDialog();
         //TODO:

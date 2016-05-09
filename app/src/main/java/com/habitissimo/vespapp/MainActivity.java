@@ -1,13 +1,16 @@
 package com.habitissimo.vespapp;
 
-import android.content.Context;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,38 +21,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.habitissimo.vespapp.api.VespappApi;
-import com.habitissimo.vespapp.async.TaskCallback;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
+
+import com.habitissimo.vespapp.api.VespappApi;
+import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.database.Database;
 import com.habitissimo.vespapp.fotos.ConfirmCaptureActivity;
 import com.habitissimo.vespapp.fotos.ListaFotos;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
+import com.habitissimo.vespapp.map.Map;
+import com.habitissimo.vespapp.sighting.Sighting;
 
-//import com.google.android.gms.maps.MapView;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.Serializable;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -58,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
     private ListaFotos lista;
     private File photoFile;
+    private Map map;
 
 
     @Override
@@ -73,47 +64,6 @@ public class MainActivity extends AppCompatActivity {
         initTabs();
         initCamBtn();
         initSelFotosBtn();
-        getCurrentPosition();
-    }
-
-    private void getCurrentPosition() {
-        GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-        map.setMyLocationEnabled(true);
-
-        // Search my position
-        LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-                Toast.makeText(getApplicationContext(), "Gps enabled.", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                Toast.makeText(getApplicationContext(), "Gps disabled.", Toast.LENGTH_SHORT).show();
-            }
-        };
-        String locationProvider = LocationManager.NETWORK_PROVIDER;
-        locManager.requestLocationUpdates(locationProvider, 0, 0, locListener);
-
-        // Display my position in the map
-        Location currentLocation = locManager.getLastKnownLocation(locationProvider);
-        LatLng myLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        CameraPosition camPos = new CameraPosition.Builder().target(myLocation).zoom(14).build();
-        CameraUpdate camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
-
-        map.animateCamera(camUpd3);
-        map.addMarker(new MarkerOptions().position(myLocation));
     }
 
     private void initCamBtn() {
@@ -175,14 +125,23 @@ public class MainActivity extends AppCompatActivity {
             public void onTabChanged(String tabId) {
                 int i = tabs.getCurrentTab();
                 if (i == 0) {
+                    if (map != null) {
+                        map.removeMap();
+                    }
+
                     getInfo();
                 } else if (i == 1) {
                     LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                     ll.removeAllViews();
+
+                    if (map != null) {
+                        map.removeMap();
+                    }
                 } else if (i == 2) {
                     LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                     ll.removeAllViews();
 
+                    initMap();
                 }
             }
         });
@@ -238,17 +197,61 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onError(Throwable t) {
-                System.out.println("onError " + t);
                 callback.onFailure(null, t);
             }
 
             @Override
             public void onCompleted(List<Info> infos) {
-                System.out.println("onCompleted " + infos);
                 callback.onResponse(null, Response.success((List<Info>) null));
 
             }
         });
+    }
+
+    private void initMap(){
+        final VespappApi api = Vespapp.get(this).getApi();
+
+        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        Gmap.setMyLocationEnabled(true);
+        map = new Map(Gmap);
+
+        final Callback<List<Sighting>> callback = new Callback<List<Sighting>>() {
+            @Override
+            public void onResponse(Call<List<Sighting>> call, Response<List<Sighting>> response) {
+                List<Sighting> sightingList = response.body();
+                for (Sighting sighting : sightingList) {
+                    map.addMarkerSighting(sighting);
+                }
+                double lat = 39.56;
+                double lng = 2.62;
+                map.moveCamera(lat, lng);
+            }
+
+            @Override
+            public void onFailure(Call<List<Sighting>> call, Throwable t) {
+                System.out.println("onFailure " + t);
+            }
+        };
+        Task.doInBackground(new TaskCallback<List<Sighting>>() {
+            @Override
+            public List<Sighting> executeInBackground() {
+                Call<List<Sighting>> call = api.getSightings();
+                call.enqueue(callback);
+                return null;
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                callback.onFailure(null, t);
+            }
+
+            @Override
+            public void onCompleted(List<Sighting> sightings) {
+                callback.onResponse(null, Response.success((List<Sighting>) null));
+
+            }
+        });
+
     }
 
 

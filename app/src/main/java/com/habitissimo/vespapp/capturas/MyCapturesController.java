@@ -6,8 +6,7 @@ import android.widget.Toast;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.base.Controller;
 import com.habitissimo.vespapp.model.SightingUi;
-import com.habitissimo.vespapp.questions.Picture;
-import com.habitissimo.vespapp.questions.Sighting;
+import com.habitissimo.vespapp.sighting.Sighting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,11 +52,12 @@ public class MyCapturesController extends Controller<MyCapturesView, Void> {
         }
 
         public SightingUi map(Sighting apiModel) {
-            if (apiModel.pictures == null)
+            /*if (apiModel.pictures == null)
                 apiModel.pictures = new ArrayList<>();
 
             Picture firstPicture = apiModel.pictures.size() > 0 ? apiModel.pictures.get(0) : new Picture("", "", "");
-            return new SightingUi(firstPicture.file, apiModel.status);
+            return new SightingUi(firstPicture.file, apiModel.status);*/
+            return null;
         }
 
         public List<SightingUi> map(List<Sighting> sightings) {

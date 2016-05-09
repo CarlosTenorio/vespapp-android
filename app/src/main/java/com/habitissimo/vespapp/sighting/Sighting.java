@@ -1,14 +1,20 @@
-package com.habitissimo.vespapp.questions;
+package com.habitissimo.vespapp.sighting;
+
 
 import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by archi on 11/03/16.
  */
 public class Sighting {
+
+    //private int id;
+    private float lat;
+    private float lng;
+    @SerializedName("public")
+    private boolean _public;
+    /*
+
     public static final int STATUS_PENDING = 0;
     public static final int STATUS_PROCESSING = 1;
     public static final int STATUS_PROCESSED = 2;
@@ -32,10 +38,31 @@ public class Sighting {
     public String contact = "Anónimo";
 
     public String source = "app";
-
-    public Sighting() {
+*/
+    public Sighting (float lat, float lng, boolean _public){
+        //this.id=id;
+        this.lat=lat;
+        this.lng=lng;
+        this._public=_public;
     }
 
+    public float getLat() {
+        return lat;
+    }
+
+    public float getLng() {
+        return lng;
+    }
+
+    public boolean getPublic() {
+        return _public;
+    }
+
+/*    public int getId() {
+        return id;
+    }*/
+
+    /*
     public void addAnswer(Answer answer) {
         if (answers == null) {
             answers = new ArrayList<>();
@@ -49,5 +76,5 @@ public class Sighting {
         }
 
         this.answers.remove(answer.id);
-    }
+    }*/
 }
