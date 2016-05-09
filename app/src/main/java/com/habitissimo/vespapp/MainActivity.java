@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -18,7 +19,11 @@ import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.BounceInterpolator;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 
@@ -67,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initCamBtn() {
-        Button btn = (Button) findViewById(R.id.btn_cam);
+        ImageButton btn = (ImageButton) findViewById(R.id.btn_cam);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e(TAG, "Could not take photo: " + e);
                 }
             }
-        });
+       });
     }
 
     private void takePhoto() throws IOException {
@@ -168,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
                 final List<Info> infoList = response.body();
                 for (final Info info : infoList) {
                     Button btn = new Button(getApplicationContext());
-                    btn.setTextAppearance(getApplicationContext(), R.style.ButtonOrangeRipple);
+                    btn.setTextAppearance(getApplicationContext(), R.style.camera_button);
                     btn.setText(info.getTitle());
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
