@@ -16,12 +16,11 @@ import android.widget.Toast;
 
 import com.habitissimo.vespapp.Constants;
 import com.habitissimo.vespapp.R;
-import com.habitissimo.vespapp.Vespapp;
 import com.habitissimo.vespapp.database.Database;
 import com.habitissimo.vespapp.dialog.LoadingDialog;
 import com.habitissimo.vespapp.dialog.LoadingDialog.Listener;
 import com.habitissimo.vespapp.fotos.interactor.AddPhotosToSighting;
-import com.habitissimo.vespapp.Sighting.Sighting;
+import com.habitissimo.vespapp.sighting.Sighting;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;

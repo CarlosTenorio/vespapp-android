@@ -1,13 +1,10 @@
 package com.habitissimo.vespapp;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -17,17 +14,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TabHost;
-import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
+
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.TaskCallback;
 
@@ -38,16 +28,13 @@ import com.habitissimo.vespapp.fotos.ConfirmCaptureActivity;
 import com.habitissimo.vespapp.fotos.ListaFotos;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.info.Info;
-import com.habitissimo.vespapp.Sighting.Sighting;
-
-//import com.google.android.gms.maps.MapView;
+import com.habitissimo.vespapp.map.Map;
+import com.habitissimo.vespapp.sighting.Sighting;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -76,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
         initCamBtn();
         initSelFotosBtn();
         initButtons();
-        paintSightinghsMap();
-        //getCurrentPosition();
+        initMap();
     }
 
 
@@ -130,70 +116,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void getCurrentPosition() {
-        GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-        map.setMyLocationEnabled(true);
-
-        // Search my position
-        LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-                Toast.makeText(getApplicationContext(), "Gps enabled.", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                Toast.makeText(getApplicationContext(), "Gps disabled.", Toast.LENGTH_SHORT).show();
-            }
-        };
-        String locationProvider = LocationManager.NETWORK_PROVIDER;
-        locManager.requestLocationUpdates(locationProvider, 0, 0, locListener);
-
-        // Display my position in the map
-        Location currentLocation = locManager.getLastKnownLocation(locationProvider);
-        LatLng myLocation = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
-        CameraPosition camPos = new CameraPosition.Builder().target(myLocation).zoom(14).build();
-        CameraUpdate camUpd3 = CameraUpdateFactory.newCameraPosition(camPos);
-
-        map.animateCamera(camUpd3);
-        map.addMarker(new MarkerOptions().position(myLocation));
-    }
-
-
-    private void paintSightinghsMap() {
-
-        final GoogleMap map = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-        map.setMyLocationEnabled(true);
-
+    private void initMap(){
         final VespappApi api = Vespapp.get(this).getApi();
+
+        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        Gmap.setMyLocationEnabled(true);
+        final Map map = new Map(Gmap);
 
         final Callback<List<Sighting>> callback = new Callback<List<Sighting>>() {
             @Override
             public void onResponse(Call<List<Sighting>> call, Response<List<Sighting>> response) {
-                System.out.println("Entra en onResponse");
                 List<Sighting> sightingList = response.body();
                 for (Sighting sighting : sightingList) {
-                    LatLng myLocation = new LatLng(sighting.getLat(), sighting.getLng());
-                    map.addMarker(new MarkerOptions().position(myLocation));
-
-                    System.out.println("Lat: " + sighting.getLat());
-                    System.out.println("Lng: " + sighting.getLng());
+                    map.addMarkerSighting(sighting);
                 }
-                //First Vision pf the map, center on teh Balearic Islands
-                LatLng cameraFocus = new LatLng(39.56,2.62);
-                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(cameraFocus, 7);
-                map.animateCamera(cameraUpdate);
+                double lat = 39.56;
+                double lng = 2.62;
+                map.moveCamera(lat, lng);
             }
 
             @Override
@@ -222,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
     private void initSelFotosBtn() {

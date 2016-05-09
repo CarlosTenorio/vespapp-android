@@ -3,7 +3,7 @@ package com.habitissimo.vespapp.api;
 import com.habitissimo.vespapp.questions.ExpertComment;
 import com.habitissimo.vespapp.questions.Location;
 import com.habitissimo.vespapp.questions.Picture;
-import com.habitissimo.vespapp.Sighting.Sighting;
+import com.habitissimo.vespapp.sighting.Sighting;
 import com.habitissimo.vespapp.info.Info;
 
 import java.io.File;

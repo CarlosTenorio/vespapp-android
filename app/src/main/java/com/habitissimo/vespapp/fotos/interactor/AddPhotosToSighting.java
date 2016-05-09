@@ -5,17 +5,13 @@ import android.content.Context;
 import com.habitissimo.vespapp.Vespapp;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.api.VespappApiHelper;
-import com.habitissimo.vespapp.async.Task;
-import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.fotos.ListaFotos;
-import com.habitissimo.vespapp.Sighting.Sighting;
+import com.habitissimo.vespapp.sighting.Sighting;
 
 import java.io.File;
-import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
 
 public class AddPhotosToSighting {
     private final VespappApi api;

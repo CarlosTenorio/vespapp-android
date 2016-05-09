@@ -6,8 +6,7 @@ import android.widget.Toast;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.base.Controller;
 import com.habitissimo.vespapp.model.SightingUi;
-import com.habitissimo.vespapp.questions.Picture;
-import com.habitissimo.vespapp.Sighting.Sighting;
+import com.habitissimo.vespapp.sighting.Sighting;
 
 import java.util.ArrayList;
 import java.util.List;

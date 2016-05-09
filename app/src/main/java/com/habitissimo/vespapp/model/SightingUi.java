@@ -3,7 +3,6 @@ package com.habitissimo.vespapp.model;
 import android.content.Context;
 
 import com.habitissimo.vespapp.R;
-import com.habitissimo.vespapp.Sighting.Sighting;
 
 public class    SightingUi {
     public String imageUrl;
