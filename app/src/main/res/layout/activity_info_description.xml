@@ -8,7 +8,7 @@
         android:id="@+id/toolbar_info_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/brandPrimary">
     </android.support.v7.widget.Toolbar>
 
     <LinearLayout

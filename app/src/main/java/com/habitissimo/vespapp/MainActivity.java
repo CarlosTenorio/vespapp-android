@@ -7,15 +7,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -111,33 +117,44 @@ public class MainActivity extends AppCompatActivity {
 
         TabHost.TabSpec spec = tabs.newTabSpec("GuiaTab");
         spec.setContent(R.id.layout_info_tab);
-        spec.setIndicator("Guía");
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(),android.R.drawable.ic_dialog_info, null));
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MainTab");
         spec.setContent(R.id.layout_main_tab);
-        spec.setIndicator("Haz una foto");
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), R.drawable.camera, null));
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MapTab");
         spec.setContent(R.id.map);
         spec.setIndicator("Mapa");
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_map, null));
         tabs.addTab(spec);
+
+        //Add color initial
+        tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
         tabs.setCurrentTab(1);
 
         tabs.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            Context context=null;
             public void onTabChanged(String tabId) {
                 int i = tabs.getCurrentTab();
                 if (i == 0) {
                     if (map != null) {
                         map.removeMap();
                     }
-
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
                     getInfo();
                 } else if (i == 1) {
                     LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                     ll.removeAllViews();
+
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
                     if (map != null) {
                         map.removeMap();
@@ -145,6 +162,10 @@ public class MainActivity extends AppCompatActivity {
                 } else if (i == 2) {
                     LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                     ll.removeAllViews();
+
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
                     initMap();
                 }

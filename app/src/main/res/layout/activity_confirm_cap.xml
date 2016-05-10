@@ -8,7 +8,7 @@
         android:id="@+id/toolbar_confirm_cap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"></android.support.v7.widget.Toolbar>
+        android:background="@color/brandPrimary"></android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycle_fotos"
