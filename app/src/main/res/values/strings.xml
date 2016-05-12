@@ -22,8 +22,15 @@
     <string name="s_lo_quedan_unas_preguntas">Sólo quedan unas preguntas</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_info_description">InfoDescription</string>
+    <string name="title_activity_menu_contact">Contacto</string>
 
     <string name="icon_heart">&#xf0f9;</string>
+    <string name="title_activity_menu">MenuActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 
 
 </resources>

@@ -37,7 +37,7 @@
 
                 <include layout="@layout/activity_maps" />
 
-                <!--<include layout="@layout/capturas_tab" />-->
+                <include layout="@layout/menu_tab" />
 
             </FrameLayout>
         </LinearLayout>

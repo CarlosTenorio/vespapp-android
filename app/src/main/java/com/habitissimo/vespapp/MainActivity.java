@@ -31,6 +31,7 @@ import android.view.animation.BounceInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -49,6 +50,7 @@ import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
+import com.habitissimo.vespapp.menu.MenuContact;
 import com.habitissimo.vespapp.sighting.Sighting;
 
 
@@ -122,13 +124,19 @@ public class MainActivity extends AppCompatActivity {
 
         spec = tabs.newTabSpec("MainTab");
         spec.setContent(R.id.layout_main_tab);
-        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), R.drawable.camera, null));
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_menu_camera, null));
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MapTab");
         spec.setContent(R.id.map);
         spec.setIndicator("Mapa");
         spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_map, null));
+        tabs.addTab(spec);
+
+        spec = tabs.newTabSpec("MenuTab");
+        spec.setContent(R.id.layout_menu_tab);
+        spec.setIndicator("Menu");
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_dialer, null));
         tabs.addTab(spec);
 
         //Add color initial
@@ -168,7 +176,20 @@ public class MainActivity extends AppCompatActivity {
                     tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
                     initMap();
+                } else if (i == 3) {
+                    initMenuOptions();
                 }
+            }
+        });
+    }
+
+    private void initMenuOptions(){
+        ((RelativeLayout)findViewById(R.id.layout_menu_tab_contact)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(getApplicationContext(), MenuContact.class);
+                startActivity(i);
             }
         });
     }
