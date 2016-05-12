@@ -38,7 +38,7 @@
             android:name=".example.ExampleActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".fotos.ConfirmCaptureActivity"
+            android:name=".sighting.SightingDataActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

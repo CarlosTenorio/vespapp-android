@@ -27,7 +27,7 @@ public class Map extends Activity {
 
 
     public void addMarkerSighting(Sighting sighting){
-        if (sighting.getPublic()) {
+        if (sighting.is_public()) {
             LatLng myLocation = new LatLng(sighting.getLat(), sighting.getLng());
             Gmap.addMarker(new MarkerOptions().position(myLocation));
         }

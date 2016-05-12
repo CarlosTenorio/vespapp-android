@@ -5,13 +5,14 @@
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_confirm_cap"
+        android:id="@+id/toolbar_sigthing_data"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"></android.support.v7.widget.Toolbar>
+        android:background="@color/colorPrimaryDark">
+    </android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycle_fotos"
+        android:id="@+id/recycle_pictures"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
@@ -27,13 +28,26 @@
         android:padding="30dp">
 
         <Button
-            android:id="@+id/btn_añadir_foto"
+            android:id="@+id/btn_add_picture"
             style="@style/camera_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dp"
-            android:text="@string/añadir_foto" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="@string/add_picture" />
+
+        <Button
+            android:id="@+id/btn_select_picture"
+            style="@style/camera_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="@string/select_picture" />
 
         <TextView
             android:layout_width="wrap_content"
