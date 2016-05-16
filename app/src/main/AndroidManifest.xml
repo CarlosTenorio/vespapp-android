@@ -52,6 +52,16 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".menu.MenuContact"
+            android:label="@string/title_activity_menu_contact"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".sighting.LocationsListActivity"
+            android:label="@string/title_activity_menu_contact"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_menu_contact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/brandPrimary">
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:id="@+id/menu_contact_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/menu_contact_name"
+            android:text="Nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="30dp"/>
+        <EditText
+            android:id="@+id/name_contact"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="tu nombre"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/menu_contact_subject"
+            android:text="Asunto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="30dp"/>
+        <EditText
+            android:id="@+id/subject_contact"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Asunto"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/menu_contact_body"
+            android:text="Mensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="30dp"/>
+        <EditText
+            android:id="@+id/body_contact"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cuerpo del mensaje"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/menu_contact_phone"
+            android:text="Teléfono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="30dp"/>
+        <EditText
+            android:id="@+id/phone_contact"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="(Opcional)"
+            android:inputType="phone" />
+
+        <Button
+            android:id="@+id/sendButton_contact"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Enviar"
+        android:onClick="selfDestruct" />
+
+    </LinearLayout>
+
+</LinearLayout>

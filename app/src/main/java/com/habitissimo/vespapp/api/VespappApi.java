@@ -54,8 +54,6 @@ public interface VespappApi {
     @GET("/sightings/{sightingId}/expert_comments/{commentId}/")
     void getExpertCommentById(@Path("sightingId") String sightingId, @Path("commentId") String commentId, Callback<ExpertComment> callback);
 
-    @GET("/locations/")
-    void getLocations(Callback<List<Location>> callback);
 
 
 
@@ -71,7 +69,8 @@ public interface VespappApi {
 
 
 
-
+    @GET("locations/")
+    Call<List<Location>> getLocations();
 
     @GET("sightings/")
     Call<List<Sighting>> getSightings();

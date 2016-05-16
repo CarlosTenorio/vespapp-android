@@ -31,7 +31,7 @@ public class Sighting  implements Serializable {
     @SerializedName("public")
     private boolean _public;
 
-    private Location location;
+    private int location;
     private float lat;
     private float lng;
 
@@ -43,7 +43,7 @@ public class Sighting  implements Serializable {
 
     public Sighting(int id, int status, String free_text, int type,
                     String contact, String source, boolean _public,
-                    Location location, float lat, float lng) {
+                    int location, float lat, float lng) {
         this.id = id;
         this.status = status;
         this.free_text = free_text;
@@ -84,7 +84,7 @@ public class Sighting  implements Serializable {
         return _public;
     }
 
-    public Location getLocation() {
+    public int getLocation() {
         return location;
     }
 
@@ -128,7 +128,7 @@ public class Sighting  implements Serializable {
         this._public = _public;
     }
 
-    public void setLocation(Location location) {
+    public void setLocation(int location) {
         this.location = location;
     }
 

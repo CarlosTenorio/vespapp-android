@@ -79,11 +79,11 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
     }
 
     private void initMap() {
-        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         Gmap.setMyLocationEnabled(true);
         map = new Map(Gmap);
 
-        LatLng position = new LatLng(39.8530596, 3.1204506);
+        LatLng position = new LatLng(sighting.getLat(), sighting.getLng());
 
         marker = Gmap.addMarker(new MarkerOptions()
                 .position(position)

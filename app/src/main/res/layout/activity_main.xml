@@ -22,7 +22,7 @@
                 android:id="@android:id/tabs"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark">
+                android:background="@color/brandPrimary">
 
             </TabWidget>
 
@@ -37,7 +37,7 @@
 
                 <include layout="@layout/activity_maps" />
 
-                <!--<include layout="@layout/capturas_tab" />-->
+                <include layout="@layout/menu_tab" />
 
             </FrameLayout>
         </LinearLayout>

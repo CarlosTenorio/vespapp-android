@@ -5,12 +5,14 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TabHost;
 
 import com.google.android.gms.maps.GoogleMap;
@@ -19,12 +21,13 @@ import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.database.Database;
-import com.habitissimo.vespapp.sighting.SightingDataActivity;
 import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
+import com.habitissimo.vespapp.menu.MenuContact;
 import com.habitissimo.vespapp.sighting.PicturesActions;
 import com.habitissimo.vespapp.sighting.Sighting;
+import com.habitissimo.vespapp.sighting.SightingDataActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -73,18 +76,28 @@ public class MainActivity extends AppCompatActivity {
 
         TabHost.TabSpec spec = tabs.newTabSpec("GuiaTab");
         spec.setContent(R.id.layout_info_tab);
-        spec.setIndicator("Guía");
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(),android.R.drawable.ic_dialog_info, null));
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MainTab");
         spec.setContent(R.id.layout_main_tab);
-        spec.setIndicator("Haz una foto");
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_menu_camera, null));
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MapTab");
         spec.setContent(R.id.map);
         spec.setIndicator("Mapa");
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_map, null));
         tabs.addTab(spec);
+
+        spec = tabs.newTabSpec("MenuTab");
+        spec.setContent(R.id.layout_menu_tab);
+        spec.setIndicator("Menu");
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_dialer, null));
+        tabs.addTab(spec);
+
+        //Add color initial
+        tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
         tabs.setCurrentTab(1);
 
@@ -95,11 +108,17 @@ public class MainActivity extends AppCompatActivity {
                     if (map != null) {
                         map.removeMap();
                     }
-
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
                     getInfo();
                 } else if (i == 1) {
                     LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                     ll.removeAllViews();
+
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
                     if (map != null) {
                         map.removeMap();
@@ -108,7 +127,13 @@ public class MainActivity extends AppCompatActivity {
                     LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                     ll.removeAllViews();
 
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
                     initMap();
+                } else if (i == 3) {
+                    initMenuOptions();
                 }
             }
         });
@@ -124,6 +149,17 @@ public class MainActivity extends AppCompatActivity {
                 } catch (IOException e) {
                     Log.e(TAG, "Could not take photo: " + e);
                 }
+            }
+        });
+    }
+
+    private void initMenuOptions(){
+        ((RelativeLayout)findViewById(R.id.layout_menu_tab_contact)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(getApplicationContext(), MenuContact.class);
+                startActivity(i);
             }
         });
     }

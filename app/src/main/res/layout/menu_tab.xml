@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_menu_tab"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_menu_tab_contact"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:padding="6dip"
+        android:layout_marginTop="10dip"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iconMenu1"
+            android:layout_width="100dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="TODO"
+            android:src="@drawable/contact_us" />
+
+        <TextView
+            android:id="@+id/secondLineMenu1"
+            android:layout_width="fill_parent"
+            android:layout_height="26dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/iconMenu1"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Envianos un correo, llámanos, twiteanos..."
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/firstLineMenu1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/secondLineMenu1"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_toRightOf="@id/iconMenu1"
+            android:gravity="center_vertical"
+            android:text="Contacto"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="10dip"/>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_menu_tab_about_us"
+        android:layout_width="fill_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:padding="6dip"
+        android:layout_marginTop="10dip"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iconMenu2"
+            android:layout_width="100dip"
+            android:layout_height="fill_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentTop="true"
+            android:contentDescription="TODO"
+            android:src="@drawable/about_us" />
+
+        <TextView
+            android:id="@+id/secondLineMenu2"
+            android:layout_width="fill_parent"
+            android:layout_height="26dip"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/iconMenu2"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:text="Conoce nuestra historia"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/firstLineMenu2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/secondLineMenu2"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_toRightOf="@id/iconMenu2"
+            android:gravity="center_vertical"
+            android:text="Acerca de "
+            android:textSize="16sp" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="10dip"/>
+</LinearLayout>

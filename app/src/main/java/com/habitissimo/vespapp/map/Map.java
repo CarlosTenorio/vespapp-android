@@ -49,12 +49,12 @@ public class Map extends Activity {
 
             @Override
             public void onProviderEnabled(String provider) {
-                Toast.makeText(getApplicationContext(), "Gps enabled.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Gps enabled.", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onProviderDisabled(String provider) {
-                Toast.makeText(getApplicationContext(), "Gps disabled.", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "Gps disabled.", Toast.LENGTH_SHORT).show();
             }
         };
         String locationProvider = LocationManager.NETWORK_PROVIDER;

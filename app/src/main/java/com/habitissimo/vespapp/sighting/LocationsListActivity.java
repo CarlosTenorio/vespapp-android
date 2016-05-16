@@ -5,18 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
-import com.google.android.gms.maps.model.Marker;
 import com.habitissimo.vespapp.R;
 import com.habitissimo.vespapp.Vespapp;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
-import com.habitissimo.vespapp.info.Info;
-import com.habitissimo.vespapp.info.InfoDescription;
-import com.habitissimo.vespapp.map.Map;
+import com.habitissimo.vespapp.locations.Location;
 
 import java.util.List;
 
@@ -33,17 +30,19 @@ public class LocationsListActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sighting_map);
+        setContentView(R.layout.activity_locations_list);
 
         initToolbar();
 
         Intent i = getIntent();
         sighting = (Sighting) i.getSerializableExtra("sightingObject");
+
+        initList();
     }
 
     private void initToolbar() {
         // Set a toolbar to replace the action bar.
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sigthing_map);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_locations_list);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitulo));
         toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
@@ -62,36 +61,25 @@ public class LocationsListActivity extends AppCompatActivity {
     private void initList(){
         final VespappApi api = Vespapp.get(this).getApi();
 
-        final Callback<List<Info>> callback = new Callback<List<Info>>() {
+        final Callback<List<Location>> callback = new Callback<List<Location>>() {
             @Override
-            public void onResponse(Call<List<Info>> call, Response<List<Info>> response) {
-                LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
-                final List<Info> infoList = response.body();
-                for (final Info info : infoList) {
-                    Button btn = new Button(getApplicationContext());
-                    btn.setTextAppearance(getApplicationContext(), R.style.camera_button);
-                    btn.setText(info.getTitle());
-                    btn.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent i = new Intent(getApplicationContext(), InfoDescription.class);
-                            i.putExtra("infoObject", info);
-                            startActivity(i);
-                        }
-                    });
-                    ll.addView(btn);
+            public void onResponse(Call<List<Location>> call, Response<List<Location>> response) {
+                LinearLayout ll = (LinearLayout) findViewById(R.id.layout_locations_list);
+                final List<Location> locationList = response.body();
+                for (final Location location : locationList) {
+                    addItemList(location);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Info>> call, Throwable t) {
+            public void onFailure(Call<List<Location>> call, Throwable t) {
                 System.out.println("onFailure " + t);
             }
         };
-        Task.doInBackground(new TaskCallback<List<Info>>() {
+        Task.doInBackground(new TaskCallback<List<Location>>() {
             @Override
-            public List<Info> executeInBackground() {
-                Call<List<Info>> call = api.getInfo();
+            public List<Location> executeInBackground() {
+                Call<List<Location>> call = api.getLocations();
                 call.enqueue(callback);
                 return null;
             }
@@ -102,11 +90,36 @@ public class LocationsListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCompleted(List<Info> infos) {
-                callback.onResponse(null, Response.success((List<Info>) null));
+            public void onCompleted(List<Location> locations) {
+                callback.onResponse(null, Response.success((List<Location>) null));
 
             }
         });
     }
 
+    private void addItemList(final Location location) {
+        LinearLayout locationsList = (LinearLayout) findViewById(R.id.layout_locations_list);
+        LinearLayout itemList = (LinearLayout) View.inflate(this, R.layout.location_item_list, null);
+        TextView itemText = (TextView) itemList.findViewById(R.id.text_item_list);
+        itemText.setText(location.getName());
+        locationsList.addView(itemList);
+
+        itemList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeActivity(location);
+            }
+        });
+    }
+
+
+    private  void changeActivity(Location location) {
+        sighting.setLocation(location.getId());
+        sighting.setLat(location.getLat());
+        sighting.setLng(location.getLng());
+
+        Intent i = new Intent(this, MapSightingActivity.class);
+        i.putExtra("sightingObject", sighting);
+        startActivity(i);
+    }
 }
