@@ -1,4 +1,4 @@
-package com.habitissimo.vespapp.locations;
+package com.habitissimo.vespapp.sighting;
 
 import java.io.Serializable;
 

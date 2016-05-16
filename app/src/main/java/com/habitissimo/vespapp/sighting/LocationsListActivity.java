@@ -13,7 +13,6 @@ import com.habitissimo.vespapp.Vespapp;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
-import com.habitissimo.vespapp.locations.Location;
 
 import java.util.List;
 

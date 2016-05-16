@@ -2,7 +2,6 @@ package com.habitissimo.vespapp.sighting;
 
 
 import com.google.gson.annotations.SerializedName;
-import com.habitissimo.vespapp.locations.Location;
 
 import java.io.Serializable;
 import java.util.List;

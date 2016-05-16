@@ -1,4 +1,4 @@
-package com.habitissimo.vespapp.base;
+package com.habitissimo.vespapp.database;
 
 import android.content.Context;
 import android.view.View;

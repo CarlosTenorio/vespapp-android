@@ -27,7 +27,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     @Override
     public RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.confirm_cap_img, parent, false);
+        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.picture_item_list, parent, false);
         RecyclerViewHolders rcv = new RecyclerViewHolders(layoutView, context, new RecyclerViewHolders.Callback() {
             @Override
             public void onImageDeleted(int index) {

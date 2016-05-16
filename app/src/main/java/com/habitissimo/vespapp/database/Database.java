@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 
 import com.google.gson.Gson;
 import com.habitissimo.vespapp.Vespapp;
-import com.habitissimo.vespapp.base.Controller;
 
 public class Database {
     private SharedPreferences preferences;

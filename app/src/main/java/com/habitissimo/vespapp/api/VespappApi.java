@@ -1,7 +1,6 @@
 package com.habitissimo.vespapp.api;
 
-import com.habitissimo.vespapp.questions.ExpertComment;
-import com.habitissimo.vespapp.locations.Location;
+import com.habitissimo.vespapp.sighting.Location;
 import com.habitissimo.vespapp.sighting.Picture;
 import com.habitissimo.vespapp.sighting.Sighting;
 import com.habitissimo.vespapp.info.Info;
@@ -21,17 +20,6 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface VespappApi {
-    String SIGHTINGS = "sightings/";
-
-
-    @GET(SIGHTINGS + "{sightingId}/")
-    void getSightingById(@Path("sightingId") String sightingId, Callback<Sighting> callback);
-
-    @PATCH(SIGHTINGS + "{sightingId}/")
-    void updateSighting(@Path("sightingId") String sightingId, @Body Sighting sighting, Callback<Sighting> callback);
-
-
-
     @GET("/sightings/{sightingId}/photos/")
     void getPhotos(@Path("sightingId") String sightingId, Callback<List<Picture>> callback);
 
@@ -44,16 +32,6 @@ public interface VespappApi {
 //    @PATCH("/sightings/{sightingId}/questions/{questionId}")
 //    void updateQuestion(@Path("sightingId") String sightingId, @Path("questionId") String questionId, @Body QuestionRequest answersid,
 //                        Callback</* TODO */Void> callback);
-
-    @GET("/sightings/{sightingId}/expert_comments/")
-    void getExpertComments(@Path("sightingId") String sightingId, Callback<ExpertComment> callback);
-
-    @POST("/sightings/{sightingId}/expert_comments/")
-    void createExpertComment(@Path("sightingId") String sightingId, @Body /* TODO */ Void comment, Callback<ExpertComment> callback);
-
-    @GET("/sightings/{sightingId}/expert_comments/{commentId}/")
-    void getExpertCommentById(@Path("sightingId") String sightingId, @Path("commentId") String commentId, Callback<ExpertComment> callback);
-
 
 
 
