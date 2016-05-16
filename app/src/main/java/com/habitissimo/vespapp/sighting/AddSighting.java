@@ -1,25 +1,32 @@
 package com.habitissimo.vespapp.sighting;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.habitissimo.vespapp.R;
 import com.habitissimo.vespapp.Vespapp;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.api.VespappApiHelper;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.dialog.LoadingDialog;
+import com.habitissimo.vespapp.map.Map;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddSighting {
+public class AddSighting extends AppCompatActivity {
     public static final String TAG = "AddSighting";
 
     private final VespappApi api;
@@ -35,13 +42,8 @@ public class AddSighting {
         this.picturesActions = picturesActions;
     }
 
-    public void onTypeOfSightPressed(int type) {
+    public void sendSighting(final Sighting sighting) {
         showLoading();
-
-        final Sighting sighting = new Sighting();
-        sighting.setType(type);
-        sighting.setLat(3.69f);
-        sighting.setLng(2.69f);
 
         final Callback<Sighting> callback = new Callback<Sighting>() {
             @Override
@@ -97,7 +99,7 @@ public class AddSighting {
             public Void executeInBackground() {
                 try {
                     String sightingId = String.valueOf(sighting.getId());
-                    uploadPhotos(sightingId);
+                    uploadPhotos(sightingId, callback);
                 } catch (IOException e1) {
                     throw new RuntimeException("Error uploading photos", e1);
                 }
@@ -117,10 +119,11 @@ public class AddSighting {
         });
     }
 
-    private void uploadPhotos(String sightingId) throws java.io.IOException {
+    private void uploadPhotos(String sightingId, Callback callback) throws java.io.IOException {
         for (String picturePath : picturesActions.getList()) {
+            System.out.println("Ahora toca foto");
             Call<Void> call = api.addPhoto(sightingId, VespappApiHelper.buildPhotoApiParameter(new File(picturePath)));
-            call.execute();
+            call.enqueue(callback);
         }
     }
 

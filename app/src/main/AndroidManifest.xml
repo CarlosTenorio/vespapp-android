@@ -40,15 +40,18 @@
         <activity
             android:name=".sighting.SightingDataActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".info.InfoDescription"
+            android:label="@string/title_activity_info_description"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".sighting.MapSightingActivity"
+            android:label="@string/title_activity_maps"
+            android:theme="@style/AppTheme" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
-        <activity
-            android:name=".info.InfoDescription"
-            android:label="@string/title_activity_info_description"
-            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

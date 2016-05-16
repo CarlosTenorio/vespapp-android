@@ -4,12 +4,13 @@ package com.habitissimo.vespapp.sighting;
 import com.google.gson.annotations.SerializedName;
 import com.habitissimo.vespapp.locations.Location;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by archi on 11/03/16.
  */
-public class Sighting {
+public class Sighting  implements Serializable {
 
     private static final int STATUS_PENDING = 0;
     private static final int STATUS_PROCESSING = 1;

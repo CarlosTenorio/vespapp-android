@@ -116,13 +116,25 @@ public class SightingDataActivity extends AppCompatActivity {
 
     @OnClick(R.id.btn_nido)
     void onNidoPressed() {
-        new AddSighting(this, getPicturesList()).onTypeOfSightPressed(Sighting.TYPE_NEST);
+        onTypeOfSightPressed(Sighting.TYPE_NEST);
     }
 
     @OnClick(R.id.btn_avispa)
     void onAvispaPressed() {
-        new AddSighting(this, getPicturesList()).onTypeOfSightPressed(Sighting.TYPE_WASP);
+        onTypeOfSightPressed(Sighting.TYPE_WASP);
     }
+
+
+
+    public void onTypeOfSightPressed(int type) {
+        Sighting sighting = new Sighting();
+        sighting.setType(type);
+
+        Intent i = new Intent(this, LocationsListActivity.class);
+        i.putExtra("sightingObject", sighting);
+        startActivity(i);
+    }
+
 
 
     private PicturesActions getPicturesList() {
