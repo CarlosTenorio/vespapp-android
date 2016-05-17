@@ -114,18 +114,21 @@ public class MainActivity extends AppCompatActivity {
                     tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
                     tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
                     tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(3).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
                     getInfo();
                 } else if (i == 1) {
+                    if (map != null) {
+                        map.removeMap();
+                    }
                     LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                     ll.removeAllViews();
 
                     tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
                     tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
                     tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(3).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
-                    if (map != null) {
-                        map.removeMap();
-                    }
                 } else if (i == 2) {
                     LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                     ll.removeAllViews();
@@ -133,9 +136,21 @@ public class MainActivity extends AppCompatActivity {
                     tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
                     tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
                     tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(3).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
                     initMap();
                 } else if (i == 3) {
+                    if (map != null) {
+                        map.removeMap();
+                    }
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
+                    ll.removeAllViews();
+
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
                     initMenuOptions();
                 }
             }
