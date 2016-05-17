@@ -1,8 +1,7 @@
 package com.habitissimo.vespapp.api;
 
-import com.habitissimo.vespapp.questions.ExpertComment;
-import com.habitissimo.vespapp.questions.Location;
-import com.habitissimo.vespapp.questions.Picture;
+import com.habitissimo.vespapp.sighting.Location;
+import com.habitissimo.vespapp.sighting.Picture;
 import com.habitissimo.vespapp.sighting.Sighting;
 import com.habitissimo.vespapp.info.Info;
 
@@ -21,27 +20,6 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface VespappApi {
-    String SIGHTINGS = "sightings/";
-
-    @GET(SIGHTINGS)
-    Call<List<Sighting>> getSightings();
-
-    @GET(SIGHTINGS + "{sightingId}/")
-    void getSightingById(@Path("sightingId") String sightingId, Callback<Sighting> callback);
-
-    @PATCH(SIGHTINGS + "{sightingId}/")
-    void updateSighting(@Path("sightingId") String sightingId, @Body Sighting sighting, Callback<Sighting> callback);
-
-    @POST(SIGHTINGS)
-    Call<Sighting> createSighting(@Body Sighting sighting);
-
-    /**
-     * @see VespappApiHelper#buildPhotoApiParameter(File)
-     */
-    @Multipart
-    @POST(SIGHTINGS + "{sightingId}/photos/")
-    Call<Void> addPhoto(@Path("sightingId") String sightingId, @Part("file\"; filename=\"photo.png\" ") RequestBody photo);
-
     @GET("/sightings/{sightingId}/photos/")
     void getPhotos(@Path("sightingId") String sightingId, Callback<List<Picture>> callback);
 
@@ -55,18 +33,38 @@ public interface VespappApi {
 //    void updateQuestion(@Path("sightingId") String sightingId, @Path("questionId") String questionId, @Body QuestionRequest answersid,
 //                        Callback</* TODO */Void> callback);
 
-    @GET("/sightings/{sightingId}/expert_comments/")
-    void getExpertComments(@Path("sightingId") String sightingId, Callback<ExpertComment> callback);
 
-    @POST("/sightings/{sightingId}/expert_comments/")
-    void createExpertComment(@Path("sightingId") String sightingId, @Body /* TODO */ Void comment, Callback<ExpertComment> callback);
 
-    @GET("/sightings/{sightingId}/expert_comments/{commentId}/")
-    void getExpertCommentById(@Path("sightingId") String sightingId, @Path("commentId") String commentId, Callback<ExpertComment> callback);
 
-    @GET("/locations/")
-    void getLocations(Callback<List<Location>> callback);
+
+
+
+
+
+
+
+
+
+
+
+    @GET("locations/")
+    Call<List<Location>> getLocations();
+
+    @GET("sightings/")
+    Call<List<Sighting>> getSightings();
 
     @GET("info/")
     Call<List<Info>> getInfo();
+
+
+    @POST("sightings/")
+    Call<Sighting> createSighting(@Body Sighting sighting);
+
+    /**
+     * @see VespappApiHelper#buildPhotoApiParameter(File)
+     */
+    @Multipart
+    @POST("sightings/{sightingId}/photos/")
+    Call<Void> addPhoto(@Path("sightingId") String sightingId, @Part("file\"; filename=\"photo.png\" ") RequestBody photo);
+
 }

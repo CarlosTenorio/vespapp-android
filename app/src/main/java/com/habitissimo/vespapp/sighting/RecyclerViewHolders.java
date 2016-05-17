@@ -1,4 +1,4 @@
-package com.habitissimo.vespapp.fotos;
+package com.habitissimo.vespapp.sighting;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -12,7 +12,7 @@ import com.habitissimo.vespapp.R;
 public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private final Callback callback;
-    public ImageView foto;
+    public ImageView photo;
     private Context context;
 
     public RecyclerViewHolders(View itemView, Context context, Callback callback) {
@@ -20,12 +20,11 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder implements View
         this.context = context;
         this.callback = callback;
         itemView.setOnClickListener(this);
-        foto = (ImageView) itemView.findViewById(R.id.confirm_cap_img);
+        photo = (ImageView) itemView.findViewById(R.id.confirm_cap_img);
     }
 
     @Override
     public void onClick(View view) {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle(R.string.confirm_cap_DeleteDialog_msg)
                 .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {

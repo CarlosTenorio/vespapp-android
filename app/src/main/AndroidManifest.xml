@@ -34,11 +34,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
-            android:name=".example.ExampleActivity"
+            android:name=".sighting.SightingDataActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".fotos.ConfirmCaptureActivity"
+            android:name=".info.InfoDescription"
+            android:label="@string/title_activity_info_description"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".sighting.MapSightingActivity"
+            android:label="@string/title_activity_maps"
+            android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -46,12 +54,19 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".info.InfoDescription"
-            android:label="@string/title_activity_info_description"
-            android:theme="@style/AppTheme" />
+            android:name=".menu.MenuContact"
+            android:label="@string/title_activity_menu_contact"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
 
         <activity
-            android:name=".menu.MenuContact"
+            android:name=".sighting.LocationsListActivity"
+            android:label="@string/title_activity_menu_contact"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".questions.QuestionsActivity"
             android:label="@string/title_activity_menu_contact"
             android:theme="@style/AppTheme" />
 

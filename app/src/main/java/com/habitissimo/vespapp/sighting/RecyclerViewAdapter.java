@@ -1,4 +1,4 @@
-package com.habitissimo.vespapp.fotos;
+package com.habitissimo.vespapp.sighting;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,14 +27,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     @Override
     public RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.confirm_cap_img, parent, false);
+        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.picture_item_list, parent, false);
         RecyclerViewHolders rcv = new RecyclerViewHolders(layoutView, context, new RecyclerViewHolders.Callback() {
             @Override
             public void onImageDeleted(int index) {
                 // Actualizar database
-                ListaFotos lista = Database.get(context).load(Constants.FOTOS_LIST, ListaFotos.class);
-                String removeUrl = lista.getLista().remove(index);
+                PicturesListt lista = Database.get(context).load(Constants.FOTOS_LIST, PicturesListt.class);
+                String removeUrl = lista.getList().remove(index);
                 Database.get(context).save(Constants.FOTOS_LIST, lista);
 
                 // Actualizar adapter
@@ -49,7 +48,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     public void onBindViewHolder(RecyclerViewHolders holder, int position) {
         Bitmap img = BitmapFactory.decodeFile(itemList.get(position));
         img = getResizedBitmap(img, 640);
-        holder.foto.setImageBitmap(img);
+        holder.photo.setImageBitmap(img);
     }
 
     @Override
@@ -57,7 +56,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         return this.itemList.size();
     }
 
-    public Bitmap getResizedBitmap(Bitmap image, int maxSize) {
+    private Bitmap getResizedBitmap(Bitmap image, int maxSize) {
         int width = image.getWidth();
         int height = image.getHeight();
 

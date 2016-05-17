@@ -1,4 +1,4 @@
-package com.habitissimo.vespapp.questions;
+package com.habitissimo.vespapp.sighting;
 
 /**
  * Created by archi on 11/03/16.
