@@ -36,12 +36,14 @@
 
     <string name="action_settings">Settings</string>
 
-    <string name="about_us_date_1">2009-2011</string>
-    <string name="about_us_title_1">Our Humble Beginnings</string>
-    <string name="about_us_body_1">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</string>
+    <string name="about_us_date_1">Octubre de 2015</string>
+    <string name="about_us_title_1">Confirmación por primera vez de la avispa asiática</string>
+    <string name="about_us_body_1">El Laboratorio de Zoología del Departamento de Biología de la Universitat de les Illes Balears confirmó la detección por primera vez de esta avispa en Mallorca, gracias a la colaboración de los apicultores.</string>
+    <string name="link_us_date_1">http://diari.uib.es/arxiu/La-avispa-asiatica-ya-esta-en-Mallorca.cid411005</string>
 
     <string name="about_us_date_2">March 2011</string>
     <string name="about_us_title_2">An Agency is Born</string>
     <string name="about_us_body_2">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt ut voluptatum eius sapiente, totam reiciendis temporibus qui quibusdam, recusandae sit vero unde, sed, incidunt et ea quo dolore laudantium consectetur!</string>
+    <string name="link_us_date_2">http://diari.uib.es/arxiu/La-avispa-asiatica-ya-esta-en-Mallorca.cid411005</string>
 
 </resources>

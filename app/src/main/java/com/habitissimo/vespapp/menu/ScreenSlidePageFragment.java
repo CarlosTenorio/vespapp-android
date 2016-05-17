@@ -31,7 +31,7 @@ public class ScreenSlidePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         ViewGroup rootView =null;
-        //reverse order
+        //reverse order api 21 and top, first appear the last
         if (mPageNumber==1){
 
             rootView = (ViewGroup) inflater.inflate(

@@ -45,5 +45,14 @@
             android:textSize="@dimen/about_us_body_textsize"
             android:text="@string/about_us_body_1" />
 
+        <TextView
+            android:id="@+id/link_about_us_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/about_us_date_textsize"
+            android:text="@string/link_us_date_1"
+            android:autoLink="web"/>
+
     </LinearLayout>
 </ScrollView>
