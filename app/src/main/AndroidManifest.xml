@@ -41,11 +41,13 @@
         <activity
             android:name=".info.InfoDescription"
             android:label="@string/title_activity_info_description"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".sighting.MapSightingActivity"
             android:label="@string/title_activity_maps"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -54,17 +56,20 @@
         <activity
             android:name=".menu.MenuContact"
             android:label="@string/title_activity_menu_contact"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".sighting.LocationsListActivity"
             android:label="@string/title_activity_menu_contact"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".questions.QuestionsActivity"
             android:label="@string/title_activity_menu_contact"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
