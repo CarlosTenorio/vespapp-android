@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
         TabHost.TabSpec spec = tabs.newTabSpec("GuiaTab");
         spec.setContent(R.id.layout_info_tab);
-        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(),android.R.drawable.ic_dialog_info, null));
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_info, null));
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MainTab");

@@ -9,6 +9,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.habitissimo.vespapp.R;
@@ -78,10 +80,8 @@ public class QuestionsActivity extends AppCompatActivity {
         });
     }
 
-
-
     /**
-     * A simple pager adapter that represents 5 {@link ScreenSlidePageFragment} objects, in
+     * A simple pager adapter that represents NUM_PAGES {@link ScreenSlidePageFragment} objects, in
      * sequence.
      */
     private class ScreenSlidePagerAdapter extends FragmentPagerAdapter {

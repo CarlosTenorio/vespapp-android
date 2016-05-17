@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/activity_menu_about_us_1"
+    android:id="@+id/fragment_one_answer"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content">
 
@@ -17,7 +17,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="holaa" />
+            android:text="adios" />
+
+        <CheckBox
+            android:id="@+id/check_answer_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Primera" />
+
+        <CheckBox
+            android:id="@+id/check_answer_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Segunda" />
 
     </LinearLayout>
 </ScrollView>
