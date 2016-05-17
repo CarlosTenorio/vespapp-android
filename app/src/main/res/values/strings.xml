@@ -7,6 +7,8 @@
     <string name="btn_selFotos">Seleccionar foto</string>
     <string name="txt_selFotos">O si ya tienes fotos, ¡añádelas!</string>
     <string name="confirm_cap_titulo">Añade fotos</string>
+    <string name="confirm_cap_location">Ha sido en...</string>
+    <string name="confirm_cap_map">Mueve el marker</string>
     <string name="confirm_cap_txt_confirm">La foto es de...</string>
     <string name="nido">Nido</string>
     <string name="avispa">Avispa</string>

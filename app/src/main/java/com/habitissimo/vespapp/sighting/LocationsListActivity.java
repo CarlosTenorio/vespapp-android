@@ -43,8 +43,6 @@ public class LocationsListActivity extends AppCompatActivity {
         // Set a toolbar to replace the action bar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_locations_list);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitulo));
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,7 +52,7 @@ public class LocationsListActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.confirm_cap_titulo);
+        getSupportActionBar().setTitle(R.string.confirm_cap_location);
     }
 
     private void initList(){

@@ -49,8 +49,6 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
         // Set a toolbar to replace the action bar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sigthing_map);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitulo));
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +58,7 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.confirm_cap_titulo);
+        getSupportActionBar().setTitle(R.string.confirm_cap_map);
 
         Button btn_send = (Button) findViewById(R.id.send_button);
         btn_send.setOnClickListener(new View.OnClickListener() {
