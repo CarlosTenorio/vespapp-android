@@ -50,6 +50,7 @@ import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
+import com.habitissimo.vespapp.menu.MenuAboutUs;
 import com.habitissimo.vespapp.menu.MenuContact;
 import com.habitissimo.vespapp.sighting.Sighting;
 
@@ -189,6 +190,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent i = new Intent(getApplicationContext(), MenuContact.class);
+                startActivity(i);
+            }
+        });
+        ((RelativeLayout)findViewById(R.id.layout_menu_tab_about_us)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(getApplicationContext(), MenuAboutUs.class);
                 startActivity(i);
             }
         });

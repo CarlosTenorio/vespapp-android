@@ -62,6 +62,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         int height = image.getHeight();
 
         float bitmapRatio = (float) width / (float) height;
+
         if (bitmapRatio > 1) {
             width = maxSize;
             height = (int) (width / bitmapRatio);

@@ -7,8 +7,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 import com.habitissimo.vespapp.R;
 
@@ -25,8 +23,6 @@ public class MenuContact extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-
-
                 EditText name   = (EditText)findViewById(R.id.name_contact);
                 EditText subject   = (EditText)findViewById(R.id.subject_contact);
                 EditText body   = (EditText)findViewById(R.id.body_contact);
