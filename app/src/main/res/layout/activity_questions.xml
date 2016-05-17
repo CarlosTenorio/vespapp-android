@@ -9,6 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/brandPrimary">
+
+        <TextView
+            android:id="@+id/progress_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp"
+            android:layout_gravity="right"
+            android:textSize="@dimen/info_textsize"
+            />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.view.ViewPager

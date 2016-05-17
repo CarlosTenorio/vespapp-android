@@ -9,6 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 
 import com.habitissimo.vespapp.R;
 
@@ -47,6 +48,9 @@ public class QuestionsActivity extends AppCompatActivity {
             }
         });
 
+        TextView progressQuestionText = (TextView) toolbar.findViewById(R.id.progress_text);
+        progressQuestionText.setText("1/" + NUM_PAGES);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.confirm_cap_titulo);
@@ -64,6 +68,11 @@ public class QuestionsActivity extends AppCompatActivity {
                 // on which page is currently active. An alternative approach is to have each
                 // fragment expose actions itself (rather than the activity exposing actions),
                 // but for simplicity, the activity provides the actions in this sample.
+                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_questions);
+                TextView progressQuestionText = (TextView) toolbar.findViewById(R.id.progress_text);
+                position += 1;
+                progressQuestionText.setText(position + "/" + NUM_PAGES);
+
                 invalidateOptionsMenu();
             }
         });
