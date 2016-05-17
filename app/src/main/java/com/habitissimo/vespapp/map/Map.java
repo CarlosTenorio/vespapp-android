@@ -2,22 +2,27 @@ package com.habitissimo.vespapp.map;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.habitissimo.vespapp.sighting.Sighting;
+import com.habitissimo.vespapp.sighting.SightingViewActivity;
 
-public class Map extends Activity {
+import java.util.HashMap;
+
+public class Map {
 
     private GoogleMap Gmap;
 
@@ -26,14 +31,7 @@ public class Map extends Activity {
     }
 
 
-    public void addMarkerSighting(Sighting sighting){
-        if (sighting.is_public()) {
-            LatLng myLocation = new LatLng(sighting.getLat(), sighting.getLng());
-            Gmap.addMarker(new MarkerOptions().position(myLocation));
-        }
-    }
-
-    public void getCurrentPosition() {
+   /* public void getCurrentPosition() {
         // Search my position
         LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         LocationListener locListener = new LocationListener() {
@@ -68,7 +66,7 @@ public class Map extends Activity {
 
         Gmap.animateCamera(camUpd3);
         Gmap.addMarker(new MarkerOptions().position(myLocation));
-    }
+    }*/
 
 
     public void moveCamera(double lat, double lng) {

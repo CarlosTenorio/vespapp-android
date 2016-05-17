@@ -17,6 +17,9 @@ import android.widget.TabHost;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
@@ -28,9 +31,11 @@ import com.habitissimo.vespapp.menu.MenuContact;
 import com.habitissimo.vespapp.sighting.PicturesActions;
 import com.habitissimo.vespapp.sighting.Sighting;
 import com.habitissimo.vespapp.sighting.SightingDataActivity;
+import com.habitissimo.vespapp.sighting.SightingViewActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -46,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private File photoFile;
     private PicturesActions picturesActions;
     private Map map;
+    private Marker marker;
+    private HashMap<String, Sighting> relation= new HashMap<String, Sighting>();
 
 
 
@@ -244,12 +251,28 @@ public class MainActivity extends AppCompatActivity {
         Gmap.setMyLocationEnabled(true);
         map = new Map(Gmap);
 
+
+        Gmap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                Sighting s= getSightingByMarker(marker);
+                changeActivityToSightingView(getSightingByMarker(marker));
+                return false;
+            }
+        });
+
+
+
         final Callback<List<Sighting>> callback = new Callback<List<Sighting>>() {
             @Override
             public void onResponse(Call<List<Sighting>> call, Response<List<Sighting>> response) {
                 List<Sighting> sightingList = response.body();
                 for (Sighting sighting : sightingList) {
-                    map.addMarkerSighting(sighting);
+                    if (sighting.is_public()) {
+                        LatLng myLocation = new LatLng(sighting.getLat(), sighting.getLng());
+                        marker= Gmap.addMarker(new MarkerOptions().position(myLocation));
+                        relation.put(marker.getId(), sighting);
+                    }
                 }
                 double lat = 39.56;
                 double lng = 2.62;
@@ -281,6 +304,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void changeActivityToSightingView(Sighting sighting){
+        System.out.println("HOLAAAA"+ sighting);
+
+        Intent i = new Intent(this, SightingViewActivity.class);
+        i.putExtra("sightingObject", sighting);
+        startActivity(i);
+    }
+
+    private Sighting getSightingByMarker(Marker m){
+        Sighting sighting = new Sighting();
+        sighting= (Sighting) relation.get(m.getId());
+        return sighting;
+    }
+
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

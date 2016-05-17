@@ -32,7 +32,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
             @Override
             public void onImageDeleted(int index) {
                 // Actualizar database
-                PicturesListt lista = Database.get(context).load(Constants.FOTOS_LIST, PicturesListt.class);
+                PicturesActions lista = Database.get(context).load(Constants.FOTOS_LIST, PicturesActions.class);
                 String removeUrl = lista.getList().remove(index);
                 Database.get(context).save(Constants.FOTOS_LIST, lista);
 
