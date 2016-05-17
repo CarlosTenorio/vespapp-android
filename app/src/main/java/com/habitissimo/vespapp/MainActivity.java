@@ -25,6 +25,7 @@ import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
 import com.habitissimo.vespapp.menu.MenuContact;
+import com.habitissimo.vespapp.questions.QuestionsActivity;
 import com.habitissimo.vespapp.sighting.PicturesActions;
 import com.habitissimo.vespapp.sighting.Sighting;
 import com.habitissimo.vespapp.sighting.SightingDataActivity;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         initTabs();
         initCamBtn();
         initSelFotosBtn();
+        initPrueba();
     }
 
     private void initTabs() {
@@ -173,6 +175,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void initPrueba() {
+        Button btn = (Button) findViewById(R.id.btn_prueba);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), QuestionsActivity.class);
+                startActivity(i);
+            }
+        });
+    }
+
 
     public void takePhoto() throws IOException {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

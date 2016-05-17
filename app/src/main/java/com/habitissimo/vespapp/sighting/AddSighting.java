@@ -134,7 +134,6 @@ public class AddSighting extends AppCompatActivity {
     private void onPhotosUploaded(Sighting sighting) {
         Toast.makeText(context, "Fotos subidas", Toast.LENGTH_LONG).show();
         hideDialog();
-        //CuestionarioActivity.launchActivity();
     }
 
     private void onPhotosUploadingError(Throwable t) {

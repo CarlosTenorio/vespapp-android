@@ -34,9 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".example.ExampleActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".sighting.SightingDataActivity"
             android:screenOrientation="portrait" />
@@ -60,6 +58,11 @@
 
         <activity
             android:name=".sighting.LocationsListActivity"
+            android:label="@string/title_activity_menu_contact"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".questions.QuestionsActivity"
             android:label="@string/title_activity_menu_contact"
             android:theme="@style/AppTheme" />
     </application>

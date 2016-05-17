@@ -4,20 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_questions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"></android.support.v7.widget.Toolbar>
+        android:background="@color/brandPrimary">
+    </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/textView"
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="New Text"
-        android:textSize="35sp" />
+        android:layout_height="match_parent" />
 </LinearLayout>
