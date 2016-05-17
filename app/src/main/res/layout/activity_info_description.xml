@@ -12,30 +12,37 @@
         android:background="@color/brandPrimary">
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/info_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="30dp">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/info_image"
+        <LinearLayout
+            android:id="@+id/info_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="10dp"
-            />
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="30dp">
 
-        <TextView
-            android:id="@+id/info_body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="@dimen/info_textsize"
-            />
+            <ImageView
+                android:id="@+id/info_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_margin="10dp"
+                />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/info_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/info_textsize"
+                />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
