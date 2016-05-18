@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -77,7 +78,7 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
     }
 
     private void initMap() {
-        GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         Gmap.setMyLocationEnabled(true);
         map = new Map(Gmap);
 
@@ -91,6 +92,21 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
         Gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
 
         Gmap.setOnMarkerDragListener(this);
+
+        Gmap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+
+            @Override
+            public void onMapLongClick(LatLng position) {
+                if (marker != null) {
+                    marker.remove();
+                }
+                marker = Gmap.addMarker(new MarkerOptions()
+                        .position(position)
+                        .title("Mantenme pulsado y arrástrame")
+                        .draggable(true)
+                        .visible(true));
+            }
+        });
     }
 
 
@@ -112,4 +128,5 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
     public void onMarkerDragEnd(Marker marker) {
 
     }
+
 }
