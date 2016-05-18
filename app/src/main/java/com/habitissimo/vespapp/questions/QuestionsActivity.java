@@ -9,8 +9,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.CheckBox;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.habitissimo.vespapp.R;
@@ -18,10 +16,8 @@ import com.habitissimo.vespapp.R;
 
 public class QuestionsActivity extends AppCompatActivity {
 
-    public static final String TAG = "QuestionsActivity";
-
     // The number of pages (wizard steps) to show
-    private static final int NUM_PAGES = 2;
+    private static final int NUM_PAGES = 4;
     // The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
     private ViewPager mPager;
     // The pager adapter, which provides the pages to the view pager widget.
@@ -72,8 +68,8 @@ public class QuestionsActivity extends AppCompatActivity {
                 // but for simplicity, the activity provides the actions in this sample.
                 Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_questions);
                 TextView progressQuestionText = (TextView) toolbar.findViewById(R.id.progress_text);
-                position += 1;
-                progressQuestionText.setText(position + "/" + NUM_PAGES);
+                int pos = position + 1;
+                progressQuestionText.setText(pos + "/" + NUM_PAGES);
 
                 invalidateOptionsMenu();
             }

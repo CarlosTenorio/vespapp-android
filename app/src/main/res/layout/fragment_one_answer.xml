@@ -13,23 +13,18 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/date_about_us_1"
+            android:id="@+id/text_one_answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="adios" />
+            android:textSize="@dimen/question_textsize" />
 
-        <CheckBox
-            android:id="@+id/check_answer_first"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/radiogroup_one_answer"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Primera" />
-
-        <CheckBox
-            android:id="@+id/check_answer_second"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Segunda" />
+            android:orientation="vertical">
+        </RadioGroup>
 
     </LinearLayout>
 </ScrollView>
