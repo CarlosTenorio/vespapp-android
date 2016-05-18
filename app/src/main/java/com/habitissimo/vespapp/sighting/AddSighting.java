@@ -121,7 +121,6 @@ public class AddSighting extends AppCompatActivity {
 
     private void uploadPhotos(String sightingId, Callback callback) throws java.io.IOException {
         for (String picturePath : picturesActions.getList()) {
-            System.out.println("Ahora toca foto");
             Call<Void> call = api.addPhoto(sightingId, VespappApiHelper.buildPhotoApiParameter(new File(picturePath)));
             call.enqueue(callback);
         }

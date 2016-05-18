@@ -6,9 +6,6 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by archi on 11/03/16.
- */
 public class Sighting  implements Serializable {
 
     private static final int STATUS_PENDING = 0;
@@ -22,15 +19,17 @@ public class Sighting  implements Serializable {
 
     private int id;
     private int status;
-    private String free_text;
+    private String free_text= "";
     private int type;
     private String contact;
     private String source = "app";
+    private String created_at;
 
     @SerializedName("public")
     private boolean _public;
+    private Boolean is_valid;
 
-    private int location;
+    private Location location;
     private float lat;
     private float lng;
 
@@ -41,8 +40,8 @@ public class Sighting  implements Serializable {
     }
 
     public Sighting(int id, int status, String free_text, int type,
-                    String contact, String source, boolean _public,
-                    int location, float lat, float lng) {
+                    String contact, String source, boolean _public, boolean _valid,
+                    Location location, float lat, float lng) {
         this.id = id;
         this.status = status;
         this.free_text = free_text;
@@ -50,6 +49,7 @@ public class Sighting  implements Serializable {
         this.contact = contact;
         this.source = source;
         this._public = _public;
+        this.is_valid = _valid;
         this.location = location;
         this.lat = lat;
         this.lng = lng;
@@ -83,7 +83,7 @@ public class Sighting  implements Serializable {
         return _public;
     }
 
-    public int getLocation() {
+    public Location getLocation() {
         return location;
     }
 
@@ -127,7 +127,7 @@ public class Sighting  implements Serializable {
         this._public = _public;
     }
 
-    public void setLocation(int location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 
@@ -141,5 +141,13 @@ public class Sighting  implements Serializable {
 
     public void setPictures(List<Picture> pictures) {
         this.pictures = pictures;
+    }
+
+    public Boolean is_valid() {
+        return is_valid;
+    }
+
+    public void set_valid(Boolean _valid) {
+        this.is_valid = _valid;
     }
 }

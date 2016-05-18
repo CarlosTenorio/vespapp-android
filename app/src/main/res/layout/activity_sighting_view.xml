@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_sigthing_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/brandPrimary">
+    </android.support.v7.widget.Toolbar>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.habitissimo.vespapp.MainActivity">
+
+    <TabHost
+        android:id="@+id/tabs_sighting_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left|top">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TabWidget
+                android:id="@android:id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/brandPrimary">
+
+            </TabWidget>
+
+            <FrameLayout
+                android:id="@android:id/tabcontent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <include layout="@layout/info_sighting_tab" />
+
+                <include layout="@layout/pictures_sighting_tab" />
+
+                <include layout="@layout/activity_maps" />
+
+            </FrameLayout>
+        </LinearLayout>
+    </TabHost>
+</FrameLayout>
+</LinearLayout>

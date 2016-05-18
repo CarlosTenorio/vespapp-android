@@ -139,6 +139,9 @@ public class SightingDataActivity extends AppCompatActivity {
                 sighting.setContact(userEmail);
             }
         }
+
+       // sighting.set_valid(null);
+
         Intent i = new Intent(this, LocationsListActivity.class);
         i.putExtra("sightingObject", sighting);
         startActivity(i);

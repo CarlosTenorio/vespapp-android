@@ -77,6 +77,11 @@
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
             android:configChanges="keyboardHidden|orientation"/>
+
+        <activity
+            android:name=".sighting.SightingViewActivity"
+            android:label="@string/title_activity_menu_contact"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>
