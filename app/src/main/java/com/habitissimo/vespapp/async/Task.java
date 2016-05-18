@@ -15,7 +15,6 @@ public class Task {
             }
 
             @Override protected void onPostExecute(T t) {
-                System.out.println("imprimiiir " + t);
                 if (t != null) {
                     taskCallback.onCompleted(t);
                 }
