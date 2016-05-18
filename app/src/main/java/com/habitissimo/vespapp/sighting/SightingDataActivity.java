@@ -1,5 +1,7 @@
 package com.habitissimo.vespapp.sighting;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -10,6 +12,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,6 +22,7 @@ import com.habitissimo.vespapp.database.Database;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -127,7 +131,14 @@ public class SightingDataActivity extends AppCompatActivity {
     public void onTypeOfSightPressed(int type) {
         Sighting sighting = new Sighting();
         sighting.setType(type);
-
+        Pattern emailPattern = Patterns.EMAIL_ADDRESS; // API level 8+
+        Account[] accounts = AccountManager.get(getApplicationContext()).getAccounts();
+        for (Account account : accounts) {
+            if (emailPattern.matcher(account.name).matches()) {
+                String userEmail = account.name;
+                sighting.setContact(userEmail);
+            }
+        }
         Intent i = new Intent(this, LocationsListActivity.class);
         i.putExtra("sightingObject", sighting);
         startActivity(i);
