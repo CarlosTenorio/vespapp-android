@@ -57,7 +57,7 @@ public class MenuAboutUs extends AppCompatActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
-    private static final int NUM_PAGES = 2;
+    private static final int NUM_PAGES = 5;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -89,12 +89,14 @@ public class MenuAboutUs extends AppCompatActivity {
                 // on which page is currently active. An alternative approach is to have each
                 // fragment expose actions itself (rather than the activity exposing actions),
                 // but for simplicity, the activity provides the actions in this sample.
-                Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_menu_about_us);
+
+              Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_menu_about_us);
                 TextView progressQuestionText = (TextView) toolbar.findViewById(R.id.progress_text_about_us);
                 position += 1;
                 progressQuestionText.setText(position + "/" + NUM_PAGES);
 
                 invalidateOptionsMenu();
+
             }
         });
     }
