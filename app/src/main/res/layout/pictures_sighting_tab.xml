@@ -11,5 +11,13 @@
         android:orientation="vertical"
         android:gravity="center"
         >
+
+        <ImageView
+            android:id="@+id/sighting_picture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="10dp"
+            />
     </LinearLayout>
 </ScrollView>

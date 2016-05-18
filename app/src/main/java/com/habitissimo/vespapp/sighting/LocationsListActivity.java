@@ -113,7 +113,7 @@ public class LocationsListActivity extends AppCompatActivity {
 
 
     private  void changeActivity(Location location) {
-        sighting.setLocation(location.getId());
+        sighting.setLocation(location);
         sighting.setLat(location.getLat());
         sighting.setLng(location.getLng());
 

@@ -16,4 +16,28 @@ public class Picture {
         this.id = id;
         this.sighting = sighting;
     }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
+    }
+
+    public String getSighting() {
+        return sighting;
+    }
+
+    public void setSighting(String sighting) {
+        this.sighting = sighting;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 }

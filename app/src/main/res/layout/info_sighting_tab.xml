@@ -1,15 +1,222 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="false">
 
-    <LinearLayout
-        android:id="@+id/layout_info_sighting_tab"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
+<LinearLayout android:id="@+id/layout_info_sighting_tab"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+        <TextView
+            android:id="@+id/sighting_source_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:textSize="@dimen/info_textsize"
+             />
+
+        <TextView
+            android:id="@+id/sighting_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:textSize="@dimen/info_textsize"
+            android:textColor="@color/colorPrimaryText"
+            style="@style/mobileIcon"
+            />
+
+        <TextView
+            android:id="@+id/sighting_lat_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:textSize="@dimen/info_textsize"
+            />
+
+        <TextView
+            android:id="@+id/sighting_lat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:textSize="@dimen/info_textsize"
+            android:textColor="@color/colorPrimaryText"
+            />
+
+        <TextView
+            android:id="@+id/sighting_lng_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:textSize="@dimen/info_textsize"
+            />
+
+        <TextView
+            android:id="@+id/sighting_lng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:textSize="@dimen/info_textsize"
+            android:textColor="@color/colorPrimaryText"
+            />
+
+        <TextView
+            android:id="@+id/sighting_location_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:textSize="@dimen/info_textsize"
+            />
+
+        <TextView
+            android:id="@+id/sighting_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:textSize="@dimen/info_textsize"
+            android:textColor="@color/colorPrimaryText"
+            />
+
+        <TextView
+            android:id="@+id/sighting_type_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:textSize="@dimen/info_textsize"
+            />
+
+        <TextView
+            android:id="@+id/sighting_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:textSize="@dimen/info_textsize"
+            android:textColor="@color/colorPrimaryText"
+            style="@style/mobileIcon"
+            />
+
+        <TextView
+            android:id="@+id/sighting_status_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:textSize="@dimen/info_textsize"
+            />
+
+        <TextView
+            android:id="@+id/sighting_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:textSize="@dimen/info_textsize"
+            android:textColor="@color/colorPrimaryText"
+            style="@style/mobileIcon"
+            />
+
+
+        <TextView
+            android:id="@+id/sighting_result_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:textSize="@dimen/info_textsize"
+            />
+
+        <TextView
+            android:id="@+id/sighting_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:textSize="@dimen/info_textsize"
+            android:textColor="@color/colorPrimaryText"
+            />
+
+        <TextView
+            android:id="@+id/sighting_data_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:textSize="@dimen/info_textsize"
+            />
+
+        <TextView
+            android:id="@+id/sighting_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:textSize="@dimen/info_textsize"
+            android:textColor="@color/colorPrimaryText"
+            />
+
+
+        <TextView
+            android:id="@+id/sighting_description_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:layout_marginTop="20sp"
+            android:textColor="@color/colorPrimaryText"
+            android:textStyle="bold"
+            android:textSize="@dimen/info_textsize"
+            />
+
+        <TextView
+            android:id="@+id/sighting_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="20sp"
+            android:textSize="@dimen/info_textsize"
+            android:textColor="@color/colorPrimaryText"
+            />
+
+
     </LinearLayout>
-</ScrollView>
+    </ScrollView>

@@ -306,7 +306,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void changeActivityToSightingView(Sighting sighting){
-        System.out.println("HOLAAAA"+ sighting);
 
         Intent i = new Intent(this, SightingViewActivity.class);
         i.putExtra("sightingObject", sighting);
