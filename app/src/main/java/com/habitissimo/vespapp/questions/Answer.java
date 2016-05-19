@@ -5,16 +5,19 @@ package com.habitissimo.vespapp.questions;
  */
 public class Answer {
 
-    public String id;
-    public String title;
+    private int id;
+    private String value;
 
-    public Answer() {
+    public int getId() {
+        return id;
     }
 
+    public String getValue() {
+        return value;
+    }
 
-    public Answer(String id, String title) {
-
+    public Answer(int id, String value) {
         this.id = id;
-        this.title = title;
+        this.value = value;
     }
 }

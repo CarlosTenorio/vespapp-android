@@ -1,5 +1,6 @@
 package com.habitissimo.vespapp.api;
 
+import com.habitissimo.vespapp.questions.Question;
 import com.habitissimo.vespapp.sighting.Location;
 import com.habitissimo.vespapp.sighting.Picture;
 import com.habitissimo.vespapp.sighting.Sighting;
@@ -23,8 +24,7 @@ public interface VespappApi {
     @GET("/sightings/{sightingId}/photos/")
     void getPhotos(@Path("sightingId") String sightingId, Callback<List<Picture>> callback);
 
-//    @GET("/sightings/{sightingId}/questions")
-//    void getQuestions(@Path("sightingId") String sightingId, Callback<List<Answer>> callback);
+
 //
 //    @GET("/sightings/{sightingId}/questions/{questionId}")
 //    void getQuestionById(@Path("sightingId") String sightingId, @Path("questionId") String questionId, Callback<Answer> callback);
@@ -45,7 +45,8 @@ public interface VespappApi {
 
 
 
-
+    @GET("sightings/{sightingId}/questions/")
+    Call<List<Question>> getQuestions(@Path("sightingId") String sightingId);
 
     @GET("locations/")
     Call<List<Location>> getLocations();
@@ -55,7 +56,6 @@ public interface VespappApi {
 
     @GET("info/")
     Call<List<Info>> getInfo();
-
 
     @POST("sightings/")
     Call<Sighting> createSighting(@Body Sighting sighting);

@@ -9,15 +9,29 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.habitissimo.vespapp.R;
+import com.habitissimo.vespapp.Vespapp;
+import com.habitissimo.vespapp.api.VespappApi;
+import com.habitissimo.vespapp.async.Task;
+import com.habitissimo.vespapp.async.TaskCallback;
+import com.habitissimo.vespapp.sighting.Location;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class QuestionsActivity extends AppCompatActivity {
 
+    private List<Question> questionsList;
+
     // The number of pages (wizard steps) to show
-    private static final int NUM_PAGES = 4;
+    private static int NUM_PAGES;
     // The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
     private ViewPager mPager;
     // The pager adapter, which provides the pages to the view pager widget.
@@ -30,7 +44,7 @@ public class QuestionsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_questions);
 
         initToolbar();
-        initPagerAdapter();
+        getQuestionFromDatabase();
     }
 
     private void initToolbar() {
@@ -52,6 +66,45 @@ public class QuestionsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.confirm_cap_titulo);
+    }
+
+
+    private void getQuestionFromDatabase() {
+        final VespappApi api = Vespapp.get(this).getApi();
+
+        final Callback<List<Question>> callback = new Callback<List<Question>>() {
+            @Override
+            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+                questionsList = response.body();
+                NUM_PAGES = questionsList.size();
+                initPagerAdapter();
+            }
+
+            @Override
+            public void onFailure(Call<List<Question>> call, Throwable t) {
+                System.out.println("onFailure " + t);
+            }
+        };
+        Task.doInBackground(new TaskCallback<List<Question>>() {
+            @Override
+            public List<Question> executeInBackground() {
+                Call<List<Question>> call = api.getQuestions("54");
+                call.enqueue(callback);
+                return null;
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                callback.onFailure(null, t);
+            }
+
+            @Override
+            public void onCompleted(List<Question> questions) {
+                callback.onResponse(null, Response.success((List<Question>) null));
+
+            }
+        });
+
     }
 
 
@@ -87,7 +140,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ScreenSlidePageFragment.create(position);
+            return ScreenSlidePageFragment.create(position, questionsList.get(position));
         }
 
         @Override
