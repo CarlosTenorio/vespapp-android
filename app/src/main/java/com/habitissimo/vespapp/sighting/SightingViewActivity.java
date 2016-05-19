@@ -90,24 +90,32 @@ public class SightingViewActivity extends AppCompatActivity {
         final TabHost tabs = (TabHost) findViewById(R.id.tabs_sighting_view);
         tabs.setup();
 
-        TabHost.TabSpec spec = tabs.newTabSpec("GuiaTab");
+        TabHost.TabSpec spec = tabs.newTabSpec("PicsTab");
         spec.setContent(R.id.layout_pictures_sighting_tab);
-        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_info, null));
+        spec.setIndicator("Fotos");
+
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MainTab");
         spec.setContent(R.id.layout_info_sighting_tab);
-        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_menu_camera, null));
+        spec.setIndicator("Info");
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MapTab");
         spec.setContent(R.id.layout_map_sighting_tab);
         spec.setIndicator("Mapa");
-        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_map, null));
         tabs.addTab(spec);
 
         //Add color initial
         tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
+        //Set color text
+        int totalTabs = tabs.getTabWidget().getTabCount();
+
+        for (int i=0; i<totalTabs; i++){
+            TextView tv = (TextView) tabs.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
+            tv.setTextColor(getResources().getColor(R.color.colorTitulo));
+        }
 
         tabs.setCurrentTab(1);
 
