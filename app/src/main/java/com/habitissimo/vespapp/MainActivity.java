@@ -102,7 +102,6 @@ public class MainActivity extends AppCompatActivity {
 
         spec = tabs.newTabSpec("MenuTab");
         spec.setContent(R.id.layout_menu_tab);
-        spec.setIndicator("Menu");
         spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_dialer, null));
         tabs.addTab(spec);
 

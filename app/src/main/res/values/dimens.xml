@@ -9,7 +9,7 @@
     <dimen name="fab_margin">16dp</dimen>
 
 
-    <dimen name="info_textsize">24dp</dimen>
+    <dimen name="info_textsize">24sp</dimen>
     <dimen name="question_textsize">24dp</dimen>
     <dimen name="about_us_date_textsize">19sp</dimen>
     <dimen name="about_us_title_textsize">24sp</dimen>

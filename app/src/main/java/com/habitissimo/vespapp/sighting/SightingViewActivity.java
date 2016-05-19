@@ -80,7 +80,7 @@ public class SightingViewActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.confirm_cap_titulo);
+        getSupportActionBar().setTitle(R.string.confirm_cap_map_sight);
     }
 
     private void initTabs() {
@@ -98,7 +98,7 @@ public class SightingViewActivity extends AppCompatActivity {
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MapTab");
-        spec.setContent(R.id.map);
+        spec.setContent(R.id.layout_map_sighting_tab);
         spec.setIndicator("Mapa");
         spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_map, null));
         tabs.addTab(spec);
@@ -107,12 +107,33 @@ public class SightingViewActivity extends AppCompatActivity {
         tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
         tabs.setCurrentTab(1);
+
+        tabs.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            public void onTabChanged(String tabId) {
+                int i = tabs.getCurrentTab();
+                if (i == 0) {
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
+                } else if (i == 1) {
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
+                } else if (i == 2) {
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
+                }
+            }
+        });
     }
 
 
     @TargetApi(Build.VERSION_CODES.M)
     private void getInfo() {
-
         TextView lSource = (TextView) findViewById(R.id.sighting_source_label);
         lSource.setText("Notificado por:");
         TextView tSource = (TextView) findViewById(R.id.sighting_source);
@@ -248,7 +269,7 @@ public class SightingViewActivity extends AppCompatActivity {
     }
 
     private void initMap() {
-        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.layout_map_sighting_tab)).getMap();
         Gmap.setMyLocationEnabled(true);
         map = new Map(Gmap);
 
