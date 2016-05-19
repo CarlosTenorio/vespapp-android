@@ -9,12 +9,14 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.habitissimo.vespapp.Constants;
 import com.habitissimo.vespapp.R;
 import com.habitissimo.vespapp.Vespapp;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.api.VespappApiHelper;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
+import com.habitissimo.vespapp.database.Database;
 import com.habitissimo.vespapp.dialog.LoadingDialog;
 import com.habitissimo.vespapp.map.Map;
 
@@ -26,20 +28,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddSighting extends AppCompatActivity {
+public class AddSighting {
+
     public static final String TAG = "AddSighting";
 
     private final VespappApi api;
-    private PicturesActions picturesActions;
     private AlertDialog dialog;
 
     private Context context;
 
-    public AddSighting(Context context, PicturesActions picturesActions) {
-        Vespapp vespapp = Vespapp.get(context);
-        api = vespapp.getApi();
+
+    public AddSighting(Context context) {
+        api = Vespapp.get(context).getApi();
         this.context = context;
-        this.picturesActions = picturesActions;
     }
 
     public void sendSighting(final Sighting sighting) {
@@ -120,10 +121,16 @@ public class AddSighting extends AppCompatActivity {
     }
 
     private void uploadPhotos(String sightingId, Callback callback) throws java.io.IOException {
+        PicturesActions picturesActions = getPicturesList();
+
         for (String picturePath : picturesActions.getList()) {
             Call<Void> call = api.addPhoto(sightingId, VespappApiHelper.buildPhotoApiParameter(new File(picturePath)));
             call.enqueue(callback);
         }
+    }
+
+    private PicturesActions getPicturesList() {
+        return Database.get(context).load(Constants.FOTOS_LIST, PicturesActions.class);
     }
 
     private void onSightingCreationError(Throwable t) {

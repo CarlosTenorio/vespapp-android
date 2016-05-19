@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.database.Database;
+import com.habitissimo.vespapp.dialog.InfoDialog;
 import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     private PicturesActions picturesActions;
     private Map map;
     private Marker marker;
+    private AlertDialog dialog;
     private HashMap<String, Sighting> relation= new HashMap<String, Sighting>();
 
 
@@ -379,23 +382,41 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
 
-            savePictureToDatabase(picturePath);
-
-            Intent i = new Intent(this, SightingDataActivity.class);
-            startActivity(i);
+            photoFile = new File(picturePath);
+            if (photoFile.length() < 1468006) {
+                savePictureToDatabase(picturePath);
+                Intent i = new Intent(this, SightingDataActivity.class);
+                startActivity(i);
+            } else {
+                showInfoDialog();
+            }
         }
     }
 
-    public void savePicturePathToDatabase(String picturePath) {
+    private void savePicturePathToDatabase(String picturePath) {
         Database.get(this).save(Constants.KEY_CAPTURE, picturePath);
     }
 
-    public String getPicturePathFromDatabase() {
+    private String getPicturePathFromDatabase() {
         return Database.get(this).load(Constants.KEY_CAPTURE);
     }
 
-    public void savePictureToDatabase(String picturePath) {
+    private void savePictureToDatabase(String picturePath) {
+        picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
+
+        if (picturesActions == null) {
+            picturesActions = new PicturesActions();
+        }
+
         picturesActions.getList().add(picturePath);
         Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
+    }
+
+    private void showInfoDialog() {
+        dialog = InfoDialog.show(this, new InfoDialog.Listener() {
+            @Override public void onDialogDismissed() {
+                //Put something
+            }
+        });
     }
 }

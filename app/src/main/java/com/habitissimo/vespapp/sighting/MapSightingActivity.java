@@ -74,7 +74,7 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
     private void sendSighting() {
         sighting.setLat((float) marker.getPosition().latitude);
         sighting.setLng((float) marker.getPosition().longitude);
-        new AddSighting(this, getPicturesList()).sendSighting(sighting);
+        new AddSighting(this).sendSighting(sighting);
     }
 
     private void initMap() {
@@ -107,11 +107,6 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
                         .visible(true));
             }
         });
-    }
-
-
-    private PicturesActions getPicturesList() {
-        return Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
     }
 
     @Override
