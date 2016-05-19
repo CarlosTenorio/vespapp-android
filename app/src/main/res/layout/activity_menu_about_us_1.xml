@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_menu_about_us_1"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/date_about_us_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/about_us_date_textsize"
+            android:text="@string/about_us_date_1" />
+
+        <TextView
+            android:id="@+id/title_about_us_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/about_us_title_textsize"
+            android:text="@string/about_us_title_1" />
+
+        <ImageView
+            android:id="@+id/image_about_us_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:layout_gravity="center_vertical"
+            android:cropToPadding="true"/>
+
+        <TextView
+            android:id="@+id/body_about_us_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dip"
+            android:textSize="@dimen/about_us_body_textsize"
+            android:text="@string/about_us_body_1" />
+
+        <TextView
+            android:id="@+id/link_about_us_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/about_us_date_textsize"
+            android:text="@string/link_us_date_1"
+            android:autoLink="web"/>
+
+    </LinearLayout>
+</ScrollView>

@@ -27,6 +27,7 @@ import com.habitissimo.vespapp.database.Database;
 import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
+import com.habitissimo.vespapp.menu.MenuAboutUs;
 import com.habitissimo.vespapp.menu.MenuContact;
 import com.habitissimo.vespapp.questions.QuestionsActivity;
 import com.habitissimo.vespapp.sighting.PicturesActions;
@@ -120,18 +121,21 @@ public class MainActivity extends AppCompatActivity {
                     tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
                     tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
                     tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(3).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
                     getInfo();
                 } else if (i == 1) {
+                    if (map != null) {
+                        map.removeMap();
+                    }
                     LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                     ll.removeAllViews();
 
                     tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
                     tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
                     tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(3).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
-                    if (map != null) {
-                        map.removeMap();
-                    }
                 } else if (i == 2) {
                     LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                     ll.removeAllViews();
@@ -139,9 +143,21 @@ public class MainActivity extends AppCompatActivity {
                     tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
                     tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
                     tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(3).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
                     initMap();
                 } else if (i == 3) {
+                    if (map != null) {
+                        map.removeMap();
+                    }
+                    LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
+                    ll.removeAllViews();
+
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
                     initMenuOptions();
                 }
             }
@@ -168,6 +184,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent i = new Intent(getApplicationContext(), MenuContact.class);
+                startActivity(i);
+            }
+        });
+        ((RelativeLayout)findViewById(R.id.layout_menu_tab_about_us)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(getApplicationContext(), MenuAboutUs.class);
                 startActivity(i);
             }
         });

@@ -32,9 +32,9 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
             @Override
             public void onImageDeleted(int index) {
                 // Actualizar database
-                PicturesActions lista = Database.get(context).load(Constants.FOTOS_LIST, PicturesActions.class);
-                String removeUrl = lista.getList().remove(index);
-                Database.get(context).save(Constants.FOTOS_LIST, lista);
+                PicturesActions list = Database.get(context).load(Constants.FOTOS_LIST, PicturesActions.class);
+                String removeUrl = list.getList().remove(index);
+                Database.get(context).save(Constants.FOTOS_LIST, list);
 
                 // Actualizar adapter
                 itemList.remove(removeUrl);
@@ -61,6 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         int height = image.getHeight();
 
         float bitmapRatio = (float) width / (float) height;
+
         if (bitmapRatio > 1) {
             width = maxSize;
             height = (int) (width / bitmapRatio);

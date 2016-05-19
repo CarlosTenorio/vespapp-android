@@ -11,6 +11,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -49,8 +50,6 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
         // Set a toolbar to replace the action bar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sigthing_map);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitulo));
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +59,7 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.confirm_cap_titulo);
+        getSupportActionBar().setTitle(R.string.confirm_cap_map);
 
         Button btn_send = (Button) findViewById(R.id.send_button);
         btn_send.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +78,7 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
     }
 
     private void initMap() {
-        GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         Gmap.setMyLocationEnabled(true);
         map = new Map(Gmap);
 
@@ -93,6 +92,21 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
         Gmap.moveCamera(CameraUpdateFactory.newLatLngZoom(position, 15));
 
         Gmap.setOnMarkerDragListener(this);
+
+        Gmap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+
+            @Override
+            public void onMapLongClick(LatLng position) {
+                if (marker != null) {
+                    marker.remove();
+                }
+                marker = Gmap.addMarker(new MarkerOptions()
+                        .position(position)
+                        .title("Mantenme pulsado y arrástrame")
+                        .draggable(true)
+                        .visible(true));
+            }
+        });
     }
 
 
@@ -114,4 +128,5 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
     public void onMarkerDragEnd(Marker marker) {
 
     }
+
 }

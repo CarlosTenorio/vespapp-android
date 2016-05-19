@@ -2,35 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar_sigthing_map"
+        android:id="@+id/toolbar_menu_about_us"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/brandPrimary"
-        app:titleTextColor="@color/colorTitulo">
+        android:background="@color/brandPrimary">
 
-        <Button
-            android:id="@+id/send_button"
+        <TextView
+            android:id="@+id/progress_text_about_us"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enviar"
+            android:paddingRight="20dp"
+            android:text="1/4"
             android:layout_gravity="right"
+            android:textSize="@dimen/info_textsize"
             />
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/info_description"
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
-        >
-
-        <include layout="@layout/activity_maps" />
-
-    </LinearLayout>
+        android:layout_height="match_parent" />
 
 </LinearLayout>
