@@ -21,32 +21,12 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface VespappApi {
-    @GET("/sightings/{sightingId}/photos/")
-    void getPhotos(@Path("sightingId") String sightingId, Callback<List<Picture>> callback);
-
-
-//
-//    @GET("/sightings/{sightingId}/questions/{questionId}")
-//    void getQuestionById(@Path("sightingId") String sightingId, @Path("questionId") String questionId, Callback<Answer> callback);
-//
-//    @PATCH("/sightings/{sightingId}/questions/{questionId}")
-//    void updateQuestion(@Path("sightingId") String sightingId, @Path("questionId") String questionId, @Body QuestionRequest answersid,
-//                        Callback</* TODO */Void> callback);
-
-
-
-
-
-
-
-
-
-
-
-
 
     @GET("sightings/{sightingId}/questions/")
     Call<List<Question>> getQuestions(@Path("sightingId") String sightingId);
+
+    @GET("sightings/{sightingId}/photos/")
+    Call <List<Picture>> getPhotos(@Path("sightingId") String sightingId);
 
     @GET("locations/")
     Call<List<Location>> getLocations();
@@ -66,5 +46,4 @@ public interface VespappApi {
     @Multipart
     @POST("sightings/{sightingId}/photos/")
     Call<Void> addPhoto(@Path("sightingId") String sightingId, @Part("file\"; filename=\"photo.png\" ") RequestBody photo);
-
 }

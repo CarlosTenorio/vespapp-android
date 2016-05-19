@@ -129,6 +129,7 @@ public class SightingDataActivity extends AppCompatActivity {
     public void onTypeOfSightPressed(int type) {
         Sighting sighting = new Sighting();
         sighting.setType(type);
+        sighting.set_valid(null);
 
         Intent i = new Intent(this, LocationsListActivity.class);
         i.putExtra("sightingObject", sighting);
