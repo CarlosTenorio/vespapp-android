@@ -7,9 +7,12 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -256,13 +259,18 @@ public class SightingViewActivity extends AppCompatActivity {
             ImageView imageInfo = new ImageView(this);
             LinearLayout.LayoutParams vp =
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
+                            LinearLayout.LayoutParams.MATCH_PARENT);
             imageInfo.setLayoutParams(vp);
+
+            imageInfo.setAdjustViewBounds(true); //Adjust the height to size photo
+            imageInfo.setCropToPadding(true);
+            vp.setMargins(0, 35, 0, 0); //(left, top, right, bottom);
 
             Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(picture.getFile()).getContent());
             imageInfo.setImageBitmap(bitmap);
 
             ll.addView(imageInfo);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
