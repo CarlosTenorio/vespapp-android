@@ -27,6 +27,7 @@ import com.habitissimo.vespapp.database.Database;
 import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
+import com.habitissimo.vespapp.menu.Contributors;
 import com.habitissimo.vespapp.menu.MenuAboutUs;
 import com.habitissimo.vespapp.menu.MenuContact;
 import com.habitissimo.vespapp.questions.QuestionsActivity;
@@ -192,6 +193,14 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent i = new Intent(getApplicationContext(), MenuAboutUs.class);
+                startActivity(i);
+            }
+        });
+        ((RelativeLayout)findViewById(R.id.layout_menu_tab_contributors)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent i = new Intent(getApplicationContext(), Contributors.class);
                 startActivity(i);
             }
         });
