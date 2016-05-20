@@ -15,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -25,13 +26,11 @@ import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.database.Database;
-import com.habitissimo.vespapp.dialog.InfoDialog;
 import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
 import com.habitissimo.vespapp.menu.MenuAboutUs;
 import com.habitissimo.vespapp.menu.MenuContact;
-import com.habitissimo.vespapp.questions.QuestionsActivity;
 import com.habitissimo.vespapp.sighting.PicturesActions;
 import com.habitissimo.vespapp.sighting.Sighting;
 import com.habitissimo.vespapp.sighting.SightingDataActivity;
@@ -80,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
         initTabs();
         initCamBtn();
         initSelFotosBtn();
-        initPrueba();
     }
 
     private void initTabs() {
@@ -205,17 +203,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 selectPicture();
-            }
-        });
-    }
-
-    private void initPrueba() {
-        Button btn = (Button) findViewById(R.id.btn_prueba);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), QuestionsActivity.class);
-                startActivity(i);
             }
         });
     }
@@ -381,13 +368,10 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
 
-            photoFile = new File(picturePath);
-            if (photoFile.length() < 1468006) {
-                savePictureToDatabase(picturePath);
+            boolean saved = savePictureToDatabase(picturePath);
+            if (saved) {
                 Intent i = new Intent(this, SightingDataActivity.class);
                 startActivity(i);
-            } else {
-                showInfoDialog();
             }
         }
     }
@@ -400,22 +384,20 @@ public class MainActivity extends AppCompatActivity {
         return Database.get(this).load(Constants.KEY_CAPTURE);
     }
 
-    private void savePictureToDatabase(String picturePath) {
+    private boolean savePictureToDatabase(String picturePath) {
         picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
 
         if (picturesActions == null) {
             picturesActions = new PicturesActions();
         }
 
-        picturesActions.getList().add(picturePath);
-        Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
-    }
-
-    private void showInfoDialog() {
-        dialog = InfoDialog.show(this, new InfoDialog.Listener() {
-            @Override public void onDialogDismissed() {
-                //Put something
-            }
-        });
+        if (picturesActions.getList().size() == 5) {
+            Toast.makeText(this, "No se pueden subir más de 5 imágenes", Toast.LENGTH_LONG).show();
+            return false;
+        } else {
+            picturesActions.getList().add(picturePath);
+            Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
+            return true;
+        }
     }
 }

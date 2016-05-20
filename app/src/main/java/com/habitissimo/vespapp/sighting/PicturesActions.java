@@ -1,13 +1,8 @@
 package com.habitissimo.vespapp.sighting;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.os.Environment;
-
-import com.habitissimo.vespapp.Constants;
-import com.habitissimo.vespapp.database.Database;
 
 import java.io.File;
 import java.io.FileOutputStream;

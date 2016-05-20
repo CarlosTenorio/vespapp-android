@@ -10,6 +10,7 @@ import android.widget.Toast;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.habitissimo.vespapp.Constants;
+import com.habitissimo.vespapp.MainActivity;
 import com.habitissimo.vespapp.R;
 import com.habitissimo.vespapp.Vespapp;
 import com.habitissimo.vespapp.api.VespappApi;
@@ -19,9 +20,13 @@ import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.database.Database;
 import com.habitissimo.vespapp.dialog.LoadingDialog;
 import com.habitissimo.vespapp.map.Map;
+import com.habitissimo.vespapp.questions.Question;
+import com.habitissimo.vespapp.questions.QuestionsActivity;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -83,11 +88,17 @@ public class AddSighting {
 
 
 
-    private void onSightingCreated(final Sighting sighting) {
+    private void onSightingCreated(Sighting sighting) {
+        uploadPhotosToDatabase(sighting);
+        getQuestionFromDatabase(sighting);
+    }
+
+
+    private void uploadPhotosToDatabase(final Sighting sighting) {
         final Callback<Void> callback = new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                onPhotosUploaded(sighting);
+                onPhotosUploaded();
             }
 
             @Override
@@ -137,14 +148,73 @@ public class AddSighting {
         Log.e(TAG, "Error creating sighting: " + t);
     }
 
-    private void onPhotosUploaded(Sighting sighting) {
-        Toast.makeText(context, "Fotos subidas", Toast.LENGTH_LONG).show();
+    private void onPhotosUploaded() {
+        Toast.makeText(context, "Fotos subidas", Toast.LENGTH_SHORT).show();
         hideDialog();
     }
 
     private void onPhotosUploadingError(Throwable t) {
-        Toast.makeText(context, "Error subiendo fotos", Toast.LENGTH_LONG).show();
+        Toast.makeText(context, "Error subiendo fotos", Toast.LENGTH_SHORT).show();
         hideDialog();
+    }
+
+
+
+
+    private void getQuestionFromDatabase(final Sighting sighting) {
+        final Callback<List<Question>> callback = new Callback<List<Question>>() {
+            @Override
+            public void onResponse(Call<List<Question>> call, Response<List<Question>> response) {
+                List<Question> questionsList = new ArrayList<>();
+
+                List<Question> list = response.body();
+                for (Question question : list) {
+                    if (sighting.getType() == question.getSighting_type()) {
+                        questionsList.add(question);
+                    }
+                }
+                if (questionsList.isEmpty()) {
+                    goToMainActivity();
+                } else {
+                    Intent i = new Intent(context, QuestionsActivity.class);
+                    i.putExtra("sightingObject", sighting);
+                    i.putExtra("questionsList", (Serializable) questionsList);
+                    context.startActivity(i);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Question>> call, Throwable t) {
+                System.out.println("onFailure " + t);
+            }
+        };
+        Task.doInBackground(new TaskCallback<List<Question>>() {
+            @Override
+            public List<Question> executeInBackground() {
+                Call<List<Question>> call = api.getQuestions(String.valueOf(sighting.getId()));
+                call.enqueue(callback);
+                return null;
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                callback.onFailure(null, t);
+            }
+
+            @Override
+            public void onCompleted(List<Question> questions) {
+                callback.onResponse(null, Response.success((List<Question>) null));
+
+            }
+        });
+    }
+
+
+    private void goToMainActivity() {
+        Intent i = new Intent(context, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        context.startActivity(i);
     }
 
 

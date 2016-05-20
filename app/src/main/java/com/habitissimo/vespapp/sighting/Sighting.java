@@ -7,7 +7,7 @@ import com.habitissimo.vespapp.questions.Answer;
 import java.io.Serializable;
 import java.util.List;
 
-public class Sighting  implements Serializable {
+public class Sighting implements Serializable {
 
     private static final int STATUS_PENDING = 0;
     private static final int STATUS_PROCESSING = 1;
@@ -20,11 +20,10 @@ public class Sighting  implements Serializable {
 
     private int id;
     private int status;
-    private String free_text= "";
+    private String free_text = "";
     private int type;
     private String contact;
     private String source = "app";
-    private String created_at;
 
     @SerializedName("public")
     private boolean _public;
@@ -36,9 +35,9 @@ public class Sighting  implements Serializable {
     private float lng;
 
     private List<Picture> pictures = null;
-    private List<Integer> answers=null;
+    private List<Integer> answers = null;
 
-    public Sighting () {
+    public Sighting() {
 
     }
 

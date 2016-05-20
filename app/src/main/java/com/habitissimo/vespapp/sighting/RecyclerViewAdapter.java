@@ -27,16 +27,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     @Override
     public RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
+        System.out.println("photooo");
         View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.picture_item_list, parent, false);
         RecyclerViewHolders rcv = new RecyclerViewHolders(layoutView, context, new RecyclerViewHolders.Callback() {
             @Override
             public void onImageDeleted(int index) {
-                // Actualizar database
+                // Update database
                 PicturesActions list = Database.get(context).load(Constants.FOTOS_LIST, PicturesActions.class);
                 String removeUrl = list.getList().remove(index);
                 Database.get(context).save(Constants.FOTOS_LIST, list);
 
-                // Actualizar adapter
+                // Update adapter
                 itemList.remove(removeUrl);
                 notifyDataSetChanged();
             }
@@ -44,8 +45,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         return rcv;
     }
 
+
+    public void addPhoto(String photo) {
+        itemList.add(photo);
+        notifyDataSetChanged();
+    }
+
     @Override
     public void onBindViewHolder(RecyclerViewHolders holder, int position) {
+        System.out.println("onBindViewHolder");
         Bitmap img = BitmapFactory.decodeFile(itemList.get(position));
         img = getResizedBitmap(img, 640);
         holder.photo.setImageBitmap(img);
