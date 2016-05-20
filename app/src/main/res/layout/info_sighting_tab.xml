@@ -18,15 +18,27 @@
         android:textStyle="bold"
         android:textSize="@dimen/info_textsize"/>
 
-    <TextView
-        android:id="@+id/sighting_source"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
+        android:orientation="horizontal"
         android:layout_marginLeft="20sp"
-        android:textSize="@dimen/info_textsize"
-        android:textColor="@color/colorPrimaryText"
-        style="@style/mobileIcon"/>
+        android:layout_alignParentLeft="true">
+
+        <ImageView
+            android:id="@+id/sighting_source_image"
+            android:layout_width="30dip"
+            android:layout_height="30dip"/>
+
+        <TextView
+            android:id="@+id/sighting_source"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/info_textsize"
+            android:textColor="@color/colorPrimaryText"/>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/sighting_lat_label"
@@ -87,9 +99,7 @@
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
         android:textSize="@dimen/info_textsize"
-        android:textColor="@color/colorPrimaryText"
-        style="@style/mobileIcon"/>
-
+        android:textColor="@color/colorPrimaryText"/>
     <TextView
         android:id="@+id/sighting_status_label"
         android:layout_width="wrap_content"
@@ -108,8 +118,7 @@
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
         android:textSize="@dimen/info_textsize"
-        android:textColor="@color/colorPrimaryText"
-        style="@style/mobileIcon"/>
+        android:textColor="@color/colorTitulo"/>
 
 
     <TextView
@@ -130,7 +139,7 @@
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
         android:textSize="@dimen/info_textsize"
-        android:textColor="@color/colorPrimaryText"/>
+        android:textColor="@color/colorTitulo"/>
 
     <TextView
         android:id="@+id/sighting_data_label"

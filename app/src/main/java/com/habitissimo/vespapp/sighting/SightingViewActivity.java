@@ -150,12 +150,16 @@ public class SightingViewActivity extends AppCompatActivity {
         TextView tSource = (TextView) findViewById(R.id.sighting_source);
         String source = sighting.getSource();
         tSource.setText(source);
+
         if (source.equals("web")) {
-            // tSource.setTextAppearance(R.style.computerIcon);
+            ImageView myImage = (ImageView) findViewById(R.id.sighting_source_image);
+            myImage.setImageResource(R.mipmap.ic_computer);
         } else if (source.equals("app")) {
-            // tSource.setTextAppearance(R.style.computerIcon);
+            ImageView myImage = (ImageView) findViewById(R.id.sighting_source_image);
+            myImage.setImageResource(R.mipmap.ic_movile);
         } else {
-            //tSource.setTextAppearance(R.style.computerIcon);
+            ImageView myImage = (ImageView) findViewById(R.id.sighting_source_image);
+            myImage.setImageResource(R.mipmap.ic_computer);
         }
 
         TextView lLat = (TextView) findViewById(R.id.sighting_lat_label);
@@ -174,7 +178,6 @@ public class SightingViewActivity extends AppCompatActivity {
         int type = sighting.getType();
         if (type == 1) {
             tType.setText(String.valueOf("Avispa"));
-//            tType.setTextAppearance(R.style.computerIcon);
         } else {
             tType.setText(String.valueOf("Nido"));
         }
@@ -185,10 +188,13 @@ public class SightingViewActivity extends AppCompatActivity {
         int status = sighting.getStatus();
         if (status == 0) {
             tStatus.setText(String.valueOf("Pendiente"));
+            tStatus.setBackgroundColor(getResources().getColor(R.color.statusPending));
         } else if (status == 1) {
             tStatus.setText(String.valueOf("Procesando"));
+            tStatus.setBackgroundColor(getResources().getColor(R.color.statusProcessing));
         } else if (status == 2) {
             tStatus.setText(String.valueOf("Procesado"));
+            tStatus.setBackgroundColor(getResources().getColor(R.color.statusValidated));
         }
 
         TextView lResult = (TextView) findViewById(R.id.sighting_result_label);
@@ -198,10 +204,13 @@ public class SightingViewActivity extends AppCompatActivity {
         System.out.println("EY" + result);
         if (result == null) {
             tResult.setText(String.valueOf("Desconocido"));
+            tResult.setBackgroundColor(getResources().getColor(R.color.resultUnknown));
         } else if (result == false) {
             tResult.setText(String.valueOf("Negativo"));
+            tResult.setBackgroundColor(getResources().getColor(R.color.resultNo));
         } else if (result == true) {
             tResult.setText(String.valueOf("Positivo"));
+            tResult.setBackgroundColor(getResources().getColor(R.color.resultYes));
         }
 
         TextView lData = (TextView) findViewById(R.id.sighting_data_label);
