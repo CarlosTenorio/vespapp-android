@@ -1,5 +1,6 @@
 package com.habitissimo.vespapp.questions;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -18,7 +20,9 @@ import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.sighting.Location;
+import com.habitissimo.vespapp.sighting.Sighting;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -37,11 +41,26 @@ public class QuestionsActivity extends AppCompatActivity {
     // The pager adapter, which provides the pages to the view pager widget.
     private PagerAdapter mPagerAdapter;
 
+    private Sighting sighting;
+
+    private Context context= this;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
+
+        sighting= new Sighting();
+        sighting.setId(54);
+        sighting.setLat(39.930721f);
+        sighting.setLng(4.14008999f);
+        sighting.setType(1);
+        sighting.setLocation(202);
+        sighting.set_public(true);
+
+        List<Integer> listAnswers= new ArrayList<Integer>();
+        sighting.setAnswers(listAnswers);
 
         initToolbar();
         getQuestionFromDatabase();
@@ -66,7 +85,16 @@ public class QuestionsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.confirm_cap_titulo);
+
+        Button btn_send = (Button) findViewById(R.id.send_button_question);
+        btn_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ScreenSlidePageFragment.updateSighting(context);
+            }
+        });
     }
+
 
 
     private void getQuestionFromDatabase() {
@@ -88,7 +116,7 @@ public class QuestionsActivity extends AppCompatActivity {
         Task.doInBackground(new TaskCallback<List<Question>>() {
             @Override
             public List<Question> executeInBackground() {
-                Call<List<Question>> call = api.getQuestions("54");
+                Call<List<Question>> call = api.getQuestions(String.valueOf(sighting.getId()));
                 call.enqueue(callback);
                 return null;
             }
@@ -124,7 +152,10 @@ public class QuestionsActivity extends AppCompatActivity {
                 int pos = position + 1;
                 progressQuestionText.setText(pos + "/" + NUM_PAGES);
 
+
+
                 invalidateOptionsMenu();
+
             }
         });
     }
@@ -140,7 +171,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ScreenSlidePageFragment.create(position, questionsList.get(position));
+            return ScreenSlidePageFragment.create(position, questionsList.get(position), sighting);
         }
 
         @Override
