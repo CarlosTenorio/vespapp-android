@@ -23,6 +23,7 @@ public class Sighting  implements Serializable {
     private String free_text= "";
     private int type;
     private String contact;
+
     private String source = "app";
     private String created_at;
 
@@ -161,4 +162,13 @@ public class Sighting  implements Serializable {
     public void setAnswers(List<Integer> answers) {
         this.answers = answers;
     }
+
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
 }

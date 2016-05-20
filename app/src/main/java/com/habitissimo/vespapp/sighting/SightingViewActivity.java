@@ -37,6 +37,9 @@ import com.habitissimo.vespapp.map.Map;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -178,9 +181,12 @@ public class SightingViewActivity extends AppCompatActivity {
         int type = sighting.getType();
         if (type == 1) {
             tType.setText(String.valueOf("Avispa"));
-        } else {
+        } else if(type == 2){
             tType.setText(String.valueOf("Nido"));
+        }else {
+            tType.setText("-");
         }
+
 
         TextView lStatus = (TextView) findViewById(R.id.sighting_status_label);
         lStatus.setText("Estado:");
@@ -201,7 +207,6 @@ public class SightingViewActivity extends AppCompatActivity {
         lResult.setText("Resultado:");
         TextView tResult = (TextView) findViewById(R.id.sighting_result);
         Boolean result = sighting.is_valid();
-        System.out.println("EY" + result);
         if (result == null) {
             tResult.setText(String.valueOf("Desconocido"));
             tResult.setBackgroundColor(getResources().getColor(R.color.resultUnknown));
@@ -216,12 +221,18 @@ public class SightingViewActivity extends AppCompatActivity {
         TextView lData = (TextView) findViewById(R.id.sighting_data_label);
         lData.setText("Fecha:");
         TextView tData = (TextView) findViewById(R.id.sighting_data);
-        tData.setText("hue");
+        tData.setText(parseDateToddMMyyyy(sighting.getCreated_at()));
+
 
         TextView lDescription = (TextView) findViewById(R.id.sighting_description_label);
         lDescription.setText("Descripción:");
         TextView tDescription = (TextView) findViewById(R.id.sighting_description);
-        tDescription.setText(sighting.getFree_text());
+        if(!sighting.getFree_text().isEmpty()){
+            tDescription.setText(sighting.getFree_text());
+        }else{
+            tDescription.setText("-");
+        }
+
 
     }
 
@@ -260,6 +271,25 @@ public class SightingViewActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    public String parseDateToddMMyyyy(String time) {
+        System.out.println(time);
+        String inputPattern = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+        String outputPattern = "dd-MMM-yyyy h:mm a";
+        SimpleDateFormat inputFormat = new SimpleDateFormat(inputPattern);
+        SimpleDateFormat outputFormat = new SimpleDateFormat(outputPattern);
+
+        Date date = null;
+        String str = null;
+
+        try {
+            date = inputFormat.parse(time);
+            str = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return str;
     }
 
 
