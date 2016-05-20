@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +20,8 @@ import android.widget.Button;
 import com.habitissimo.vespapp.Constants;
 import com.habitissimo.vespapp.R;
 import com.habitissimo.vespapp.database.Database;
+import com.habitissimo.vespapp.dialog.InfoDialog;
+import com.habitissimo.vespapp.dialog.LoadingDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -36,6 +39,7 @@ public class SightingDataActivity extends AppCompatActivity {
     private File photoFile;
     private PicturesActions picturesActions;
 
+    private AlertDialog dialog;
     RecyclerViewAdapter rcAdapter;
 
     @Override
@@ -103,7 +107,7 @@ public class SightingDataActivity extends AppCompatActivity {
         });
     }
 
-    public void takePhoto() throws IOException {
+    private void takePhoto() throws IOException {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         photoFile = picturesActions.createImageFile();
         savePicturePathToDatabase(photoFile.getAbsolutePath());
@@ -111,24 +115,24 @@ public class SightingDataActivity extends AppCompatActivity {
         startActivityForResult(intent, TAKE_CAPTURE_REQUEST);
     }
 
-    public void selectPicture() {
+    private void selectPicture() {
         Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(i, PICK_IMAGE_REQUEST);
     }
 
     @OnClick(R.id.btn_nido)
-    void onNidoPressed() {
+    void onNestPressed() {
         onTypeOfSightPressed(Sighting.TYPE_NEST);
     }
 
     @OnClick(R.id.btn_avispa)
-    void onAvispaPressed() {
+    void onWaspPressed() {
         onTypeOfSightPressed(Sighting.TYPE_WASP);
     }
 
 
 
-    public void onTypeOfSightPressed(int type) {
+    private void onTypeOfSightPressed(int type) {
         Sighting sighting = new Sighting();
         sighting.setType(type);
         Pattern emailPattern = Patterns.EMAIL_ADDRESS; // API level 8+
@@ -164,6 +168,13 @@ public class SightingDataActivity extends AppCompatActivity {
                     picturePath = getPicturePathFromDatabase();
                     //photoFile = new File(picturePath);
                     //picturesActions.resize(photoFile, 640, 480);
+
+                    photoFile = new File(picturePath);
+                    if (photoFile.length() < 1468006) {
+                        savePictureToDatabase(picturePath);
+                    } else {
+                        showInfoDialog();
+                    }
                     break;
                 case PICK_IMAGE_REQUEST:
                     Uri selectedImage = data.getData();
@@ -174,30 +185,44 @@ public class SightingDataActivity extends AppCompatActivity {
                     picturePath = cursor.getString(columnIndex);
                     cursor.close();
 
-                    Intent i = getIntent();
-                    finish();
-                    startActivity(i);
+                    photoFile = new File(picturePath);
+                    if (photoFile.length() < 1468006) {
+                        savePictureToDatabase(picturePath);
+                        Intent i = getIntent();
+                        finish();
+                        startActivity(i);
+                    } else {
+                        showInfoDialog();
+                    }
                     break;
             }
-            savePictureToDatabase(picturePath);
         }
     }
 
-    public void savePicturePathToDatabase(String picturePath) {
+    private void savePicturePathToDatabase(String picturePath) {
         Database.get(this).save(Constants.KEY_CAPTURE, picturePath);
     }
 
-    public String getPicturePathFromDatabase() {
+    private String getPicturePathFromDatabase() {
         return Database.get(this).load(Constants.KEY_CAPTURE);
     }
 
-    public void savePictureToDatabase(String picturePath) {
+    private void savePictureToDatabase(String picturePath) {
+        picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
+
         if (picturesActions == null) {
             picturesActions = new PicturesActions();
-        } else {
-            picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
         }
+
         picturesActions.getList().add(picturePath);
         Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
+    }
+
+    private void showInfoDialog() {
+        dialog = InfoDialog.show(this, new InfoDialog.Listener() {
+            @Override public void onDialogDismissed() {
+                //Put something
+            }
+        });
     }
 }

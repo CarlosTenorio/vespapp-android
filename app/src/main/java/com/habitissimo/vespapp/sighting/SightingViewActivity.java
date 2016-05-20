@@ -7,9 +7,12 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -80,39 +83,68 @@ public class SightingViewActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle(R.string.confirm_cap_titulo);
+        getSupportActionBar().setTitle(R.string.confirm_cap_map_sight);
     }
 
     private void initTabs() {
         final TabHost tabs = (TabHost) findViewById(R.id.tabs_sighting_view);
         tabs.setup();
 
-        TabHost.TabSpec spec = tabs.newTabSpec("GuiaTab");
+        TabHost.TabSpec spec = tabs.newTabSpec("PicsTab");
         spec.setContent(R.id.layout_pictures_sighting_tab);
-        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_info, null));
+        spec.setIndicator("Fotos");
+
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MainTab");
         spec.setContent(R.id.layout_info_sighting_tab);
-        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_menu_camera, null));
+        spec.setIndicator("Info");
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MapTab");
-        spec.setContent(R.id.map);
+        spec.setContent(R.id.layout_map_sighting_tab);
         spec.setIndicator("Mapa");
-        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_dialog_map, null));
         tabs.addTab(spec);
 
         //Add color initial
         tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
 
+        //Set color text
+        int totalTabs = tabs.getTabWidget().getTabCount();
+
+        for (int i=0; i<totalTabs; i++){
+            TextView tv = (TextView) tabs.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
+            tv.setTextColor(getResources().getColor(R.color.colorTitulo));
+        }
+
         tabs.setCurrentTab(1);
+
+        tabs.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            public void onTabChanged(String tabId) {
+                int i = tabs.getCurrentTab();
+                if (i == 0) {
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
+                } else if (i == 1) {
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(2).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
+                } else if (i == 2) {
+                    tabs.getTabWidget().getChildAt(i).setBackgroundColor(getResources().getColor(R.color.orange));
+                    tabs.getTabWidget().getChildAt(0).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+                    tabs.getTabWidget().getChildAt(1).setBackgroundColor(getResources().getColor(R.color.brandPrimary));
+
+                }
+            }
+        });
     }
 
 
     @TargetApi(Build.VERSION_CODES.M)
     private void getInfo() {
-
         TextView lSource = (TextView) findViewById(R.id.sighting_source_label);
         lSource.setText("Notificado por:");
         TextView tSource = (TextView) findViewById(R.id.sighting_source);
@@ -235,20 +267,25 @@ public class SightingViewActivity extends AppCompatActivity {
             ImageView imageInfo = new ImageView(this);
             LinearLayout.LayoutParams vp =
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT);
+                            LinearLayout.LayoutParams.MATCH_PARENT);
             imageInfo.setLayoutParams(vp);
+
+            imageInfo.setAdjustViewBounds(true); //Adjust the height to size photo
+            imageInfo.setCropToPadding(true);
+            vp.setMargins(0, 35, 0, 0); //(left, top, right, bottom);
 
             Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(picture.getFile()).getContent());
             imageInfo.setImageBitmap(bitmap);
 
             ll.addView(imageInfo);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     private void initMap() {
-        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.layout_map_sighting_tab)).getMap();
         Gmap.setMyLocationEnabled(true);
         map = new Map(Gmap);
 

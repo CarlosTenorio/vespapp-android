@@ -3,6 +3,7 @@ package com.habitissimo.vespapp.sighting;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.os.Environment;
 
 import com.habitissimo.vespapp.Constants;
@@ -79,6 +80,14 @@ public class PicturesActions {
                 throw new RuntimeException("Could not save bitmap into file(" + photo.getAbsolutePath() + "): " + e);
             }
         }
+    }
+
+
+    public int getImageSize(File photo) {
+        BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        bmOptions.inJustDecodeBounds = false;
+        Bitmap image = BitmapFactory.decodeFile(photo.getAbsolutePath(), bmOptions);
+        return image.getByteCount();
     }
 }
 
