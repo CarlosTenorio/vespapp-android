@@ -7,11 +7,15 @@
     <color name="colorAccent">#FFA51F</color>
     <color name="colorBackground">#FFFFFF</color>
 
-    <color name="statusProcessing">#FFA51F</color>
-    <color name="statusNotSent">#FF6716</color>
+    <color name="statusPending">#d9534f</color>
+    <color name="statusProcessing">#f0ad4e</color>
     <color name="statusValidated">#63CA75</color>
-    <color name="statusPending">#B26F0D</color>
+    <color name="statusNotSent">#FF6716</color>
     <color name="red">#9c0608</color>
+
+    <color name="resultUnknown">#f0ad4e</color>
+    <color name="resultYes">#63CA75</color>
+    <color name="resultNo">#d9534f</color>
     
     <color name="brandPrimary">#FD9627</color>
     <color name="brandSecondary">#8904B1</color>

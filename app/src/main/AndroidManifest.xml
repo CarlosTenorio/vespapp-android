@@ -85,6 +85,12 @@
             android:label="@string/title_activity_menu_contact"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".menu.Contributors"
+            android:label="@string/title_activity_menu_contact"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
     </application>
 
 </manifest>

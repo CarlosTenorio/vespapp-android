@@ -28,6 +28,7 @@
     <string name="title_activity_info_description">InfoDescription</string>
     <string name="title_activity_menu_contact">Contacto</string>
     <string name="title_activity_menu_about_us">Acerca de nosotros</string>
+    <string name="title_activity_menu_contributors">Colaboradores</string>
 
     <string name="icon_heart">&#xf0f9;</string>
     <string name="title_activity_menu">MenuActivity</string>
@@ -56,6 +57,8 @@
     <string name="about_us_title_4">Segunda fase de Vespapp</string>
     <string name="about_us_body_4">Un equipo de tres estudiantes de ingeniería informática,becados por Cátedra Santander UIB de Innovación y Transferencia del Conocimiento (CSUIT), llevan a cabo la segunda fase de la creación de Vespapp. Paralelamente el equipo investigador del proyecto (Laboratorio de Zoología, Informática, Sistemas de Información Geográfica (SIG) y Comunicación, participación y redes sociales) trabaja para que Vespapp sea una realidad tangible.</string>
     <string name="link_us_date_4"></string>
+
+    <string name="contributers_tittle">Colaboradores de Vespapp</string>
 
     <string name="about_us_date_5">Mayo de 2016:</string>
     <string name="about_us_title_5">Presentación de Vespapp</string>
