@@ -40,6 +40,9 @@ public interface VespappApi {
     @POST("sightings/")
     Call<Sighting> createSighting(@Body Sighting sighting);
 
+    @POST("sightings/{sightingId}/")
+    Call<Sighting> updateSighting(@Body Sighting sighting, @Path("sightingId") String sightingId);
+
     /**
      * @see VespappApiHelper#buildPhotoApiParameter(File)
      */

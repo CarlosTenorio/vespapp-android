@@ -2,6 +2,7 @@ package com.habitissimo.vespapp.sighting;
 
 
 import com.google.gson.annotations.SerializedName;
+import com.habitissimo.vespapp.questions.Answer;
 
 import java.io.Serializable;
 import java.util.List;
@@ -35,6 +36,7 @@ public class Sighting  implements Serializable {
     private float lng;
 
     private List<Picture> pictures = null;
+    private List<Integer> answers=null;
 
     public Sighting () {
 
@@ -150,5 +152,13 @@ public class Sighting  implements Serializable {
 
     public void set_valid(Boolean is_valid) {
         this.is_valid = is_valid;
+    }
+
+    public List<Integer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Integer> answers) {
+        this.answers = answers;
     }
 }
