@@ -69,10 +69,10 @@ public class Map {
     }*/
 
 
-    public void moveCamera(double lat, double lng) {
+    public void moveCamera(double lat, double lng, int zoom) {
         //First Vision, center on teh Balearic Islands
         LatLng cameraFocus = new LatLng(lat,lng);
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(cameraFocus, 8);
+        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(cameraFocus, zoom);
         Gmap.animateCamera(cameraUpdate);
     }
 

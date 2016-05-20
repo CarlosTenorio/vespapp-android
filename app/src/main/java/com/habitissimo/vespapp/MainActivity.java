@@ -325,7 +325,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 double lat = 39.56;
                 double lng = 2.62;
-                map.moveCamera(lat, lng);
+                int zoom = 8;
+                map.moveCamera(lat, lng, zoom);
             }
 
             @Override

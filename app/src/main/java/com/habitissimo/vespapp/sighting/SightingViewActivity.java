@@ -300,9 +300,10 @@ public class SightingViewActivity extends AppCompatActivity {
 
         double lat = sighting.getLat();
         double lng = sighting.getLng();
+        int zoom = 15;
 
         LatLng myLocation = new LatLng(lat, lng);
         marker = Gmap.addMarker(new MarkerOptions().position(myLocation));
-        map.moveCamera(lat, lng);
+        map.moveCamera(lat, lng, zoom);
     }
 }
