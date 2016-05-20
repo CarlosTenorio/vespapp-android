@@ -52,10 +52,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int TAKE_CAPTURE_REQUEST = 0;
     private static final int PICK_IMAGE_REQUEST = 1;
     private File photoFile;
-    private PicturesActions picturesActions;
     private Map map;
     private Marker marker;
-    private AlertDialog dialog;
     private HashMap<String, Sighting> relation= new HashMap<String, Sighting>();
 
 
@@ -65,16 +63,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        try {
-            picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
-
-            if (picturesActions == null) {
-                picturesActions = new PicturesActions();
-            }
-        } catch (Exception e) {
-            picturesActions = new PicturesActions();
-        }
 
         initTabs();
         initCamBtn();
@@ -210,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void takePhoto() throws IOException {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        photoFile = picturesActions.createImageFile();
+        photoFile = PicturesActions.createImageFile();
         savePicturePathToDatabase(photoFile.getAbsolutePath());
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
         startActivityForResult(intent, TAKE_CAPTURE_REQUEST);
@@ -368,11 +356,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
 
-            boolean saved = savePictureToDatabase(picturePath);
-            if (saved) {
-                Intent i = new Intent(this, SightingDataActivity.class);
-                startActivity(i);
-            }
+            savePictureToDatabase(picturePath);
+            Intent i = new Intent(this, SightingDataActivity.class);
+            startActivity(i);
         }
     }
 
@@ -384,20 +370,9 @@ public class MainActivity extends AppCompatActivity {
         return Database.get(this).load(Constants.KEY_CAPTURE);
     }
 
-    private boolean savePictureToDatabase(String picturePath) {
-        picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
-
-        if (picturesActions == null) {
-            picturesActions = new PicturesActions();
-        }
-
-        if (picturesActions.getList().size() == 5) {
-            Toast.makeText(this, "No se pueden subir más de 5 imágenes", Toast.LENGTH_LONG).show();
-            return false;
-        } else {
-            picturesActions.getList().add(picturePath);
-            Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
-            return true;
-        }
+    private void savePictureToDatabase(String picturePath) {
+        PicturesActions picturesActions = new PicturesActions();
+        picturesActions.getList().add(picturePath);
+        Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
     }
 }

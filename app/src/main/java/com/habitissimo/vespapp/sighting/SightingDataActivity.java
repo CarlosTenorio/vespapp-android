@@ -36,9 +36,7 @@ public class SightingDataActivity extends AppCompatActivity {
     private static final int TAKE_CAPTURE_REQUEST = 0;
     private static final int PICK_IMAGE_REQUEST = 1;
     private File photoFile;
-    private PicturesActions picturesActions;
 
-    private AlertDialog dialog;
     RecyclerViewAdapter rcAdapter;
 
     @Override
@@ -70,7 +68,7 @@ public class SightingDataActivity extends AppCompatActivity {
     }
 
     private void initAlbum() {
-        picturesActions = getPicturesList();
+        PicturesActions picturesActions = getPicturesList();
 
         GridLayoutManager gridLayout = new GridLayoutManager(this, 2);
 
@@ -108,7 +106,7 @@ public class SightingDataActivity extends AppCompatActivity {
 
     private void takePhoto() throws IOException {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        photoFile = picturesActions.createImageFile();
+        photoFile = PicturesActions.createImageFile();
         savePicturePathToDatabase(photoFile.getAbsolutePath());
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
         startActivityForResult(intent, TAKE_CAPTURE_REQUEST);
@@ -192,7 +190,7 @@ public class SightingDataActivity extends AppCompatActivity {
     }
 
     private void savePictureToDatabase(String picturePath) {
-        picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
+        PicturesActions picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
 
         if (picturesActions == null) {
             picturesActions = new PicturesActions();

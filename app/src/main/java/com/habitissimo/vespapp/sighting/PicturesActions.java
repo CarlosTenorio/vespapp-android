@@ -26,7 +26,7 @@ public class PicturesActions {
         return list;
     }
 
-    public File createImageFile() throws IOException {
+    public static File createImageFile() throws IOException {
         // Create an image file name
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp + "_";
