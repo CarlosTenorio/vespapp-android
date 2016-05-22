@@ -3,6 +3,7 @@ package com.habitissimo.vespapp;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.res.ResourcesCompat;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
         initTabs();
         initCamBtn();
-        initSelFotosBtn();
+        initSelectPicturesBtn();
     }
 
     private void initTabs() {
@@ -195,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initSelFotosBtn() {
+    private void initSelectPicturesBtn() {
         Button btn = (Button) findViewById(R.id.btn_selFotos);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -232,9 +233,9 @@ public class MainActivity extends AppCompatActivity {
                             ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
                     params.setMargins(15, 20, 20, 20);
                     Button btn = new Button(getApplicationContext());
-                    btn.setTextAppearance(getApplicationContext(), R.style.camera_button);
                     btn.setText(info.getTitle());
                     btn.setBackgroundResource(R.drawable.button_selector);
+                    btn.setTextSize((int) getResources().getDimension(R.dimen.textsize_info_button));
                     btn.setLayoutParams(params);
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override

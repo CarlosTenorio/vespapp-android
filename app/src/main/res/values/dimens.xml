@@ -8,6 +8,7 @@
     <dimen name="toolbar_title_size">25sp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
+    <dimen name="textsize_info_button">10dp</dimen>
 
     <dimen name="info_textsize">24sp</dimen>
     <dimen name="question_textsize">24dp</dimen>
