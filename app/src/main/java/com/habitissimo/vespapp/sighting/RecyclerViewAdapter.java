@@ -31,17 +31,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
         RecyclerViewHolders rcv = new RecyclerViewHolders(layoutView, context, new RecyclerViewHolders.Callback() {
             @Override
             public void onImageDeleted(int index) {
-                // Actualizar database
+                // Update database
                 PicturesActions list = Database.get(context).load(Constants.FOTOS_LIST, PicturesActions.class);
                 String removeUrl = list.getList().remove(index);
                 Database.get(context).save(Constants.FOTOS_LIST, list);
 
-                // Actualizar adapter
+                // Update adapter
                 itemList.remove(removeUrl);
                 notifyDataSetChanged();
             }
         });
         return rcv;
+    }
+
+
+    public void addPhoto(String photo) {
+        itemList.add(photo);
+        notifyDataSetChanged();
     }
 
     @Override

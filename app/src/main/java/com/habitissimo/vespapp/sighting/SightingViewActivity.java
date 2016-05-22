@@ -4,12 +4,15 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +37,10 @@ import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -236,6 +243,7 @@ public class SightingViewActivity extends AppCompatActivity {
 
     }
 
+
     private void getPictures() {
         final VespappApi api = Vespapp.get(this).getApi();
 
@@ -300,10 +308,12 @@ public class SightingViewActivity extends AppCompatActivity {
     }
 
     private void addItemList(final Picture picture) {
+        Bitmap bitmap = null;
+        ImageView imageInfo = null;
         try {
             LinearLayout ll = (LinearLayout) findViewById(R.id.layout_pictures_sighting_tab);
 
-            ImageView imageInfo = new ImageView(this);
+            imageInfo = new ImageView(this);
             LinearLayout.LayoutParams vp =
                     new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.MATCH_PARENT);
@@ -313,15 +323,73 @@ public class SightingViewActivity extends AppCompatActivity {
             imageInfo.setCropToPadding(true);
             vp.setMargins(0, 35, 0, 0); //(left, top, right, bottom);
 
-            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(picture.getFile()).getContent());
+            bitmap = BitmapFactory.decodeStream((InputStream) new URL(picture.getFile()).getContent());
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int widthDisplay = size.x;
+            int heightDisplay = size.y;
+            double heightFinal = widthDisplay*0.5;
+            int i =  (int) heightFinal;
+
+            bitmap = resizeBitmap(bitmap, widthDisplay, i);
             imageInfo.setImageBitmap(bitmap);
 
             ll.addView(imageInfo);
 
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (OutOfMemoryError e) {
         }
     }
+
+    public static Bitmap resizeBitmap(Bitmap bitmap, int width, int height) {
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+        Matrix matrix = new Matrix();
+        float scaleWidth = ((float) width / w);
+        float scaleHeight = ((float) height / h);
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
+        return newbmp;
+    }
+
+/*
+    protected Bitmap createScaledBitmapFromStream( InputStream s, int minimumDesiredBitmapWidth, int minimumDesiredBitmapHeight ) {
+
+        final BufferedInputStream is = new BufferedInputStream(s, 32 * 1024);
+        try {
+            final BitmapFactory.Options decodeBitmapOptions = new BitmapFactory.Options();
+            // For further memory savings, you may want to consider using this option
+             decodeBitmapOptions.inPreferredConfig = Bitmap.Config.RGB_565; // Uses 2-bytes instead of default 4 per pixel
+
+            if( minimumDesiredBitmapWidth >0 && minimumDesiredBitmapHeight >0 ) {
+                final BitmapFactory.Options decodeBoundsOptions = new BitmapFactory.Options();
+                decodeBoundsOptions.inJustDecodeBounds = true;
+                is.mark(32 * 1024); // 32k is probably overkill, but 8k is insufficient for some jpgs
+                BitmapFactory.decodeStream(is,null,decodeBoundsOptions);
+                is.reset();
+
+                final int originalWidth = decodeBoundsOptions.outWidth;
+                final int originalHeight = decodeBoundsOptions.outHeight;
+
+                // inSampleSize prefers multiples of 2, but we prefer to prioritize memory savings
+                decodeBitmapOptions.inSampleSize= Math.max(1,Math.min(originalWidth / minimumDesiredBitmapWidth, originalHeight / minimumDesiredBitmapHeight));
+
+            }
+
+            return BitmapFactory.decodeStream(is,null,decodeBitmapOptions);
+
+        } catch( IOException e ) {
+            throw new RuntimeException(e); // this shouldn't happen
+        } finally {
+            try {
+                is.close();
+            } catch( IOException ignored ) {}
+        }
+
+    }
+    */
 
     private void initMap() {
         final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.layout_map_sighting_tab)).getMap();
@@ -330,9 +398,10 @@ public class SightingViewActivity extends AppCompatActivity {
 
         double lat = sighting.getLat();
         double lng = sighting.getLng();
+        int zoom = 15;
 
         LatLng myLocation = new LatLng(lat, lng);
         marker = Gmap.addMarker(new MarkerOptions().position(myLocation));
-        map.moveCamera(lat, lng);
+        map.moveCamera(lat, lng, zoom);
     }
 }

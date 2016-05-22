@@ -32,17 +32,6 @@
         android:textSize="20sp"
         android:text="@string/add_Photo" />
 
-    <Button
-        android:id="@+id/btn_prueba"
-        style="@style/camera_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:text="preguntas" />
-
     <ImageButton
         android:id="@+id/btn_cam"
         android:src="@drawable/camera"

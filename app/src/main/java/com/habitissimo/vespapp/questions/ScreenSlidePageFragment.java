@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -20,7 +19,9 @@ import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.sighting.Sighting;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,22 +30,19 @@ import retrofit2.Response;
 
 public class ScreenSlidePageFragment extends Fragment {
 
-    public static final String ARG_PAGE = "page";
     public static final String ARG_QUESTION = "question";
     private Question question;
-    private static Sighting sighting;
-    private int mPageNumber;
+    private static Map<String, Answer> answersMap = new HashMap<>();;
 
-    public static ScreenSlidePageFragment create(int position, Question question, Sighting s) {
+    public static ScreenSlidePageFragment create(Question question) {
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
+
         Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, position);
         args.putSerializable(ARG_QUESTION, question);
         fragment.setArguments(args);
-        sighting= s;
+
         return fragment;
     }
-
 
 
     public ScreenSlidePageFragment() {
@@ -53,14 +51,12 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mPageNumber = getArguments().getInt(ARG_PAGE);
         question = (Question) getArguments().getSerializable(ARG_QUESTION);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        ViewGroup rootView = null;
-
+        ViewGroup rootView;
 
         if (question.isCheckBox()) {
             rootView = (ViewGroup) inflater.inflate(R.layout.fragment_multiple_answer, container, false);
@@ -75,9 +71,12 @@ public class ScreenSlidePageFragment extends Fragment {
                 checkAnswerFirst.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        List<Integer> answerList= sighting.getAnswers();
-                        answerList.add(mPageNumber, answer.getId());
-                        sighting.setAnswers(answerList);
+                        boolean checked = ((CheckBox) v).isChecked();
+                        if (checked) {
+                            answersMap.put(answer.getValue(), answer);
+                        } else {
+                            answersMap.remove(answer.getValue());
+                        }
                     }
                 });
                 ll.addView(checkAnswerFirst);
@@ -96,9 +95,10 @@ public class ScreenSlidePageFragment extends Fragment {
                 radioAnswerFirst.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        List<Integer> answerList= sighting.getAnswers();
-                        answerList.add(mPageNumber, answer.getId());
-                        sighting.setAnswers(answerList);
+                        boolean checked = ((RadioButton) v).isChecked();
+                        if (checked) {
+                            answersMap.put(question.getTitle(), answer);
+                        }
                     }
                 });
                 rg.addView(radioAnswerFirst);
@@ -107,12 +107,15 @@ public class ScreenSlidePageFragment extends Fragment {
         return rootView;
     }
 
-    public static void updateSighting(Context context){
-        System.out.println("HOLAS");
-
+    public static void updateSighting(Context context, final Sighting sighting) {
         final VespappApi api = Vespapp.get(context).getApi();
 
-        System.out.println("HOLAS MOSCAS");
+        List<Integer> answerList = sighting.getAnswers();
+        for (Map.Entry<String, Answer> a : answersMap.entrySet()){
+            Answer answer = a.getValue();
+            answerList.add(answer.getId());
+        }
+        sighting.setAnswers(answerList);
 
         final Callback<Sighting> callback = new Callback<Sighting>() {
             @Override
@@ -130,7 +133,6 @@ public class ScreenSlidePageFragment extends Fragment {
         Task.doInBackground(new TaskCallback<Sighting>() {
             @Override
             public Sighting executeInBackground() {
-                System.out.print("HOLIIIIIIIIIIIIS"+sighting.getAnswers());
                 Call<Sighting> call = api.updateSighting(sighting, String.valueOf(sighting.getId()));
                 call.enqueue(callback);
                 return null;
@@ -143,6 +145,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
             @Override
             public void onCompleted(Sighting sigthing) {
+                System.out.print("HOLIIIIIIIIIIIIS");
                 callback.onResponse(null, Response.success((Sighting) null));
 
             }

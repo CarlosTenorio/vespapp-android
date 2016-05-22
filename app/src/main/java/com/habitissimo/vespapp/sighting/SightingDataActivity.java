@@ -16,12 +16,11 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.habitissimo.vespapp.Constants;
 import com.habitissimo.vespapp.R;
 import com.habitissimo.vespapp.database.Database;
-import com.habitissimo.vespapp.dialog.InfoDialog;
-import com.habitissimo.vespapp.dialog.LoadingDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -37,9 +36,7 @@ public class SightingDataActivity extends AppCompatActivity {
     private static final int TAKE_CAPTURE_REQUEST = 0;
     private static final int PICK_IMAGE_REQUEST = 1;
     private File photoFile;
-    private PicturesActions picturesActions;
 
-    private AlertDialog dialog;
     RecyclerViewAdapter rcAdapter;
 
     @Override
@@ -71,7 +68,7 @@ public class SightingDataActivity extends AppCompatActivity {
     }
 
     private void initAlbum() {
-        picturesActions = getPicturesList();
+        PicturesActions picturesActions = getPicturesList();
 
         GridLayoutManager gridLayout = new GridLayoutManager(this, 2);
 
@@ -109,7 +106,7 @@ public class SightingDataActivity extends AppCompatActivity {
 
     private void takePhoto() throws IOException {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        photoFile = picturesActions.createImageFile();
+        photoFile = PicturesActions.createImageFile();
         savePicturePathToDatabase(photoFile.getAbsolutePath());
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
         startActivityForResult(intent, TAKE_CAPTURE_REQUEST);
@@ -158,7 +155,7 @@ public class SightingDataActivity extends AppCompatActivity {
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        //super.onActivityResult(requestCode, resultCode, data);
+        super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
             String picturePath = null;
@@ -168,13 +165,6 @@ public class SightingDataActivity extends AppCompatActivity {
                     picturePath = getPicturePathFromDatabase();
                     //photoFile = new File(picturePath);
                     //picturesActions.resize(photoFile, 640, 480);
-
-                    photoFile = new File(picturePath);
-                    if (photoFile.length() < 1468006) {
-                        savePictureToDatabase(picturePath);
-                    } else {
-                        showInfoDialog();
-                    }
                     break;
                 case PICK_IMAGE_REQUEST:
                     Uri selectedImage = data.getData();
@@ -184,18 +174,10 @@ public class SightingDataActivity extends AppCompatActivity {
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     picturePath = cursor.getString(columnIndex);
                     cursor.close();
-
-                    photoFile = new File(picturePath);
-                    if (photoFile.length() < 1468006) {
-                        savePictureToDatabase(picturePath);
-                        Intent i = getIntent();
-                        finish();
-                        startActivity(i);
-                    } else {
-                        showInfoDialog();
-                    }
                     break;
             }
+
+            savePictureToDatabase(picturePath);
         }
     }
 
@@ -208,21 +190,18 @@ public class SightingDataActivity extends AppCompatActivity {
     }
 
     private void savePictureToDatabase(String picturePath) {
-        picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
+        PicturesActions picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
 
         if (picturesActions == null) {
             picturesActions = new PicturesActions();
         }
 
-        picturesActions.getList().add(picturePath);
-        Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
-    }
-
-    private void showInfoDialog() {
-        dialog = InfoDialog.show(this, new InfoDialog.Listener() {
-            @Override public void onDialogDismissed() {
-                //Put something
-            }
-        });
+        if (picturesActions.getList().size() == 5) {
+            Toast.makeText(this, "No se pueden subir más de 5 imágenes", Toast.LENGTH_LONG).show();
+        } else {
+            picturesActions.getList().add(picturePath);
+            Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
+            rcAdapter.addPhoto(picturePath);
+        }
     }
 }

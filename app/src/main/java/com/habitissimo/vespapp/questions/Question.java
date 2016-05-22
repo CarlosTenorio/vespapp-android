@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Created by archi on 11/03/16.
  */
-public class Question implements Serializable{
+public class Question implements Serializable {
 
     private static final int TYPE_RADIO = 1;
     private static final int TYPE_CHECKBOX = 2;
@@ -17,17 +17,24 @@ public class Question implements Serializable{
     private String title;
 
     private int question_type;
+    private int sighting_type;
 
-    public Question(int id, List<Answer> answers, List<Answer> available_answers, String title, int question_type) {
+    public Question(int id, List<Answer> answers, List<Answer> available_answers,
+                    String title, int question_type, int sighting_type) {
         this.id = id;
         this.answers = answers;
         this.available_answers = available_answers;
         this.title = title;
         this.question_type = question_type;
+        this.sighting_type = sighting_type;
     }
 
     public boolean isCheckBox() {
         return question_type == TYPE_CHECKBOX;
+    }
+
+    public boolean isRadioButton() {
+        return question_type == TYPE_RADIO;
     }
 
     public int getId() {
@@ -50,7 +57,7 @@ public class Question implements Serializable{
         return question_type;
     }
 
-    public boolean isRadioButton() {
-        return question_type == TYPE_RADIO;
+    public int getSighting_type() {
+        return sighting_type;
     }
 }

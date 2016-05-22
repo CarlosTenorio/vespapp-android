@@ -16,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -26,14 +27,12 @@ import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.database.Database;
-import com.habitissimo.vespapp.dialog.InfoDialog;
 import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
 import com.habitissimo.vespapp.menu.Contributors;
 import com.habitissimo.vespapp.menu.MenuAboutUs;
 import com.habitissimo.vespapp.menu.MenuContact;
-import com.habitissimo.vespapp.questions.QuestionsActivity;
 import com.habitissimo.vespapp.sighting.PicturesActions;
 import com.habitissimo.vespapp.sighting.Sighting;
 import com.habitissimo.vespapp.sighting.SightingDataActivity;
@@ -55,10 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int TAKE_CAPTURE_REQUEST = 0;
     private static final int PICK_IMAGE_REQUEST = 1;
     private File photoFile;
-    private PicturesActions picturesActions;
     private Map map;
     private Marker marker;
-    private AlertDialog dialog;
     private HashMap<String, Sighting> relation= new HashMap<String, Sighting>();
 
 
@@ -69,20 +66,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        try {
-            picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
-
-            if (picturesActions == null) {
-                picturesActions = new PicturesActions();
-            }
-        } catch (Exception e) {
-            picturesActions = new PicturesActions();
-        }
-
         initTabs();
         initCamBtn();
         initSelFotosBtn();
-        initPrueba();
     }
 
     private void initTabs() {
@@ -219,21 +205,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initPrueba() {
-        Button btn = (Button) findViewById(R.id.btn_prueba);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), QuestionsActivity.class);
-                startActivity(i);
-            }
-        });
-    }
-
 
     public void takePhoto() throws IOException {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        photoFile = picturesActions.createImageFile();
+        photoFile = PicturesActions.createImageFile();
         savePicturePathToDatabase(photoFile.getAbsolutePath());
         intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photoFile));
         startActivityForResult(intent, TAKE_CAPTURE_REQUEST);
@@ -331,7 +306,8 @@ public class MainActivity extends AppCompatActivity {
                 }
                 double lat = 39.56;
                 double lng = 2.62;
-                map.moveCamera(lat, lng);
+                int zoom = 8;
+                map.moveCamera(lat, lng, zoom);
             }
 
             @Override
@@ -396,14 +372,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
             }
 
-            photoFile = new File(picturePath);
-            if (photoFile.length() < 1468006) {
-                savePictureToDatabase(picturePath);
-                Intent i = new Intent(this, SightingDataActivity.class);
-                startActivity(i);
-            } else {
-                showInfoDialog();
-            }
+            savePictureToDatabase(picturePath);
+            Intent i = new Intent(this, SightingDataActivity.class);
+            startActivity(i);
         }
     }
 
@@ -416,21 +387,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void savePictureToDatabase(String picturePath) {
-        picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
-
-        if (picturesActions == null) {
-            picturesActions = new PicturesActions();
-        }
-
+        PicturesActions picturesActions = new PicturesActions();
         picturesActions.getList().add(picturePath);
         Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
-    }
-
-    private void showInfoDialog() {
-        dialog = InfoDialog.show(this, new InfoDialog.Listener() {
-            @Override public void onDialogDismissed() {
-                //Put something
-            }
-        });
     }
 }

@@ -28,6 +28,10 @@ public class Database {
         return preferences;
     }
 
+    public void save(String key, Object obj) {
+        save(key, gson.toJson(obj));
+    }
+
     public void save(String key, String value) {
         getStringPref(key).set(value);
     }
@@ -36,16 +40,16 @@ public class Database {
         getIntPref(key).set(value);
     }
 
+    public void delete(String key) {
+        getStringPref(key).delete();
+    }
+
     public String load(String key) {
         return getStringPref(key).get();
     }
 
     public <T> T load(String key, Class<T> cls) {
         return gson.fromJson(load(key), cls);
-    }
-
-    public void save(String key, Object obj) {
-        save(key, gson.toJson(obj));
     }
 
     public int loadInt(String key) {

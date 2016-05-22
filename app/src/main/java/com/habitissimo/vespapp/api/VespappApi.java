@@ -1,22 +1,21 @@
 package com.habitissimo.vespapp.api;
 
+import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.questions.Question;
 import com.habitissimo.vespapp.sighting.Location;
 import com.habitissimo.vespapp.sighting.Picture;
 import com.habitissimo.vespapp.sighting.Sighting;
-import com.habitissimo.vespapp.info.Info;
 
 import java.io.File;
 import java.util.List;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
-import retrofit2.http.PATCH;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
 
@@ -40,7 +39,7 @@ public interface VespappApi {
     @POST("sightings/")
     Call<Sighting> createSighting(@Body Sighting sighting);
 
-    @POST("sightings/{sightingId}/")
+    @PUT("sightings/{sightingId}/")
     Call<Sighting> updateSighting(@Body Sighting sighting, @Path("sightingId") String sightingId);
 
     /**
