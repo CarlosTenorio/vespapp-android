@@ -32,45 +32,37 @@ public class ScreenSlidePageFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mPageNumber = getArguments().getInt(ARG_PAGE);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = null;
 
-
-        if (mPageNumber==4){
-
-            rootView = (ViewGroup) inflater.inflate(
-                    R.layout.activity_menu_about_us_1, container, false);
+        if (mPageNumber == 4) {
+            rootView = (ViewGroup) inflater.inflate(R.layout.activity_menu_about_us_1, container, false);
 
             //Set ImageView
-            ImageView imageAboutUs = (ImageView)rootView.findViewById(R.id.image_about_us_1);
+            ImageView imageAboutUs = (ImageView) rootView.findViewById(R.id.image_about_us_1);
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.about_us_1);
             imageAboutUs.setImageBitmap(bitmap);
 
-        }else if (mPageNumber==3){
-
-            rootView = (ViewGroup) inflater.inflate(
-                    R.layout.activity_menu_about_us_2, container, false);
+        } else if (mPageNumber == 3) {
+            rootView = (ViewGroup) inflater.inflate(R.layout.activity_menu_about_us_2, container, false);
 
             //Set ImageView
-            ImageView imageAboutUs2 = (ImageView)rootView.findViewById(R.id.image_about_us_2);
+            ImageView imageAboutUs2 = (ImageView) rootView.findViewById(R.id.image_about_us_2);
             Bitmap bitmap2 = BitmapFactory.decodeResource(getResources(), R.drawable.about_us_2);
             imageAboutUs2.setImageBitmap(bitmap2);
 
-        } else if (mPageNumber==2){
-
-            rootView = (ViewGroup) inflater.inflate(
-                    R.layout.activity_menu_about_us_3, container, false);
+        } else if (mPageNumber == 2) {
+            rootView = (ViewGroup) inflater.inflate(R.layout.activity_menu_about_us_3, container, false);
 
             //Set ImageView
-            ImageView imageAboutUs3 = (ImageView)rootView.findViewById(R.id.image_about_us_3);
+            ImageView imageAboutUs3 = (ImageView) rootView.findViewById(R.id.image_about_us_3);
             Bitmap bitmap3 = BitmapFactory.decodeResource(getResources(), R.drawable.about_us_3);
             imageAboutUs3.setImageBitmap(bitmap3);
 
-        } else if (mPageNumber==1){
-
-            rootView = (ViewGroup) inflater.inflate(
-                    R.layout.activity_menu_about_us_4, container, false);
+        } else if (mPageNumber == 1) {
+            rootView = (ViewGroup) inflater.inflate(R.layout.activity_menu_about_us_4, container, false);
 
             //Set ImageView
             /*TODO*/
@@ -78,12 +70,10 @@ public class ScreenSlidePageFragment extends Fragment {
             Bitmap bitmap4 = BitmapFactory.decodeResource(getResources(), R.drawable.about_us_4);
             imageAboutUs4.setImageBitmap(bitmap4);*/
 
-        }else if (mPageNumber==0){
+        } else if (mPageNumber == 0) {
+            rootView = (ViewGroup) inflater.inflate(R.layout.activity_menu_about_us_5, container, false);
 
-        rootView = (ViewGroup) inflater.inflate(
-                R.layout.activity_menu_about_us_5, container, false);
-
-        //Set ImageView
+            //Set ImageView
             /*TODO*/
             /*ImageView imageAboutUs5 = (ImageView)rootView.findViewById(R.id.image_about_us_5);
             Bitmap bitmap5 = BitmapFactory.decodeResource(getResources(), R.drawable.about_us_5);
@@ -92,5 +82,4 @@ public class ScreenSlidePageFragment extends Fragment {
         }
         return rootView;
     }
-
 }
