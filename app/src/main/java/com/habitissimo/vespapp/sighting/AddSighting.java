@@ -232,5 +232,6 @@ public class AddSighting {
             dialog.dismiss();
             dialog = null;
         }
+
     }
 }

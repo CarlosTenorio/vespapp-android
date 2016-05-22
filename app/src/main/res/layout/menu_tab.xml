@@ -119,7 +119,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentTop="true"
             android:contentDescription="TODO"
-            android:src="@drawable/about_us" />
+            android:src="@drawable/contributors" />
 
         <TextView
             android:id="@+id/secondLineMenu3"

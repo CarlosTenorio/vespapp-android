@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 
         spec = tabs.newTabSpec("MainTab");
         spec.setContent(R.id.layout_main_tab);
-        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), android.R.drawable.ic_menu_camera, null));
+        spec.setIndicator("", ResourcesCompat.getDrawable(getResources(), R.mipmap.ic_camera, null));
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MapTab");
