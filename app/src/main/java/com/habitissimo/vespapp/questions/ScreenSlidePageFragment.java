@@ -7,11 +7,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.habitissimo.vespapp.R;
@@ -32,15 +35,18 @@ import retrofit2.Response;
 
 public class ScreenSlidePageFragment extends Fragment {
 
-    public static final String ARG_QUESTION = "question";
+    private static final String ARG_QUESTION = "question";
+    private static final String ARG_POSITION = "position";
     private Question question;
-    private static Map<String, Answer> answersMap = new HashMap<>();;
+    private int position;
+    private static Map<String, Answer> answersMap = new HashMap<>();
 
-    public static ScreenSlidePageFragment create(Question question) {
+    public static ScreenSlidePageFragment create(int position, Question question) {
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
 
         Bundle args = new Bundle();
         args.putSerializable(ARG_QUESTION, question);
+        args.putInt(ARG_POSITION, position);
         fragment.setArguments(args);
 
         return fragment;
@@ -54,6 +60,7 @@ public class ScreenSlidePageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         question = (Question) getArguments().getSerializable(ARG_QUESTION);
+        position = getArguments().getInt(ARG_POSITION);
     }
 
     @Override
@@ -70,6 +77,15 @@ public class ScreenSlidePageFragment extends Fragment {
             for (final Answer answer : question.getAvailable_answers()) {
                 CheckBox checkAnswerFirst = new CheckBox(getActivity());
 
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                params.leftMargin = 20;
+                //Add space between button and text
+                final float scale = this.getResources().getDisplayMetrics().density;
+                checkAnswerFirst.setPadding(checkAnswerFirst.getPaddingLeft() + (int)(10.0f * scale + 0.5f),
+                        checkAnswerFirst.getPaddingTop(),
+                        checkAnswerFirst.getPaddingRight(),
+                        checkAnswerFirst.getPaddingBottom());
+
                 checkAnswerFirst.setText(answer.getValue());
                 checkAnswerFirst.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -82,7 +98,25 @@ public class ScreenSlidePageFragment extends Fragment {
                         }
                     }
                 });
-                ll.addView(checkAnswerFirst);
+
+                ll.addView(checkAnswerFirst, params);
+
+                if (position == QuestionsActivity.NUM_PAGES-1){
+                    System.out.println("Entra en enviar");
+
+                    Button btn_send = new Button(getContext());
+                    btn_send.setText("Enviar");
+
+                    ll.addView(btn_send);
+
+                    btn_send.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            QuestionsActivity.updateSighting(answersMap);
+
+                        }
+                    });
+                }
             }
 
         } else {
@@ -106,52 +140,29 @@ public class ScreenSlidePageFragment extends Fragment {
                 });
                 rg.addView(radioAnswerFirst);
             }
+
+            if (position == QuestionsActivity.NUM_PAGES-1){
+                System.out.println("Entra en enviar");
+
+                Button btn_send = new Button(getContext());
+                btn_send.setText("Enviar");
+
+                rg.addView(btn_send);
+
+                btn_send.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        QuestionsActivity.updateSighting(answersMap);
+                    }
+                });
+            }
         }
+
         return rootView;
     }
 
-    public static void updateSighting(Context context, final Sighting sighting) {
-        final VespappApi api = Vespapp.get(context).getApi();
-
-        List<Integer> answerList = sighting.getAnswers();
-        for (Map.Entry<String, Answer> a : answersMap.entrySet()){
-            Answer answer = a.getValue();
-            answerList.add(answer.getId());
-        }
-        sighting.setAnswers(answerList);
-
-        final Callback<Sighting> callback = new Callback<Sighting>() {
-            @Override
-            public void onResponse(Call<Sighting> call, Response<Sighting> response) {
-                if (response.body() == null) {
-                    throw new RuntimeException("Sighting creation call returned null body");
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Sighting> call, Throwable t) {
-                System.out.println(t);
-            }
-        };
-        Task.doInBackground(new TaskCallback<Sighting>() {
-            @Override
-            public Sighting executeInBackground() {
-                Call<Sighting> call = api.updateSighting(sighting, String.valueOf(sighting.getId()));
-                call.enqueue(callback);
-                return null;
-            }
-
-            @Override
-            public void onError(Throwable t) {
-                callback.onFailure(null, t);
-            }
-
-            @Override
-            public void onCompleted(Sighting sigthing) {
-                System.out.print("HOLIIIIIIIIIIIIS");
-                callback.onResponse(null, Response.success((Sighting) null));
-
-            }
-        });
+    private void enableSendButton() {
     }
+
+
 }

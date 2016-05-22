@@ -1,5 +1,6 @@
 package com.habitissimo.vespapp.questions;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import com.habitissimo.vespapp.sighting.Sighting;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,22 +35,24 @@ import retrofit2.Response;
 public class QuestionsActivity extends AppCompatActivity {
 
     // The number of pages (wizard steps) to show
-    private static int NUM_PAGES;
+    public static int NUM_PAGES;
     private int currentPage = 0;
     // The pager widget, which handles animation and allows swiping horizontally to access previous and next wizard steps.
     private ViewPager mPager;
     // The pager adapter, which provides the pages to the view pager widget.
     private PagerAdapter mPagerAdapter;
 
-    private Sighting sighting;
+    private static Sighting sighting;
     private List<Question> questionsList;
 
     private Toolbar toolbar;
 
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = this;
         setContentView(R.layout.activity_questions);
 
         Intent i = getIntent();
@@ -91,10 +95,6 @@ public class QuestionsActivity extends AppCompatActivity {
                     TextView progressQuestionText = (TextView) toolbar.findViewById(R.id.progress_text);
                     int pos = position + 1;
                     progressQuestionText.setText(pos + "/" + NUM_PAGES);
-
-                    if (position == NUM_PAGES - 1) { // if it is the last page
-                        enableSendButton();
-                    }
                 }
 
                 invalidateOptionsMenu();
@@ -103,30 +103,62 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
 
-    private void enableSendButton() {
-        Button btn_send = (Button) toolbar.findViewById(R.id.send_button_question);
-        btn_send.setVisibility(View.VISIBLE);
-        btn_send.setOnClickListener(new View.OnClickListener() {
+    public static void updateSighting(Map<String, Answer> answersMap ) {
+        final VespappApi api = Vespapp.get(context).getApi();
+
+        List<Integer> answerList = sighting.getAnswers();
+        for (Map.Entry<String, Answer> a : answersMap.entrySet()){
+            Answer answer = a.getValue();
+            answerList.add(answer.getId());
+        }
+        sighting.setAnswers(answerList);
+
+        final Callback<Sighting> callback = new Callback<Sighting>() {
             @Override
-            public void onClick(View v) {
-                updateSighting();
+            public void onResponse(Call<Sighting> call, Response<Sighting> response) {
+                if (response.body() == null) {
+                    throw new RuntimeException("Sighting creation call returned null body");
+                }
+                updateSightingCompleted();
+            }
+
+            @Override
+            public void onFailure(Call<Sighting> call, Throwable t) {
+                System.out.println(t);
+            }
+        };
+        Task.doInBackground(new TaskCallback<Sighting>() {
+            @Override
+            public Sighting executeInBackground() {
+                Call<Sighting> call = api.updateSighting(sighting, String.valueOf(sighting.getId()));
+                call.enqueue(callback);
+                return null;
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                callback.onFailure(null, t);
+            }
+
+            @Override
+            public void onCompleted(Sighting sigthing) {
+                callback.onResponse(null, Response.success((Sighting) null));
             }
         });
     }
 
 
-    private void updateSighting() {
-        ScreenSlidePageFragment.updateSighting(this, sighting);
-        Toast.makeText(this, "Gracias por contestar las preguntas", Toast.LENGTH_LONG).show();
+    private static void updateSightingCompleted() {
+        //ScreenSlidePageFragment.updateSighting(this, sighting);
+        Toast.makeText(context, "Gracias por contestar las preguntas", Toast.LENGTH_LONG).show();
         goToMainActivity();
     }
 
-
-    private void goToMainActivity() {
-        Intent i = new Intent(this, MainActivity.class);
+    private static void goToMainActivity() {
+        Intent i = new Intent(context, MainActivity.class);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(i);
+        context.startActivity(i);
     }
 
 
@@ -147,7 +179,7 @@ public class QuestionsActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ScreenSlidePageFragment.create(questionsList.get(position));
+            return ScreenSlidePageFragment.create(position, questionsList.get(position));
         }
 
         @Override
