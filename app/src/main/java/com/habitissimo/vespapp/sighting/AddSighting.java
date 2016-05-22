@@ -173,6 +173,7 @@ public class AddSighting {
                         questionsList.add(question);
                     }
                 }
+                hideDialog();
                 if (questionsList.isEmpty()) {
                     goToMainActivity();
                 } else {

@@ -23,6 +23,7 @@ public class Sighting implements Serializable {
     private String free_text = "";
     private int type;
     private String contact;
+    private String created_at;
 
     private String source = "app";
 
