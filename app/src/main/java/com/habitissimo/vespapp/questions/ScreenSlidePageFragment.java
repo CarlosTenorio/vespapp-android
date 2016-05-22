@@ -102,10 +102,16 @@ public class ScreenSlidePageFragment extends Fragment {
                 ll.addView(checkAnswerFirst, params);
 
                 if (position == QuestionsActivity.NUM_PAGES-1){
-                    System.out.println("Entra en enviar");
 
                     Button btn_send = new Button(getContext());
                     btn_send.setText("Enviar");
+                    btn_send.setBackgroundColor(getResources().getColor(R.color.brandSecondary));
+                    btn_send.setTextColor(getContext().getResources().getColor(R.color.colorTitulo));
+                    btn_send.setGravity(Gravity.CENTER);
+
+
+                    btn_send.setLayoutParams(params);
+
 
                     ll.addView(btn_send);
 
@@ -142,10 +148,20 @@ public class ScreenSlidePageFragment extends Fragment {
             }
 
             if (position == QuestionsActivity.NUM_PAGES-1){
-                System.out.println("Entra en enviar");
 
                 Button btn_send = new Button(getContext());
                 btn_send.setText("Enviar");
+                btn_send.setBackgroundColor(getResources().getColor(R.color.brandSecondary));
+                btn_send.setTextColor(getContext().getResources().getColor(R.color.colorTitulo));
+                btn_send.setGravity(Gravity.CENTER);
+
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(0, 40, 0, 0);
+                btn_send.setLayoutParams(params);
+
 
                 rg.addView(btn_send);
 
