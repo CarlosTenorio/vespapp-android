@@ -3,6 +3,7 @@ package com.habitissimo.vespapp.questions;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.habitissimo.vespapp.R;
@@ -67,6 +69,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
             for (final Answer answer : question.getAvailable_answers()) {
                 CheckBox checkAnswerFirst = new CheckBox(getActivity());
+
                 checkAnswerFirst.setText(answer.getValue());
                 checkAnswerFirst.setOnClickListener(new View.OnClickListener() {
                     @Override

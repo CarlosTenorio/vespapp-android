@@ -68,9 +68,8 @@ public class QuestionsActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar_questions);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitulo));
-        toolbar.setBackgroundColor(getResources().getColor(R.color.colorAccent));
 
-        getSupportActionBar().setTitle(R.string.confirm_cap_titulo);
+        getSupportActionBar().setTitle(R.string.confirm_cap_questions);
     }
 
 

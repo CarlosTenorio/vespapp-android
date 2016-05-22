@@ -11,6 +11,7 @@
     <string name="confirm_cap_map">Mueve el marker</string>
     <string name="confirm_cap_txt_confirm">La foto es de...</string>
     <string name="confirm_cap_map_sight">Avistamiento</string>
+    <string name="confirm_cap_questions">Preguntas</string>
     <string name="nido">Nido</string>
     <string name="avispa">Avispa</string>
     <string name="confirm_cap_DeleteDialog_msg">¿Eliminar imagen?</string>
