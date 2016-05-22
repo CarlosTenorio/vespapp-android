@@ -10,20 +10,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <TextView
             android:id="@+id/text_one_answer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="@dimen/question_textsize" />
+            android:textSize="@dimen/question_textsize"
+            android:layout_marginTop="20dip"
+            android:layout_marginBottom="20dip"/>
 
         <RadioGroup
             android:id="@+id/radiogroup_one_answer"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
         </RadioGroup>
 
     </LinearLayout>

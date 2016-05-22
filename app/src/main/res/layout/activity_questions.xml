@@ -8,7 +8,8 @@
         android:id="@+id/toolbar_questions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/brandPrimary">
+        android:background="@color/brandPrimary"
+        android:titleTextColor="@color/colorTitulo">
 
         <TextView
             android:id="@+id/progress_text"
@@ -25,8 +26,7 @@
             android:layout_height="wrap_content"
             android:text="Enviar"
             android:layout_gravity="right"
-            android:visibility="invisible"
-            />
+            android:visibility="invisible" />
     </android.support.v7.widget.Toolbar>
 
     <android.support.v4.view.ViewPager
