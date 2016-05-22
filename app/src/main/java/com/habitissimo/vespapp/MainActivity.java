@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -227,9 +228,14 @@ public class MainActivity extends AppCompatActivity {
                 LinearLayout ll = (LinearLayout) findViewById(R.id.layout_info_tab);
                 final List<Info> infoList = response.body();
                 for (final Info info : infoList) {
+                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                            ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                    params.setMargins(15, 20, 20, 20);
                     Button btn = new Button(getApplicationContext());
                     btn.setTextAppearance(getApplicationContext(), R.style.camera_button);
                     btn.setText(info.getTitle());
+                    btn.setBackgroundResource(R.drawable.button_selector);
+                    btn.setLayoutParams(params);
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

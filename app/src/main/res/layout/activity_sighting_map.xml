@@ -18,6 +18,10 @@
             android:layout_height="wrap_content"
             android:text="Enviar"
             android:layout_gravity="right"
+            android:background="@color/brandSecondary"
+            android:textColor="@color/colorTitulo"
+            android:layout_marginRight="10dp"
+
             />
     </android.support.v7.widget.Toolbar>
 
