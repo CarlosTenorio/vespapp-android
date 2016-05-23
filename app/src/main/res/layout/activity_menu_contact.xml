@@ -11,77 +11,91 @@
         android:background="@color/brandPrimary">
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
-        android:id="@+id/menu_contact_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:orientation="vertical"
-        android:padding="30dp">
+    <ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/menu_contact_name"
-            android:text="Nombre"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/menu_contact_description"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="30dp"/>
-        <EditText
-            android:id="@+id/name_contact"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="tu nombre"
-            android:inputType="text" />
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="30dp">
 
-        <TextView
-            android:id="@+id/menu_contact_subject"
-            android:text="Asunto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="30dp"/>
-        <EditText
-            android:id="@+id/subject_contact"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="Asunto"
-            android:inputType="text" />
+            <TextView
+                android:id="@+id/menu_contact_name"
+                android:text="Nombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="30dp"/>
+            <EditText
+                android:id="@+id/name_contact"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="tu nombre"
+                android:inputType="text" />
 
-        <TextView
-            android:id="@+id/menu_contact_body"
-            android:text="Mensaje"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="30dp"/>
-        <EditText
-            android:id="@+id/body_contact"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="Cuerpo del mensaje"
-            android:inputType="text" />
+            <TextView
+                android:id="@+id/menu_contact_subject"
+                android:text="Asunto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_contact"
+                android:textSize="30dp"/>
+            <EditText
+                android:id="@+id/subject_contact"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Asunto"
+                android:inputType="text" />
 
-        <TextView
-            android:id="@+id/menu_contact_phone"
-            android:text="Teléfono"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="30dp"/>
-        <EditText
-            android:id="@+id/phone_contact"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="(Opcional)"
-            android:inputType="phone" />
+            <TextView
+                android:id="@+id/menu_contact_body"
+                android:text="Mensaje"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_contact"
+                android:textSize="30dp"/>
+            <EditText
+                android:id="@+id/body_contact"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Cuerpo del mensaje"
+                android:inputType="text" />
 
-        <Button
-            android:id="@+id/sendButton_contact"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Enviar"
-        android:onClick="selfDestruct" />
+            <TextView
+                android:id="@+id/menu_contact_phone"
+                android:text="Teléfono"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_contact"
+                android:textSize="30dp"/>
+            <EditText
+                android:id="@+id/phone_contact"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="(Opcional)"
+                android:inputType="phone" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/sendButton_contact"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enviar"
+                android:layout_gravity="right"
+                android:background="@color/brandSecondary"
+                android:textColor="@color/colorTitle"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:onClick="selfDestruct"
+                />
 
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

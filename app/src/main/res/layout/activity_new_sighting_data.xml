@@ -34,9 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="15dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:textColor="@color/colorTitle"
             android:text="@string/add_picture" />
 
         <Button
@@ -48,6 +49,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="25dp"
             android:layout_marginRight="25dp"
+            android:textColor="@color/colorTitle"
             android:text="@string/select_picture" />
 
         <TextView
@@ -62,22 +64,29 @@
             android:layout_marginTop="10dp"
             android:orientation="horizontal">
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_nido"
-                style="@style/camera_button"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_marginRight="20dp"
-                android:layout_weight="1"
+                android:src="@drawable/nidoicon"
+                style="@style/type_button"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:padding="28dp"
+                android:textColor="@color/colorTitle"
                 android:text="@string/nido" />
 
-            <Button
+            <ImageButton
                 android:id="@+id/btn_avispa"
-                style="@style/camera_button"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_marginLeft="20dp"
-                android:layout_weight="1"
+                android:src="@drawable/vespaicon"
+                style="@style/type_button"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:padding="30dp"
+                android:layout_gravity="right"
+                android:textColor="@color/colorTitle"
                 android:text="@string/avispa" />
 
         </LinearLayout>

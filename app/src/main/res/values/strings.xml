@@ -14,7 +14,7 @@
     <string name="confirm_cap_DeleteDialog_msg">¿Eliminar imagen?</string>
     <string name="aceptar">Aceptar</string>
     <string name="cancelar">Cancelar</string>
-    <string name="add_picture">Añade otra foto</string>
+    <string name="add_picture">Haz otra foto</string>
     <string name="select_picture">Selecciona otra foto</string>
     <string name="status_pending">Pendiente</string>
     <string name="status_processed">Tramitado</string>
