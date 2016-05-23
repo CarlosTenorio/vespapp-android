@@ -1,5 +1,0 @@
-<fragment xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="1000dip"
-    android:id="@+id/layout_map_sighting_tab"
-    android:name="com.google.android.gms.maps.SupportMapFragment" />

@@ -101,7 +101,7 @@ public class SightingViewActivity extends AppCompatActivity {
         tabs.addTab(spec);
 
         spec = tabs.newTabSpec("MapTab");
-        spec.setContent(R.id.layout_map_sighting_tab);
+        spec.setContent(R.id.map);
         spec.setIndicator("Mapa");
         tabs.addTab(spec);
 
@@ -345,7 +345,7 @@ public class SightingViewActivity extends AppCompatActivity {
     }
 
     private void initMap() {
-        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.layout_map_sighting_tab)).getMap();
+        final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
         Gmap.setMyLocationEnabled(true);
         map = new Map(Gmap);
 

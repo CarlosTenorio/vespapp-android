@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout android:id="@+id/layout_info_sighting_tab"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="false">
+
+    <LinearLayout android:id="@+id/layout_info_sighting_tab"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:gravity="center">
 
     <TextView
         android:id="@+id/sighting_source_label"
@@ -162,4 +166,5 @@
         android:textSize="@dimen/info_textsize"
         android:textColor="@color/colorPrimaryText"/>
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
