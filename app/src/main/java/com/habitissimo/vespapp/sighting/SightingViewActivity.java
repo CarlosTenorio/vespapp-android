@@ -155,9 +155,9 @@ public class SightingViewActivity extends AppCompatActivity {
         } else if (source.equals("app")) {
             ImageView myImage = (ImageView) findViewById(R.id.sighting_source_image);
             myImage.setImageResource(R.mipmap.ic_movile);
-        } else {
+        } else { //Twitter
             ImageView myImage = (ImageView) findViewById(R.id.sighting_source_image);
-            myImage.setImageResource(R.mipmap.ic_computer);
+            myImage.setImageResource(R.mipmap.ic_twitter);
         }
 
         TextView lLat = (TextView) findViewById(R.id.sighting_lat_label);
