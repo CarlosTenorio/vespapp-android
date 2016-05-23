@@ -228,6 +228,5 @@ public class AddNewSighting {
             dialog.dismiss();
             dialog = null;
         }
-
     }
 }

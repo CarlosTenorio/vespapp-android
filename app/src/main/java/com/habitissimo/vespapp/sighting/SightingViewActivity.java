@@ -344,7 +344,7 @@ public class SightingViewActivity extends AppCompatActivity {
 
     private void initMap() {
         final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.layout_map_sighting_tab)).getMap();
-        Gmap.setMyLocationEnabled(true);
+        Gmap.setMyLocationEnabled(false);
         map = new Map(Gmap);
 
         double lat = sighting.getLat();
