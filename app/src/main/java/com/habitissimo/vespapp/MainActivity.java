@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
         final VespappApi api = Vespapp.get(this).getApi();
 
         final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
-        Gmap.setMyLocationEnabled(true);
+        Gmap.setMyLocationEnabled(false);
         map = new Map(Gmap);
 
 
