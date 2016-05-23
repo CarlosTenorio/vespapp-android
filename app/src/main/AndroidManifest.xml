@@ -38,15 +38,15 @@
         </activity>
 
         <activity
-            android:name=".sighting.SightingDataActivity"
+            android:name=".sighting.NewSightingDataActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".info.InfoDescription"
+            android:name=".info.InfoDescriptionActivity"
             android:label="@string/title_activity_info_description"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".sighting.MapSightingActivity"
+            android:name=".sighting.NewSightingMapActivity"
             android:label="@string/title_activity_maps"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
@@ -56,13 +56,13 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".menu.MenuContact"
+            android:name=".menu.ContactActivity"
             android:label="@string/title_activity_menu_contact"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
 
         <activity
-            android:name=".sighting.LocationsListActivity"
+            android:name=".sighting.NewSightingLocationsActivity"
             android:label="@string/title_activity_menu_contact"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait" />
@@ -74,7 +74,7 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name=".menu.MenuAboutUs"
+            android:name=".menu.AboutUsActivity"
             android:label="@string/title_activity_menu_about_us"
             android:theme="@style/AppTheme"
             android:screenOrientation="portrait"
@@ -87,7 +87,7 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".menu.Contributors"
+            android:name=".menu.ContributorsActivity"
             android:label="@string/title_activity_menu_contact"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />

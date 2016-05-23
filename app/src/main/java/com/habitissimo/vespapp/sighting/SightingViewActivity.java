@@ -8,21 +8,15 @@ import android.graphics.Matrix;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Display;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -33,14 +27,8 @@ import com.habitissimo.vespapp.Vespapp;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
-import com.habitissimo.vespapp.info.Info;
-import com.habitissimo.vespapp.info.InfoDescription;
 import com.habitissimo.vespapp.map.Map;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -83,7 +71,7 @@ public class SightingViewActivity extends AppCompatActivity {
         // Set a toolbar to replace the action bar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_sigthing_view);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitulo));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitle));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,7 +112,7 @@ public class SightingViewActivity extends AppCompatActivity {
 
         for (int i=0; i<totalTabs; i++){
             TextView tv = (TextView) tabs.getTabWidget().getChildAt(i).findViewById(android.R.id.title);
-            tv.setTextColor(getResources().getColor(R.color.colorTitulo));
+            tv.setTextColor(getResources().getColor(R.color.colorTitle));
         }
 
         tabs.setCurrentTab(1);
@@ -353,43 +341,6 @@ public class SightingViewActivity extends AppCompatActivity {
         Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
         return newbmp;
     }
-
-/*
-    protected Bitmap createScaledBitmapFromStream( InputStream s, int minimumDesiredBitmapWidth, int minimumDesiredBitmapHeight ) {
-
-        final BufferedInputStream is = new BufferedInputStream(s, 32 * 1024);
-        try {
-            final BitmapFactory.Options decodeBitmapOptions = new BitmapFactory.Options();
-            // For further memory savings, you may want to consider using this option
-             decodeBitmapOptions.inPreferredConfig = Bitmap.Config.RGB_565; // Uses 2-bytes instead of default 4 per pixel
-
-            if( minimumDesiredBitmapWidth >0 && minimumDesiredBitmapHeight >0 ) {
-                final BitmapFactory.Options decodeBoundsOptions = new BitmapFactory.Options();
-                decodeBoundsOptions.inJustDecodeBounds = true;
-                is.mark(32 * 1024); // 32k is probably overkill, but 8k is insufficient for some jpgs
-                BitmapFactory.decodeStream(is,null,decodeBoundsOptions);
-                is.reset();
-
-                final int originalWidth = decodeBoundsOptions.outWidth;
-                final int originalHeight = decodeBoundsOptions.outHeight;
-
-                // inSampleSize prefers multiples of 2, but we prefer to prioritize memory savings
-                decodeBitmapOptions.inSampleSize= Math.max(1,Math.min(originalWidth / minimumDesiredBitmapWidth, originalHeight / minimumDesiredBitmapHeight));
-
-            }
-
-            return BitmapFactory.decodeStream(is,null,decodeBitmapOptions);
-
-        } catch( IOException e ) {
-            throw new RuntimeException(e); // this shouldn't happen
-        } finally {
-            try {
-                is.close();
-            } catch( IOException ignored ) {}
-        }
-
-    }
-    */
 
     private void initMap() {
         final GoogleMap Gmap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.layout_map_sighting_tab)).getMap();

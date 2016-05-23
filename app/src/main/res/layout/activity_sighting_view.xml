@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/brandPrimary"
-        android:titleTextColor="@color/colorTitulo">
+        android:titleTextColor="@color/colorTitle">
     </android.support.v7.widget.Toolbar>
 
     <FrameLayout
@@ -33,33 +33,33 @@
                 android:orientation="vertical">
 
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TabWidget
-                    android:id="@android:id/tabs"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/brandPrimary">
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
 
-                </TabWidget>
+                    <TabWidget
+                        android:id="@android:id/tabs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/brandPrimary">
 
-                <FrameLayout
-                    android:id="@android:id/tabcontent"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    </TabWidget>
 
-                    <include layout="@layout/pictures_sighting_tab" />
+                    <FrameLayout
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
-                    <include layout="@layout/info_sighting_tab" />
+                        <include layout="@layout/tab_sighting_pictures" />
 
-                    <include layout="@layout/map_sighting_tab" />
+                        <include layout="@layout/tab_sighting_info" />
 
-                </FrameLayout>
+                        <include layout="@layout/fragment_map_size" />
 
-            </LinearLayout>
+                    </FrameLayout>
+
+                </LinearLayout>
             </ScrollView>
         </TabHost>
     </FrameLayout>

@@ -20,16 +20,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LocationsListActivity extends AppCompatActivity {
+public class NewSightingLocationsActivity extends AppCompatActivity {
 
-    public static final String TAG = "LocationsListActivity";
+    public static final String TAG = "NewSightingLocationsActivity";
 
     private Sighting sighting;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_locations_list);
+        setContentView(R.layout.activity_new_sighting_locations);
 
         initToolbar();
 
@@ -96,7 +96,7 @@ public class LocationsListActivity extends AppCompatActivity {
 
     private void addItemList(final Location location) {
         LinearLayout locationsList = (LinearLayout) findViewById(R.id.layout_locations_list);
-        LinearLayout itemList = (LinearLayout) View.inflate(this, R.layout.location_item_list, null);
+        LinearLayout itemList = (LinearLayout) View.inflate(this, R.layout.item_location, null);
         TextView itemText = (TextView) itemList.findViewById(R.id.text_item_list);
         itemText.setText(location.getName());
         locationsList.addView(itemList);
@@ -115,7 +115,7 @@ public class LocationsListActivity extends AppCompatActivity {
         sighting.setLat(location.getLat());
         sighting.setLng(location.getLng());
 
-        Intent i = new Intent(this, MapSightingActivity.class);
+        Intent i = new Intent(this, NewSightingMapActivity.class);
         i.putExtra("sightingObject", sighting);
         startActivity(i);
     }

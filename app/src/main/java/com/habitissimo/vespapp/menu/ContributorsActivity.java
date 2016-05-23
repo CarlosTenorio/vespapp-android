@@ -1,27 +1,13 @@
 package com.habitissimo.vespapp.menu;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.habitissimo.vespapp.R;
 
-import java.io.InputStream;
-import java.net.URL;
-
-public class Contributors extends AppCompatActivity {
+public class ContributorsActivity extends AppCompatActivity {
 
 
     @Override
@@ -36,7 +22,7 @@ public class Contributors extends AppCompatActivity {
         // Set a toolbar to replace the action bar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_menu_contributors);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitulo));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitle));
         toolbar.setBackgroundColor(getResources().getColor(R.color.brandPrimary));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

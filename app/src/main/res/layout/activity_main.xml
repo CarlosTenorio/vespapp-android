@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/brandPrimary"
-        android:titleTextColor="@color/colorTitulo">
+        android:titleTextColor="@color/colorTitle">
 
 
         <TextView
@@ -19,7 +19,7 @@
             android:layout_gravity="left"
             android:id="@+id/toolbar_title"
             android:textSize="25dp"
-            android:textColor="@color/colorTitulo"
+            android:textColor="@color/colorTitle"
             />
     </android.support.v7.widget.Toolbar>
 
@@ -54,13 +54,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <include layout="@layout/info_tab" />
+                    <include layout="@layout/tab_info" />
 
-                    <include layout="@layout/main_tab" />
+                    <include layout="@layout/tab_main" />
 
-                    <include layout="@layout/activity_maps" />
+                    <include layout="@layout/fragment_map" />
 
-                    <include layout="@layout/menu_tab" />
+                    <include layout="@layout/tab_menu" />
 
                 </FrameLayout>
             </LinearLayout>

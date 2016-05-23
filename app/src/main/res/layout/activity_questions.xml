@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/brandPrimary"
-        android:titleTextColor="@color/colorTitulo">
+        android:titleTextColor="@color/colorTitle">
 
         <TextView
             android:id="@+id/progress_text"

@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,9 +28,9 @@ import java.util.regex.Pattern;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SightingDataActivity extends AppCompatActivity {
+public class NewSightingDataActivity extends AppCompatActivity {
 
-    public static final String TAG = "SightingDataActivity";
+    public static final String TAG = "NewSightingDataActivity";
 
     private static final int TAKE_CAPTURE_REQUEST = 0;
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -42,7 +41,7 @@ public class SightingDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sighting_data);
+        setContentView(R.layout.activity_new_sighting_data);
         ButterKnife.bind(this);
 
         initToolbar();
@@ -143,7 +142,7 @@ public class SightingDataActivity extends AppCompatActivity {
 
        // sighting.set_valid(null);
 
-        Intent i = new Intent(this, LocationsListActivity.class);
+        Intent i = new Intent(this, NewSightingLocationsActivity.class);
         i.putExtra("sightingObject", sighting);
         startActivity(i);
     }
@@ -151,7 +150,7 @@ public class SightingDataActivity extends AppCompatActivity {
 
 
     private PicturesActions getPicturesList() {
-        return Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
+        return Database.get(this).load(Constants.PICTURES_LIST, PicturesActions.class);
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -190,7 +189,7 @@ public class SightingDataActivity extends AppCompatActivity {
     }
 
     private void savePictureToDatabase(String picturePath) {
-        PicturesActions picturesActions = Database.get(this).load(Constants.FOTOS_LIST, PicturesActions.class);
+        PicturesActions picturesActions = Database.get(this).load(Constants.PICTURES_LIST, PicturesActions.class);
 
         if (picturesActions == null) {
             picturesActions = new PicturesActions();
@@ -200,7 +199,7 @@ public class SightingDataActivity extends AppCompatActivity {
             Toast.makeText(this, "No se pueden subir más de 5 imágenes", Toast.LENGTH_LONG).show();
         } else {
             picturesActions.getList().add(picturePath);
-            Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
+            Database.get(this).save(Constants.PICTURES_LIST, picturesActions);
             rcAdapter.addPhoto(picturePath);
         }
     }

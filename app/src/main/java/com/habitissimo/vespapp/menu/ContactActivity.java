@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 import com.habitissimo.vespapp.R;
 
-public class MenuContact extends AppCompatActivity {
+public class ContactActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class MenuContact extends AppCompatActivity {
         // Set a toolbar to replace the action bar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_menu_contact);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitulo));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitle));
         toolbar.setBackgroundColor(getResources().getColor(R.color.brandPrimary));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

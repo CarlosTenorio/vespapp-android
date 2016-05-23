@@ -1,6 +1,5 @@
 package com.habitissimo.vespapp.questions;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
@@ -13,24 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.habitissimo.vespapp.R;
-import com.habitissimo.vespapp.Vespapp;
-import com.habitissimo.vespapp.api.VespappApi;
-import com.habitissimo.vespapp.async.Task;
-import com.habitissimo.vespapp.async.TaskCallback;
-import com.habitissimo.vespapp.sighting.Sighting;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 public class ScreenSlidePageFragment extends Fragment {
@@ -106,7 +93,7 @@ public class ScreenSlidePageFragment extends Fragment {
                     Button btn_send = new Button(getContext());
                     btn_send.setText("Enviar");
                     btn_send.setBackgroundColor(getResources().getColor(R.color.brandSecondary));
-                    btn_send.setTextColor(getContext().getResources().getColor(R.color.colorTitulo));
+                    btn_send.setTextColor(getContext().getResources().getColor(R.color.colorTitle));
                     btn_send.setGravity(Gravity.CENTER);
 
 
@@ -152,7 +139,7 @@ public class ScreenSlidePageFragment extends Fragment {
                 Button btn_send = new Button(getContext());
                 btn_send.setText("Enviar");
                 btn_send.setBackgroundColor(getResources().getColor(R.color.brandSecondary));
-                btn_send.setTextColor(getContext().getResources().getColor(R.color.colorTitulo));
+                btn_send.setTextColor(getContext().getResources().getColor(R.color.colorTitle));
                 btn_send.setGravity(Gravity.CENTER);
 
                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(

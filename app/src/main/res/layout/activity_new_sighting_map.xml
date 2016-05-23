@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/brandPrimary"
-        app:titleTextColor="@color/colorTitulo">
+        app:titleTextColor="@color/colorTitle">
 
         <Button
             android:id="@+id/send_button"
@@ -19,7 +19,7 @@
             android:text="Enviar"
             android:layout_gravity="right"
             android:background="@color/brandSecondary"
-            android:textColor="@color/colorTitulo"
+            android:textColor="@color/colorTitle"
             android:layout_marginRight="10dp"
 
             />
@@ -33,7 +33,7 @@
         android:orientation="vertical"
         >
 
-        <include layout="@layout/activity_maps" />
+        <include layout="@layout/fragment_map" />
 
     </LinearLayout>
 

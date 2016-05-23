@@ -26,8 +26,8 @@ public class Map {
 
     private GoogleMap Gmap;
 
-    public Map(GoogleMap Gmap){
-        this.Gmap=Gmap;
+    public Map(GoogleMap Gmap) {
+        this.Gmap = Gmap;
     }
 
 
@@ -71,7 +71,7 @@ public class Map {
 
     public void moveCamera(double lat, double lng, int zoom) {
         //First Vision, center on teh Balearic Islands
-        LatLng cameraFocus = new LatLng(lat,lng);
+        LatLng cameraFocus = new LatLng(lat, lng);
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(cameraFocus, zoom);
         Gmap.animateCamera(cameraUpdate);
     }

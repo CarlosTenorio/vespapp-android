@@ -3,15 +3,11 @@ package com.habitissimo.vespapp.sighting;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.habitissimo.vespapp.Constants;
 import com.habitissimo.vespapp.MainActivity;
-import com.habitissimo.vespapp.R;
 import com.habitissimo.vespapp.Vespapp;
 import com.habitissimo.vespapp.api.VespappApi;
 import com.habitissimo.vespapp.api.VespappApiHelper;
@@ -19,7 +15,6 @@ import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.database.Database;
 import com.habitissimo.vespapp.dialog.LoadingDialog;
-import com.habitissimo.vespapp.map.Map;
 import com.habitissimo.vespapp.questions.Question;
 import com.habitissimo.vespapp.questions.QuestionsActivity;
 
@@ -33,9 +28,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddSighting {
+public class AddNewSighting {
 
-    public static final String TAG = "AddSighting";
+    public static final String TAG = "AddNewSighting";
 
     private final VespappApi api;
     private AlertDialog dialog;
@@ -43,7 +38,7 @@ public class AddSighting {
     private Context context;
 
 
-    public AddSighting(Context context) {
+    public AddNewSighting(Context context) {
         api = Vespapp.get(context).getApi();
         this.context = context;
     }
@@ -141,7 +136,7 @@ public class AddSighting {
     }
 
     private PicturesActions getPicturesList() {
-        return Database.get(context).load(Constants.FOTOS_LIST, PicturesActions.class);
+        return Database.get(context).load(Constants.PICTURES_LIST, PicturesActions.class);
     }
 
     private void onSightingCreationError(Throwable t) {

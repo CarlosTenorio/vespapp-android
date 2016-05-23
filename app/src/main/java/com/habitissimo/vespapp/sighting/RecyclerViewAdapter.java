@@ -27,14 +27,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     @Override
     public RecyclerViewHolders onCreateViewHolder(ViewGroup parent, int viewType) {
-        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.picture_item_list, parent, false);
+        View layoutView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_picture, parent, false);
         RecyclerViewHolders rcv = new RecyclerViewHolders(layoutView, context, new RecyclerViewHolders.Callback() {
             @Override
             public void onImageDeleted(int index) {
                 // Update database
-                PicturesActions list = Database.get(context).load(Constants.FOTOS_LIST, PicturesActions.class);
+                PicturesActions list = Database.get(context).load(Constants.PICTURES_LIST, PicturesActions.class);
                 String removeUrl = list.getList().remove(index);
-                Database.get(context).save(Constants.FOTOS_LIST, list);
+                Database.get(context).save(Constants.PICTURES_LIST, list);
 
                 // Update adapter
                 itemList.remove(removeUrl);

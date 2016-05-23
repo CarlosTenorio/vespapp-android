@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorTitulo">#ffffff</color>
+    <color name="colorTitle">#ffffff</color>
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#FFA51F</color>
     <color name="colorPrimaryText">#606060</color>
@@ -11,7 +11,6 @@
     <color name="statusProcessing">#f0ad4e</color>
     <color name="statusValidated">#63CA75</color>
     <color name="statusNotSent">#FF6716</color>
-    <color name="red">#9c0608</color>
 
     <color name="resultUnknown">#f0ad4e</color>
     <color name="resultYes">#63CA75</color>

@@ -11,23 +11,15 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerDragListener;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.habitissimo.vespapp.Constants;
 import com.habitissimo.vespapp.R;
-import com.habitissimo.vespapp.database.Database;
-import com.habitissimo.vespapp.info.Info;
 import com.habitissimo.vespapp.map.Map;
 
-import java.io.File;
+public class NewSightingMapActivity extends AppCompatActivity implements OnMarkerDragListener {
 
-import butterknife.ButterKnife;
-
-public class MapSightingActivity extends AppCompatActivity implements OnMarkerDragListener {
-
-    public static final String TAG = "MapSightingActivity";
+    public static final String TAG = "NewSightingMapActivity";
 
     private Map map;
     private Marker marker;
@@ -36,7 +28,7 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sighting_map);
+        setContentView(R.layout.activity_new_sighting_map);
 
         initToolbar();
 
@@ -74,7 +66,7 @@ public class MapSightingActivity extends AppCompatActivity implements OnMarkerDr
     private void sendSighting() {
         sighting.setLat((float) marker.getPosition().latitude);
         sighting.setLng((float) marker.getPosition().longitude);
-        new AddSighting(this).sendSighting(sighting);
+        new AddNewSighting(this).sendSighting(sighting);
     }
 
     private void initMap() {

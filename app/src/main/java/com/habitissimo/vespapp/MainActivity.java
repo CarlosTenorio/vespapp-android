@@ -3,12 +3,10 @@ package com.habitissimo.vespapp;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +15,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TabHost;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -29,14 +26,14 @@ import com.habitissimo.vespapp.async.Task;
 import com.habitissimo.vespapp.async.TaskCallback;
 import com.habitissimo.vespapp.database.Database;
 import com.habitissimo.vespapp.info.Info;
-import com.habitissimo.vespapp.info.InfoDescription;
+import com.habitissimo.vespapp.info.InfoDescriptionActivity;
 import com.habitissimo.vespapp.map.Map;
-import com.habitissimo.vespapp.menu.Contributors;
-import com.habitissimo.vespapp.menu.MenuAboutUs;
-import com.habitissimo.vespapp.menu.MenuContact;
+import com.habitissimo.vespapp.menu.ContributorsActivity;
+import com.habitissimo.vespapp.menu.AboutUsActivity;
+import com.habitissimo.vespapp.menu.ContactActivity;
 import com.habitissimo.vespapp.sighting.PicturesActions;
 import com.habitissimo.vespapp.sighting.Sighting;
-import com.habitissimo.vespapp.sighting.SightingDataActivity;
+import com.habitissimo.vespapp.sighting.NewSightingDataActivity;
 import com.habitissimo.vespapp.sighting.SightingViewActivity;
 
 import java.io.File;
@@ -57,10 +54,7 @@ public class MainActivity extends AppCompatActivity {
     private File photoFile;
     private Map map;
     private Marker marker;
-    private HashMap<String, Sighting> relation= new HashMap<String, Sighting>();
-
-
-
+    private HashMap<String, Sighting> relation = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,28 +163,25 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void initMenuOptions(){
-        ((RelativeLayout)findViewById(R.id.layout_menu_tab_contact)).setOnClickListener(new View.OnClickListener() {
+    private void initMenuOptions() {
+        ((RelativeLayout) findViewById(R.id.layout_menu_tab_contact)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                Intent i = new Intent(getApplicationContext(), MenuContact.class);
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ContactActivity.class);
                 startActivity(i);
             }
         });
-        ((RelativeLayout)findViewById(R.id.layout_menu_tab_about_us)).setOnClickListener(new View.OnClickListener() {
+        ((RelativeLayout) findViewById(R.id.layout_menu_tab_about_us)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                Intent i = new Intent(getApplicationContext(), MenuAboutUs.class);
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), AboutUsActivity.class);
                 startActivity(i);
             }
         });
-        ((RelativeLayout)findViewById(R.id.layout_menu_tab_contributors)).setOnClickListener(new View.OnClickListener() {
+        ((RelativeLayout) findViewById(R.id.layout_menu_tab_contributors)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                Intent i = new Intent(getApplicationContext(), Contributors.class);
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), ContributorsActivity.class);
                 startActivity(i);
             }
         });
@@ -240,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(getApplicationContext(), InfoDescription.class);
+                            Intent i = new Intent(getApplicationContext(), InfoDescriptionActivity.class);
                             i.putExtra("infoObject", info);
                             startActivity(i);
                         }
@@ -286,12 +277,11 @@ public class MainActivity extends AppCompatActivity {
         Gmap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                Sighting s= getSightingByMarker(marker);
+                Sighting s = getSightingByMarker(marker);
                 changeActivityToSightingView(s);
                 return false;
             }
         });
-
 
 
         final Callback<List<Sighting>> callback = new Callback<List<Sighting>>() {
@@ -301,7 +291,7 @@ public class MainActivity extends AppCompatActivity {
                 for (Sighting sighting : sightingList) {
                     if (sighting.is_public()) {
                         LatLng myLocation = new LatLng(sighting.getLat(), sighting.getLng());
-                        marker= Gmap.addMarker(new MarkerOptions().position(myLocation));
+                        marker = Gmap.addMarker(new MarkerOptions().position(myLocation));
                         relation.put(marker.getId(), sighting);
                     }
                 }
@@ -337,17 +327,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void changeActivityToSightingView(Sighting sighting){
+    private void changeActivityToSightingView(Sighting sighting) {
         Intent i = new Intent(this, SightingViewActivity.class);
         i.putExtra("sightingObject", sighting);
         startActivity(i);
     }
 
-    private Sighting getSightingByMarker(Marker m){
+    private Sighting getSightingByMarker(Marker m) {
         Sighting sighting = relation.get(m.getId());
         return sighting;
     }
-
 
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -374,7 +363,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             savePictureToDatabase(picturePath);
-            Intent i = new Intent(this, SightingDataActivity.class);
+            Intent i = new Intent(this, NewSightingDataActivity.class);
             startActivity(i);
         }
     }
@@ -390,6 +379,6 @@ public class MainActivity extends AppCompatActivity {
     private void savePictureToDatabase(String picturePath) {
         PicturesActions picturesActions = new PicturesActions();
         picturesActions.getList().add(picturePath);
-        Database.get(this).save(Constants.FOTOS_LIST, picturesActions);
+        Database.get(this).save(Constants.PICTURES_LIST, picturesActions);
     }
 }

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.habitissimo.vespapp.R;
 
-public class MenuAboutUs extends AppCompatActivity {
+public class AboutUsActivity extends AppCompatActivity {
 
     /**
      * The number of pages (wizard steps) to show in this demo.
@@ -66,7 +66,7 @@ public class MenuAboutUs extends AppCompatActivity {
         // Set a toolbar to replace the action bar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_menu_about_us);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitulo));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitle));
         toolbar.setBackgroundColor(getResources().getColor(R.color.brandPrimary));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

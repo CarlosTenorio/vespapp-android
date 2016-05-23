@@ -118,7 +118,7 @@
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
         android:textSize="@dimen/info_textsize"
-        android:textColor="@color/colorTitulo"/>
+        android:textColor="@color/colorTitle"/>
 
 
     <TextView
@@ -139,7 +139,7 @@
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
         android:textSize="@dimen/info_textsize"
-        android:textColor="@color/colorTitulo"/>
+        android:textColor="@color/colorTitle"/>
 
     <TextView
         android:id="@+id/sighting_data_label"

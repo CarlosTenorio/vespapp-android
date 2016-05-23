@@ -10,8 +10,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,7 +69,7 @@ public class QuestionsActivity extends AppCompatActivity {
         // Set a toolbar to replace the action bar.
         toolbar = (Toolbar) findViewById(R.id.toolbar_questions);
         setSupportActionBar(toolbar);
-        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitulo));
+        toolbar.setTitleTextColor(getResources().getColor(R.color.colorTitle));
 
         getSupportActionBar().setTitle(R.string.confirm_cap_questions);
     }
