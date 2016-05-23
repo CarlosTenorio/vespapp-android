@@ -3,11 +3,14 @@ package com.habitissimo.vespapp.info;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Display;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -39,15 +42,40 @@ public class InfoDescriptionActivity extends AppCompatActivity {
         TextView textBody = (TextView) findViewById(R.id.info_body);
         textBody.setText(body);
 
-        try {
+        try {/*
             ImageView imageInfo = (ImageView)findViewById(R.id.info_image);
             Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
+            imageInfo.setImageBitmap(bitmap);*/
+
+            ImageView imageInfo = (ImageView)findViewById(R.id.info_image);
+            Bitmap bitmap = BitmapFactory.decodeStream((InputStream) new URL(imageUrl).getContent());
+            Display display = getWindowManager().getDefaultDisplay();
+            Point size = new Point();
+            display.getSize(size);
+            int widthDisplay = size.x;
+            int heightDisplay = size.y;
+            double heightFinal = widthDisplay*0.6;
+            int heightFinal1 =  (int) heightFinal;
+
+            bitmap = resizeBitmap(bitmap, widthDisplay, heightFinal1);
             imageInfo.setImageBitmap(bitmap);
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (OutOfMemoryError e) {
         }
+    }
+
+    public static Bitmap resizeBitmap(Bitmap bitmap, int width, int height) {
+        int w = bitmap.getWidth();
+        int h = bitmap.getHeight();
+        Matrix matrix = new Matrix();
+        float scaleWidth = ((float) width / w);
+        float scaleHeight = ((float) height / h);
+        matrix.postScale(scaleWidth, scaleHeight);
+        Bitmap newbmp = Bitmap.createBitmap(bitmap, 0, 0, w, h, matrix, true);
+        return newbmp;
     }
 
     private void initToolbar() {
