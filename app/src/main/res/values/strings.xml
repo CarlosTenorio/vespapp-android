@@ -36,22 +36,22 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="about_us_date_1">Octubre de 2015</string>
-    <string name="about_us_title_1">Confirmación por primera vez de la avispa asiática</string>
+    <string name="about_us_title_1">Primera detección de avispa asiática en Mallorca</string>
     <string name="about_us_body_1">El Laboratorio de Zoología del Departamento de Biología de la Universitat de les Illes Balears confirmó la detección por primera vez de esta avispa en Mallorca, gracias a la colaboración de los apicultores.</string>
     <string name="link_us_date_1">http://diari.uib.es/arxiu/La-avispa-asiatica-ya-esta-en-Mallorca.cid411005</string>
 
     <string name="about_us_date_2">Octubre - Noviembre de 2015</string>
-    <string name="about_us_title_2">Organitzación para la detección del nido de la avispa asiática</string>
+    <string name="about_us_title_2">Localización y retirada del nido</string>
     <string name="about_us_body_2">El Servei de Protecció d’Espècies de la Conselleria de Medi Ambient, Agricultura i Pesca organiza operativos para la detección del nido de la avispa asiática. El Equipo de control de fauna del COFIB logra retirar con éxito el único nido encontrado en la zona de la Vall de Sóller.</string>
     <string name="link_us_date_2">http://www.caib.es/pidip/dadesComunicat.do?lang=es&amp;codi=8835160</string>
 
     <string name="about_us_date_3">Marzo de 2016:</string>
-    <string name="about_us_title_3">Maratón Informático</string>
+    <string name="about_us_title_3">Maratón informático para diseñar una app contra la avispa asiática</string>
     <string name="about_us_body_3">La UIB (Laboratorio de Zoología, Escuela Politécnica Superior y Vicerrectorado de Innovación y Transferencia) y Habitissimo organizan un maratón informático para diseñar una app contra la avispa asiática. Primera fase de la creación de Vespapp.</string>
     <string name="link_us_date_3">http://diari.uib.es/arxiu/La-UIB-y-Habitissimo-organizan-un-maraton.cid432855</string>
 
     <string name="about_us_date_4">Abril – Mayo de 2016</string>
-    <string name="about_us_title_4">Segunda fase de Vespapp</string>
+    <string name="about_us_title_4">Segunda fase de la creación de Vespapp</string>
     <string name="about_us_body_4">Un equipo de tres estudiantes de ingeniería informática,becados por Cátedra Santander UIB de Innovación y Transferencia del Conocimiento (CSUIT), llevan a cabo la segunda fase de la creación de Vespapp. Paralelamente el equipo investigador del proyecto (Laboratorio de Zoología, Informática, Sistemas de Información Geográfica (SIG) y Comunicación, participación y redes sociales) trabaja para que Vespapp sea una realidad tangible.</string>
     <string name="link_us_date_4"></string>
 
