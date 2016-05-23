@@ -141,26 +141,6 @@
         android:textSize="@dimen/info_textsize"
         android:textColor="@color/colorTitle"/>
 
-    <TextView
-        android:id="@+id/sighting_data_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="20sp"
-        android:layout_marginTop="20sp"
-        android:textColor="@color/colorPrimaryText"
-        android:textStyle="bold"
-        android:textSize="@dimen/info_textsize"/>
-
-    <TextView
-        android:id="@+id/sighting_data"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="20sp"
-        android:textSize="@dimen/info_textsize"
-        android:textColor="@color/colorPrimaryText"/>
-
 
     <TextView
         android:id="@+id/sighting_description_label"

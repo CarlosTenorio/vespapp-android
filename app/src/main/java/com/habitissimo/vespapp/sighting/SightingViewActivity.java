@@ -32,6 +32,7 @@ import com.habitissimo.vespapp.map.Map;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -213,10 +214,11 @@ public class SightingViewActivity extends AppCompatActivity {
             tResult.setBackgroundColor(getResources().getColor(R.color.resultYes));
         }
 
-        TextView lData = (TextView) findViewById(R.id.sighting_data_label);
+/*        TextView lData = (TextView) findViewById(R.id.sighting_data_label);
         lData.setText("Fecha:");
         TextView tData = (TextView) findViewById(R.id.sighting_data);
-        tData.setText(parseDateToddMMyyyy(sighting.getCreated_at()));
+
+        tData.setText(sighting.getCreated_at());*/
 
 
         TextView lDescription = (TextView) findViewById(R.id.sighting_description_label);
