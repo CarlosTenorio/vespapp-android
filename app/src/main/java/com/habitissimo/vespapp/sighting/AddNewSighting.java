@@ -164,7 +164,7 @@ public class AddNewSighting {
 
                 List<Question> list = response.body();
                 for (Question question : list) {
-                    if (sighting.getType() == question.getSighting_type()) {
+                    if (sighting.getType() == question.getSighting_type() && question.is_active()) {
                         questionsList.add(question);
                     }
                 }

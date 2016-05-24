@@ -16,15 +16,18 @@ public class Question implements Serializable {
     private List<Answer> available_answers;
     private String title;
 
+    private boolean is_active;
+
     private int question_type;
     private int sighting_type;
 
     public Question(int id, List<Answer> answers, List<Answer> available_answers,
-                    String title, int question_type, int sighting_type) {
+                    String title, boolean is_active, int question_type, int sighting_type) {
         this.id = id;
         this.answers = answers;
         this.available_answers = available_answers;
         this.title = title;
+        this.is_active = is_active;
         this.question_type = question_type;
         this.sighting_type = sighting_type;
     }
@@ -51,6 +54,10 @@ public class Question implements Serializable {
 
     public String getTitle() {
         return title;
+    }
+
+    public boolean is_active() {
+        return is_active;
     }
 
     public int getQuestion_type() {

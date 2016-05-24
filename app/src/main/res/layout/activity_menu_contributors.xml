@@ -73,6 +73,19 @@
                 android:layout_margin="20dp"
                 android:src="@drawable/logo4" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginTop="10dip"/>
+
+            <ImageView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:layout_margin="20dp"
+                android:src="@drawable/logo5" />
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
