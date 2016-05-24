@@ -3,76 +3,76 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:fillViewport="false">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/layout_main_tab"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="10dp"
-        android:text="@string/app_name"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:layout_weight="1.00" />
-
-    <Space
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/layout_main_tab"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.01" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="5dp"
-        android:textSize="20sp"
-        android:text="@string/btn_add_photo" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin_bottom_title"
+            android:text="@string/app_name"
+            android:textSize="@dimen/title_main_activity"
+            android:textStyle="bold" />
 
-    <ImageButton
-        android:id="@+id/btn_cam"
-        android:src="@drawable/camera"
-        style="@style/camera_button"
-        android:layout_width="175dp"
-        android:layout_height="175dp"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:padding="50dp"
-         />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0.01" />
 
-    <Space
-        android:layout_width="wrap_content"
-        android:layout_height="110dp"
-        android:layout_weight="0.00" />
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
+            android:textSize="@dimen/title_add_picture"
+            android:text="@string/btn_add_photo" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/txt_selFotos"
-        android:layout_weight="0.00" />
+        <ImageButton
+            android:id="@+id/btn_cam"
+            android:src="@drawable/camera"
+            style="@style/camera_button"
+            android:layout_width="@dimen/camera_button"
+            android:layout_height="@dimen/camera_button"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="fitCenter"
+            android:adjustViewBounds="true"
+            android:padding="50dp"
+             />
 
-    <Button
-        android:id="@+id/btn_selFotos"
-        style="@style/camera_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginRight="25dp"
-        android:text="@string/btn_select_photo" />
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_weight="0.00" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textSize="@dimen/title_select_picture"
+            android:text="@string/txt_selFotos" />
+
+        <Button
+            android:id="@+id/btn_selFotos"
+            style="@style/camera_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:textColor="@color/colorTitle"
+            android:text="@string/btn_select_photo" />
+
+    </LinearLayout>
 </ScrollView>

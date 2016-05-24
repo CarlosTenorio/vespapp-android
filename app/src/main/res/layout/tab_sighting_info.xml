@@ -20,7 +20,7 @@
         android:layout_marginTop="20sp"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"
-        android:textSize="@dimen/info_textsize"/>
+        android:textSize="@dimen/info_text"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
             android:id="@+id/sighting_source"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/info_textsize"
+            android:textSize="@dimen/info_text"
             android:textColor="@color/colorPrimaryText"/>
 
     </LinearLayout>
@@ -53,7 +53,7 @@
         android:layout_marginTop="20sp"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"
-        android:textSize="@dimen/info_textsize"/>
+        android:textSize="@dimen/info_text"/>
 
     <TextView
         android:id="@+id/sighting_lat"
@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
-        android:textSize="@dimen/info_textsize"
+        android:textSize="@dimen/info_text"
         android:textColor="@color/colorPrimaryText"
         />
 
@@ -74,7 +74,7 @@
         android:layout_marginTop="20sp"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"
-        android:textSize="@dimen/info_textsize"/>
+        android:textSize="@dimen/info_text"/>
 
     <TextView
         android:id="@+id/sighting_lng"
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
-        android:textSize="@dimen/info_textsize"
+        android:textSize="@dimen/info_text"
         android:textColor="@color/colorPrimaryText"/>
 
     <TextView
@@ -94,7 +94,7 @@
         android:layout_marginTop="20sp"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"
-        android:textSize="@dimen/info_textsize"/>
+        android:textSize="@dimen/info_text"/>
 
     <TextView
         android:id="@+id/sighting_type"
@@ -102,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
-        android:textSize="@dimen/info_textsize"
+        android:textSize="@dimen/info_text"
         android:textColor="@color/colorPrimaryText"/>
     <TextView
         android:id="@+id/sighting_status_label"
@@ -113,7 +113,7 @@
         android:layout_marginTop="20sp"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"
-        android:textSize="@dimen/info_textsize"/>
+        android:textSize="@dimen/info_text"/>
 
     <TextView
         android:id="@+id/sighting_status"
@@ -121,7 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
-        android:textSize="@dimen/info_textsize"
+        android:textSize="@dimen/info_text"
         android:textColor="@color/colorTitle"/>
 
 
@@ -134,7 +134,7 @@
         android:layout_marginTop="20sp"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"
-        android:textSize="@dimen/info_textsize"/>
+        android:textSize="@dimen/info_text"/>
 
     <TextView
         android:id="@+id/sighting_result"
@@ -142,7 +142,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
-        android:textSize="@dimen/info_textsize"
+        android:textSize="@dimen/info_text"
         android:textColor="@color/colorTitle"/>
 
 
@@ -155,7 +155,7 @@
         android:layout_marginTop="20sp"
         android:textColor="@color/colorPrimaryText"
         android:textStyle="bold"
-        android:textSize="@dimen/info_textsize"/>
+        android:textSize="@dimen/info_text"/>
 
     <TextView
         android:id="@+id/sighting_description"
@@ -163,7 +163,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="left"
         android:layout_marginLeft="20sp"
-        android:textSize="@dimen/info_textsize"
+        android:textSize="@dimen/info_text"
         android:textColor="@color/colorPrimaryText"/>
 
     </LinearLayout>

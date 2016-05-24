@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:paddingRight="20dp"
             android:layout_gravity="right"
-            android:textSize="@dimen/info_textsize"
+            android:textSize="@dimen/info_text"
             />
 
     </android.support.v7.widget.Toolbar>

@@ -222,11 +222,11 @@ public class MainActivity extends AppCompatActivity {
                 for (final Info info : infoList) {
                     LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
                             ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(15, 20, 20, 20);
+                    params.setMargins(15, 50, 20, 20);
                     Button btn = new Button(getApplicationContext());
                     btn.setText(info.getTitle());
                     btn.setBackgroundResource(R.drawable.button_selector);
-                    btn.setTextSize((int) getResources().getDimension(R.dimen.textsize_info_button));
+                    btn.setTextSize((int) getResources().getDimension(R.dimen.text_info_button));
                     btn.setLayoutParams(params);
                     btn.setOnClickListener(new View.OnClickListener() {
                         @Override

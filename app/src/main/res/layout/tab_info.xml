@@ -4,12 +4,13 @@
     android:layout_height="wrap_content"
     android:fillViewport="false">
 
-<LinearLayout
-    android:id="@+id/layout_info_tab"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    >
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_info_tab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        >
+    </LinearLayout>
 </ScrollView>
