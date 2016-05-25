@@ -36,7 +36,7 @@ public class ScreenSlidePageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup rootView = null;
 
-        if (mPageNumber == 4) {
+        if (mPageNumber == 3) {
             rootView = (ViewGroup) inflater.inflate(R.layout.fragment_menu_about_us, container, false);
 
             TextView textDate = (TextView) rootView.findViewById(R.id.date_about_us);
@@ -59,7 +59,7 @@ public class ScreenSlidePageFragment extends Fragment {
             String stringLink = getResources().getString(R.string.about_us_link_1);
             textLink.setText(stringLink);
 
-        } else if (mPageNumber == 3) {
+        } else if (mPageNumber == 2) {
             rootView = (ViewGroup) inflater.inflate(R.layout.fragment_menu_about_us, container, false);
 
             TextView textDate = (TextView) rootView.findViewById(R.id.date_about_us);
@@ -82,7 +82,7 @@ public class ScreenSlidePageFragment extends Fragment {
             String stringLink = getResources().getString(R.string.about_us_link_2);
             textLink.setText(stringLink);
 
-        } else if (mPageNumber == 2) {
+        } else if (mPageNumber == 1) {
             rootView = (ViewGroup) inflater.inflate(R.layout.fragment_menu_about_us, container, false);
 
             TextView textDate = (TextView) rootView.findViewById(R.id.date_about_us);
@@ -105,7 +105,7 @@ public class ScreenSlidePageFragment extends Fragment {
             String stringLink = getResources().getString(R.string.about_us_link_3);
             textLink.setText(stringLink);
 
-        } else if (mPageNumber == 1) {
+        } else if (mPageNumber == 0) {
             rootView = (ViewGroup) inflater.inflate(R.layout.fragment_menu_about_us, container, false);
 
             TextView textDate = (TextView) rootView.findViewById(R.id.date_about_us);
@@ -116,9 +116,9 @@ public class ScreenSlidePageFragment extends Fragment {
             String stringTitle = getResources().getString(R.string.about_us_title_4);
             textTitle.setText(stringTitle);
 
-            /*ImageView imageAboutUs = (ImageView) rootView.findViewById(R.id.image_about_us);
+            ImageView imageAboutUs = (ImageView) rootView.findViewById(R.id.image_about_us);
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.about_us_4);
-            imageAboutUs.setImageBitmap(bitmap);*/
+            imageAboutUs.setImageBitmap(bitmap);
 
             TextView textBody = (TextView) rootView.findViewById(R.id.body_about_us);
             String stringBody = getResources().getString(R.string.about_us_body_4);
@@ -128,7 +128,7 @@ public class ScreenSlidePageFragment extends Fragment {
             String stringLink = getResources().getString(R.string.about_us_link_4);
             textLink.setText(stringLink);
 
-        } else if (mPageNumber == 0) {
+        } /*else if (mPageNumber == 0) {
             rootView = (ViewGroup) inflater.inflate(R.layout.fragment_menu_about_us, container, false);
 
             TextView textDate = (TextView) rootView.findViewById(R.id.date_about_us);
@@ -139,9 +139,9 @@ public class ScreenSlidePageFragment extends Fragment {
             String stringTitle = getResources().getString(R.string.about_us_title_5);
             textTitle.setText(stringTitle);
 
-            /*ImageView imageAboutUs = (ImageView) rootView.findViewById(R.id.image_about_us);
+            *//*ImageView imageAboutUs = (ImageView) rootView.findViewById(R.id.image_about_us);
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.about_us_5);
-            imageAboutUs.setImageBitmap(bitmap);*/
+            imageAboutUs.setImageBitmap(bitmap);*//*
 
             TextView textBody = (TextView) rootView.findViewById(R.id.body_about_us);
             String stringBody = getResources().getString(R.string.about_us_body_5);
@@ -151,7 +151,7 @@ public class ScreenSlidePageFragment extends Fragment {
             String stringLink = getResources().getString(R.string.about_us_link_5);
             textLink.setText(stringLink);
 
-        }
+        }*/
         return rootView;
     }
 }
