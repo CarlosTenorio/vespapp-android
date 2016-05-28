@@ -30,8 +30,6 @@ import retrofit2.Response;
 
 public class AddNewSighting {
 
-    public static final String TAG = "AddNewSighting";
-
     private final VespappApi api;
     private AlertDialog dialog;
 
@@ -140,7 +138,7 @@ public class AddNewSighting {
     }
 
     private void onSightingCreationError(Throwable t) {
-        Log.e(TAG, "Error creating sighting: " + t);
+        Toast.makeText(context, "Error al subir avistamiento", Toast.LENGTH_SHORT).show();
     }
 
     private void onPhotosUploaded() {

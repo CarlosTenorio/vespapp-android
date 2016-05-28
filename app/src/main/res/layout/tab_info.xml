@@ -5,12 +5,27 @@
     android:fillViewport="false">
 
     <LinearLayout
-        android:id="@+id/layout_info_tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         >
+
+            <LinearLayout
+                android:id="@+id/layout_info_tab"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                >
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_weight="0.01" />
     </LinearLayout>
+
 </ScrollView>

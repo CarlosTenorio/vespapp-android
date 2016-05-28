@@ -48,7 +48,6 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String TAG = "MainActivity";
     private static final int TAKE_CAPTURE_REQUEST = 0;
     private static final int PICK_IMAGE_REQUEST = 1;
     private File photoFile;
@@ -157,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     takePhoto();
                 } catch (IOException e) {
-                    Log.e(TAG, "Could not take photo: " + e);
                 }
             }
         });

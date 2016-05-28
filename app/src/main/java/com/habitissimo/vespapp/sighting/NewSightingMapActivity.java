@@ -30,8 +30,6 @@ import com.habitissimo.vespapp.map.Map;
 
 public class NewSightingMapActivity extends AppCompatActivity implements OnMarkerDragListener {
 
-    public static final String TAG = "NewSightingMapActivity";
-
     private Map map;
     private Marker marker;
     private Sighting sighting;

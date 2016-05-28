@@ -44,8 +44,6 @@ import retrofit2.Response;
 
 public class SightingViewActivity extends AppCompatActivity {
 
-    public static final String TAG = "SightingViewActivity";
-
     private static Sighting sighting;
 
     private Map map;

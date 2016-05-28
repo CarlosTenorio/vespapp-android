@@ -22,8 +22,6 @@ import retrofit2.Response;
 
 public class NewSightingLocationsActivity extends AppCompatActivity {
 
-    public static final String TAG = "NewSightingLocationsActivity";
-
     private Sighting sighting;
 
     @Override

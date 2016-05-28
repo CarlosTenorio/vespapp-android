@@ -1,7 +1,5 @@
 <resources>
     <!--
-    TODO: Before you release your application, you need a Google Maps API key.
-
     To do this, you can either add your release key credentials to your existing
     key, or create a new key.
 
@@ -17,6 +15,6 @@
     string in this file.
     -->
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
-        YOUR_KEY_HERE
+        AIzaSyAwGrBBhboKnljvG3PYbQsG1qaB7iCByA8
     </string>
 </resources>
