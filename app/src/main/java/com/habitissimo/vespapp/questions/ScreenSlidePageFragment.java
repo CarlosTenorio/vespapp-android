@@ -68,7 +68,7 @@ public class ScreenSlidePageFragment extends Fragment {
                 params.leftMargin = 20;
                 //Add space between button and text
                 final float scale = this.getResources().getDisplayMetrics().density;
-                checkAnswerFirst.setPadding(checkAnswerFirst.getPaddingLeft() + (int)(10.0f * scale + 0.5f),
+                checkAnswerFirst.setPadding(checkAnswerFirst.getPaddingLeft() + (int) (10.0f * scale + 0.5f),
                         checkAnswerFirst.getPaddingTop(),
                         checkAnswerFirst.getPaddingRight(),
                         checkAnswerFirst.getPaddingBottom());
@@ -87,30 +87,32 @@ public class ScreenSlidePageFragment extends Fragment {
                 });
 
                 ll.addView(checkAnswerFirst, params);
-
-                if (position == QuestionsActivity.NUM_PAGES-1){
-
-                    Button btn_send = new Button(getContext());
-                    btn_send.setText("Enviar");
-                    btn_send.setBackgroundColor(getResources().getColor(R.color.brandSecondary));
-                    btn_send.setTextColor(getContext().getResources().getColor(R.color.colorTitle));
-                    btn_send.setGravity(Gravity.CENTER);
-
-
-                    btn_send.setLayoutParams(params);
-
-
-                    ll.addView(btn_send);
-
-                    btn_send.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            QuestionsActivity.updateSighting(answersMap);
-
-                        }
-                    });
-                }
             }
+
+            if (position == QuestionsActivity.NUM_PAGES - 1) {
+                Button btn_send = new Button(getContext());
+                btn_send.setText("Enviar");
+                btn_send.setBackgroundColor(getResources().getColor(R.color.brandSecondary));
+                btn_send.setTextColor(getContext().getResources().getColor(R.color.colorTitle));
+                btn_send.setGravity(Gravity.CENTER);
+
+                RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
+                        ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT
+                );
+                params.setMargins(0, 40, 0, 0);
+                btn_send.setLayoutParams(params);
+                ll.addView(btn_send);
+
+                btn_send.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        QuestionsActivity.updateSighting(answersMap);
+                        answersMap.clear();
+                    }
+                });
+            }
+
 
         } else {
             rootView = (ViewGroup) inflater.inflate(R.layout.fragment_one_answer, container, false);
@@ -134,8 +136,7 @@ public class ScreenSlidePageFragment extends Fragment {
                 rg.addView(radioAnswerFirst);
             }
 
-            if (position == QuestionsActivity.NUM_PAGES-1){
-
+            if (position == QuestionsActivity.NUM_PAGES - 1) {
                 Button btn_send = new Button(getContext());
                 btn_send.setText("Enviar");
                 btn_send.setBackgroundColor(getResources().getColor(R.color.brandSecondary));
@@ -149,13 +150,13 @@ public class ScreenSlidePageFragment extends Fragment {
                 params.setMargins(0, 40, 0, 0);
                 btn_send.setLayoutParams(params);
 
-
                 rg.addView(btn_send);
 
                 btn_send.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         QuestionsActivity.updateSighting(answersMap);
+                        answersMap.clear();
                     }
                 });
             }

@@ -19,20 +19,19 @@ public class ContactActivity extends AppCompatActivity {
 
         initToolbar();
 
-        ((Button)findViewById(R.id.sendButton_contact)).setOnClickListener(new View.OnClickListener() {
+        ((Button) findViewById(R.id.sendButton_contact)).setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
-                EditText name   = (EditText)findViewById(R.id.name_contact);
-                EditText subject   = (EditText)findViewById(R.id.subject_contact);
-                EditText body   = (EditText)findViewById(R.id.body_contact);
-                EditText phone   = (EditText)findViewById(R.id.phone_contact);
+            public void onClick(View v) {
+                EditText name = (EditText) findViewById(R.id.name_contact);
+                EditText subject = (EditText) findViewById(R.id.subject_contact);
+                EditText body = (EditText) findViewById(R.id.body_contact);
+                EditText phone = (EditText) findViewById(R.id.phone_contact);
 
                 Intent i = new Intent(Intent.ACTION_SEND);
                 i.setType("message/rfc822");
-                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"vespapp.uib@gmail.com"});
-                i.putExtra(Intent.EXTRA_SUBJECT,  subject.getText().toString());
-                i.putExtra(Intent.EXTRA_TEXT   , "Enviado por: "+name.getText().toString()+ " con el número de teléfono: "+ phone.getText().toString() +" y el mensaje: "+body.getText().toString());
+                i.putExtra(Intent.EXTRA_EMAIL, new String[]{"vespapp.uib@gmail.com"});
+                i.putExtra(Intent.EXTRA_SUBJECT, subject.getText().toString());
+                i.putExtra(Intent.EXTRA_TEXT, "Enviado por: " + name.getText().toString() + "\n\nNúmero de teléfono: " + phone.getText().toString() + "\n\nMensaje: " + body.getText().toString());
                 try {
                     startActivity(Intent.createChooser(i, "Escoje la que quieras..."));
                 } catch (android.content.ActivityNotFoundException ex) {
@@ -60,9 +59,6 @@ public class ContactActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(R.string.title_activity_menu_contact);
     }
-
-
-
 
 
 }
